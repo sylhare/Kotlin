@@ -13,3 +13,49 @@ If you are not using intellij, you can run with:
 ```bash
 kotlinc hello.kt
 ```
+
+## Object oriented
+
+Some principles
+
+- Inheritance : kill off duplicate codes
+- Polymorphism : abstraction of implementation
+- Encapsulation : hiding the changes, protects data
+
+Objects comparison:
+
+- `equals`: should not throw an exception 
+- `hashCode`: to compare (find) the object in a list
+
+Encapsulation problems
+- getters / setters
+	- Either with a verb to change something
+	- With a noun to have the value of something	 
+- publicly available data
+- Data object, feature envy
+- Classes finishing by `-er` or `-or`	
+
+## Tips
+
+- Use ``` ` ``` (back tick) to define method's name with space:
+
+```kotlin
+@Test
+fun `valid parameters` { ... }
+```
+
+## Keywords
+
+- `Any?` for any type
+- `init {}` to check the values inputed at the creation of the class
+- `override` at the beginning of the function to override it:
+
+```kotlin
+override fun equals(other: Any?) { ... }
+```
+- `operator` to override an operator function. Here an example with the comparison operator (`>`, `<`, ...)
+
+```kotlin
+operator fun compareTo(other: Probability) { ... }
+```
+
