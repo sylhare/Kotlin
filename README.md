@@ -27,13 +27,16 @@ Objects comparison:
 - `equals`: should not throw an exception 
 - `hashCode`: to compare (find) the object in a list
 
-Encapsulation problems
+Encapsulation problems:
+
 - getters / setters
 	- Either with a verb to change something
 	- With a noun to have the value of something	 
 - publicly available data
+	- You don't want anyone using the data without knowing how to. 
 - Data object, feature envy
-- Classes finishing by `-er` or `-or`	
+- Classes finishing by `-er` or `-or`
+	- Should be a job of the class, or implemented as a pattern
 
 ## Tips
 

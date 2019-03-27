@@ -1,6 +1,6 @@
 package exercises
 
-enum class Units(val value: Int) {
+enum class Metrics(val value: Int) {
     TEASPOON(1),
     TABLESPOON(3),
     OUNCE(6),

@@ -1,12 +1,28 @@
 package exercises
 
-class Unit(value: Number, private val units: Units) {
+class Unit {
+    private val baseUnitRatio: Int = 1
+    private val baseUnit: Int
 
-    private val measure: Double = value.toDouble() * units.value
-
-    override fun equals(other: Any?): Boolean {
-        return this === other || other is Unit && this.measure  == other.measure
+    private constructor() {
+        this.baseUnit = baseUnitRatio
     }
 
-    operator fun plus(other: Unit) = Unit(other.measure + this.measure, Units.TEASPOON)
+    private constructor(value: Int, unit: Unit) {
+        this.baseUnit = value * unit.baseUnit
+    }
+
+    companion object {
+        val teaspoon = Unit()
+        val tablespoon = Unit(3, teaspoon)
+        val ounce = Unit(2, tablespoon)
+        val cup = Unit(8, ounce)
+        val pint = Unit(2, cup)
+        val quart = Unit(2, pint)
+        val gallon = Unit(4, quart)
+    }
+
+    fun ratio(unit: Unit) = this.baseUnit.toDouble() / unit.baseUnit.toDouble()
+
+    internal fun hashCode(amount: Double) = (baseUnit * amount).hashCode()
 }
