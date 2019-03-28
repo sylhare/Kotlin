@@ -20,7 +20,8 @@ class Quantity(amount: Number, private val unit: Unit) {
 
     override fun equals(other: Any?) =
             this === other ||
-                    other is Quantity && (convertedAmount(other) - this.amount).absoluteValue < delta
+                    other is Quantity && this.unit.isCompatibleWith(other.unit) &&
+                    (convertedAmount(other) - this.amount).absoluteValue < delta
 
     override fun hashCode() = unit.hashCode(this.amount)
 }
