@@ -1,8 +1,8 @@
 package tests
 
 
-import exercises.Metric
-import exercises.Metrics.*
+import quantity.Metric.Metric
+import quantity.Metric.Metrics.*
 import org.junit.Assert.*
 import org.junit.Test
 

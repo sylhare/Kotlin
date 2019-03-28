@@ -1,4 +1,4 @@
-package exercises
+package quantity
 
 import kotlin.math.absoluteValue
 
@@ -7,7 +7,7 @@ open class IntervalQuantity internal constructor(amount: Number, private val uni
     private val amount = amount.toDouble()
     private val delta = 0.1
 
-    open internal fun convertedAmount(other: IntervalQuantity) = this.unit.convertedAmount(other.amount, other.unit)
+    internal open fun convertedAmount(other: IntervalQuantity) = this.unit.convertedAmount(other.amount, other.unit)
 
     override fun equals(other: Any?) =
             this === other ||

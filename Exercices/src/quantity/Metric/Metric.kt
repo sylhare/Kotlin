@@ -1,4 +1,7 @@
-package exercises
+package quantity.Metric
+
+// Should not use an ENUM, sign of a code smell
+// Breaks encapsulation
 
 class Metric(value: Number, metrics: Metrics) {
 

@@ -1,4 +1,7 @@
-package exercises
+package quantity.Metric
+
+// Enum have no behaviours their data is only stolen away without control
+// Breaks encapsulation
 
 enum class Metrics(val value: Int) {
     TEASPOON(1),

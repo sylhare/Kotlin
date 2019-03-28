@@ -1,4 +1,4 @@
-package exercises
+package quantity
 
 /*
 Type of Unit
@@ -51,8 +51,8 @@ internal class Unit {
 
         val celsius = Unit()
         val fahrenheit = Unit(5.0 / 9.0, celsius, 32.0)
-        val kelvin = Unit(1.0, celsius,273.15)
-        val gasmark = Unit(14.0, celsius, -121.0/14.0)
+        val kelvin = Unit(1.0, celsius, 273.15)
+        val gasmark = Unit(14.0, celsius, -121.0 / 14.0)
     }
 
     internal fun hashCode(amount: Double) = (baseUnitRatio * (amount - offset)).hashCode()
