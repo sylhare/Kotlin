@@ -24,6 +24,11 @@ class Unit {
         val gallon = Unit(4, quart)
 
         val inch = Unit()
+        val foot = Unit(12, inch)
+        val yard = Unit(3, foot)
+        val chain = Unit(22, yard)
+        val furlong = Unit(10, chain)
+        val mile = Unit(8, furlong)
     }
 
     fun ratio(unit: Unit) = this.baseUnit.toDouble() / unit.baseUnit.toDouble()
@@ -33,10 +38,4 @@ class Unit {
     fun isCompatibleWith(other: Unit)= other.type == this.type
 }
 
-val Number.teaspoons get() = Quantity(this, Unit.teaspoon)
-//val Number.tablespoons get() = Quantity(this, Unit.tablespoon)
-//val Number.ounces get() = Quantity(this, Unit.ounce)
-//val Number.cups get() = Quantity(this, Unit.cup)
-//val Number.pints get() = Quantity(this, Unit.pint)
-//val Number.quarts get() = Quantity(this, Unit.quart)
-//val Number.gallon get() = Quantity(this, Unit.gallon)
+// Overload Number with getters

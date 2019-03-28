@@ -47,6 +47,16 @@ Encapsulation problems:
 fun `valid parameters` { ... }
 ```
 
+- Overload Objects to generates new ones easily:
+```kotlin
+val Number.teaspoons get() = Quantity(this, Unit.teaspoon)
+
+Quantity(1.5, Unit.teasponn) 
+// Can now be written
+1.5.teaspoons
+
+```
+
 ## Keywords
 
 - `Any?` for any type
@@ -61,4 +71,3 @@ override fun equals(other: Any?) { ... }
 ```kotlin
 operator fun compareTo(other: Probability) { ... }
 ```
-
