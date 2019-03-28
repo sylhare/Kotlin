@@ -7,7 +7,7 @@ import org.junit.Test
 import java.lang.IllegalArgumentException
 import kotlin.test.assertFailsWith
 
-internal class QuantityTest {
+internal class RatioQuantityTest {
 
     @Test internal fun `Same quantity on different metrics should be equal`() {
         assertEquals(3.teaspoons, 1.tablespoons)
@@ -18,25 +18,25 @@ internal class QuantityTest {
     }
 
     @Test internal fun `hashCode should be equals`() {
-        assertEquals(Quantity(0.25, Unit.gallon).hashCode(), Quantity(2, Unit.pint).hashCode())
-        //assertNotEquals(Quantity(1, Unit.teaspoon).hashCode(), Quantity(1, Unit.inch).hashCode())  // Not necessary
-        assertEquals(Quantity(-40, Unit.fahrenheit).hashCode(), Quantity(-40, Unit.celsius).hashCode())
+        assertEquals(RatioQuantity(0.25, Unit.gallon).hashCode(), RatioQuantity(2, Unit.pint).hashCode())
+        //assertNotEquals(RatioQuantity(1, Unit.teaspoon).hashCode(), RatioQuantity(1, Unit.inch).hashCode())  // Not necessary
+        assertEquals(RatioQuantity(-40, Unit.fahrenheit).hashCode(), RatioQuantity(-40, Unit.celsius).hashCode())
     }
 
     @Test internal fun `Quantity can be anti matter`() {
-        assertEquals(Quantity(-3, Unit.teaspoon), Quantity(-1, Unit.tablespoon))
-        assertEquals(Quantity(-3, Unit.teaspoon), - Quantity(1, Unit.tablespoon))
+        assertEquals(RatioQuantity(-3, Unit.teaspoon), RatioQuantity(-1, Unit.tablespoon))
+        assertEquals(RatioQuantity(-3, Unit.teaspoon), - RatioQuantity(1, Unit.tablespoon))
     }
 
     @Test internal fun `The Quantities can be added`() {
-        assertEquals(Quantity(1, Unit.ounce),3.teaspoons + Quantity(1, Unit.tablespoon))
-        assertEquals(Quantity(0.5, Unit.ounce),Quantity(6, Unit.teaspoon) + Quantity(-1, Unit.tablespoon))
+        assertEquals(RatioQuantity(1, Unit.ounce),3.teaspoons + RatioQuantity(1, Unit.tablespoon))
+        assertEquals(RatioQuantity(0.5, Unit.ounce),RatioQuantity(6, Unit.teaspoon) + RatioQuantity(-1, Unit.tablespoon))
     }
 
     @Test internal fun `The Quantities can be subsctracted`() {
-        assertEquals(Quantity(0.5, Unit.ounce),Quantity(6, Unit.teaspoon) - Quantity(1, Unit.tablespoon))
-        assertEquals(Quantity(1, Unit.ounce),3.teaspoons - Quantity(- 1, Unit.tablespoon))
-        assertEquals(Quantity(0.5, Unit.ounce),Quantity(+6, Unit.teaspoon) - +Quantity(+1, Unit.tablespoon))
+        assertEquals(RatioQuantity(0.5, Unit.ounce),RatioQuantity(6, Unit.teaspoon) - RatioQuantity(1, Unit.tablespoon))
+        assertEquals(RatioQuantity(1, Unit.ounce),3.teaspoons - RatioQuantity(- 1, Unit.tablespoon))
+        assertEquals(RatioQuantity(0.5, Unit.ounce),RatioQuantity(+6, Unit.teaspoon) - +RatioQuantity(+1, Unit.tablespoon))
     }
 
     @Test internal fun `A Quantity of distance cannot be equal to one of volume`() {
@@ -79,16 +79,16 @@ internal class QuantityTest {
 
     @Test internal fun `Substraction does not work on temperature`(){
         assertFailsWith<IllegalArgumentException> {
-            (-10).celsius -  (-50).fahrenheits
+            // - (-50).fahrenheits
         }
         assertFailsWith<IllegalArgumentException> {
-            20.celsius - 50.fahrenheits
+            // 20.celsius - 50.kelvins
         }
     }
 
     @Test internal fun `Addition does not work on temperature`(){
         assertFailsWith<IllegalArgumentException> {
-            10.celsius + 10.celsius
+            // 10.celsius + 10.fahrenheits
         }
     }
 

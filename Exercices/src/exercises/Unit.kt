@@ -5,12 +5,12 @@ Type of Unit
 
 Nominal (distance, volume)
 Ordinal (scale-like representing a rank)
-Interval (dates, temperature)
+IntervalQuantity (dates, temperature)
 Ratio (days)
 
 
  */
-class Unit {
+internal class Unit {
     private val baseUnitRatio: Double
     private val type: Any
     private val offset: Double
@@ -33,7 +33,7 @@ class Unit {
         this.baseUnitRatio = value * unit.baseUnitRatio
     }
 
-    companion object {
+    internal companion object {
         val teaspoon = Unit()
         val tablespoon = Unit(3, teaspoon)
         val ounce = Unit(2, tablespoon)
