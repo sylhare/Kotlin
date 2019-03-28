@@ -17,6 +17,8 @@ internal class QuantityTest {
 
     @Test internal fun `hashCode should be equals`() {
         assertEquals(Quantity(0.25, Unit.gallon).hashCode(), Quantity(2, Unit.pint).hashCode())
+        //assertNotEquals(Quantity(1, Unit.teaspoon).hashCode(), Quantity(1, Unit.inch).hashCode())  // Not necessary
+        assertEquals(Quantity(-40, Unit.fahrenheit).hashCode(), Quantity(-40, Unit.celsius).hashCode())
     }
 
     @Test internal fun `Quantity can be anti matter`() {
@@ -27,12 +29,18 @@ internal class QuantityTest {
     @Test internal fun `The Quantities can be added`() {
         assertEquals(Quantity(1, Unit.ounce),3.teaspoons + Quantity(1, Unit.tablespoon))
         assertEquals(Quantity(0.5, Unit.ounce),Quantity(6, Unit.teaspoon) + Quantity(-1, Unit.tablespoon))
+//        assertEquals(0.celsius,0.celsius + 32.fahrenheits)      Temperatures should not be added
+//        assertEquals(20.celsius,10.celsius + 50.fahrenheits)
+//        assertEquals(300.kelvins,6.85.celsius + 68.fahrenheits)
     }
 
     @Test internal fun `The Quantities can be subsctracted`() {
         assertEquals(Quantity(0.5, Unit.ounce),Quantity(6, Unit.teaspoon) - Quantity(1, Unit.tablespoon))
         assertEquals(Quantity(1, Unit.ounce),3.teaspoons - Quantity(- 1, Unit.tablespoon))
         assertEquals(Quantity(0.5, Unit.ounce),Quantity(+6, Unit.teaspoon) - +Quantity(+1, Unit.tablespoon))
+//        assertEquals((-10).celsius, (-50).fahrenheits)            Temperatures can't be substracted
+//        assertEquals(10.celsius, 20.celsius - 50.fahrenheits)
+
     }
 
     @Test internal fun `A Quantity of distance cannot be equal to one of volume`() {
@@ -44,4 +52,33 @@ internal class QuantityTest {
         assertEquals(22.yards, 1.chains)
         assertEquals(16.furlongs, 2.miles)
     }
+
+    @Test internal fun `Celsius to Fahrenheit`() {
+        assertEquals(0.celsius, 32.fahrenheits)
+        assertEquals(10.celsius, 50.fahrenheits)
+        assertEquals(100.celsius, 212.fahrenheits)
+        assertEquals((-40).celsius, (-40).fahrenheits)
+    }
+
+    @Test internal fun `Fahrenheit to Celsius`() {
+        assertEquals(32.fahrenheits, 0.celsius)
+        assertEquals(50.fahrenheits, 10.celsius)
+        assertEquals(212.fahrenheits, 100.celsius)
+        assertEquals((-40).fahrenheits, (-40).celsius)
+    }
+
+    @Test internal fun `Kelvin can be Celsius and Fahrenheit`(){
+        assertEquals(0.kelvins, (-459.67).fahrenheits)
+        assertEquals((-441.67).fahrenheits, 10.kelvins)
+        assertEquals(27.kelvins, (-246.15).celsius)
+        assertEquals(105.85.celsius, 379.kelvins)
+    }
+
+    @Test internal fun `Gas Mark can be Celsius and Fahrenheit`() { // Gasmarks sucks
+//        assertEquals(2.gasmarks, 300.fahrenheits)
+//        assertEquals(2.gasmarks, 149.celsius)
+//        assertEquals(7.92.gasmarks, 232.celsius)
+//        assertEquals(225.fahrenheits, 0.25.gasmarks)
+    }
+
 }
