@@ -4,6 +4,8 @@ import exercises.*
 import exercises.Unit
 import org.junit.Assert.*
 import org.junit.Test
+import java.lang.IllegalArgumentException
+import kotlin.test.assertFailsWith
 
 internal class QuantityTest {
 
@@ -29,18 +31,12 @@ internal class QuantityTest {
     @Test internal fun `The Quantities can be added`() {
         assertEquals(Quantity(1, Unit.ounce),3.teaspoons + Quantity(1, Unit.tablespoon))
         assertEquals(Quantity(0.5, Unit.ounce),Quantity(6, Unit.teaspoon) + Quantity(-1, Unit.tablespoon))
-//        assertEquals(0.celsius,0.celsius + 32.fahrenheits)      Temperatures should not be added
-//        assertEquals(20.celsius,10.celsius + 50.fahrenheits)
-//        assertEquals(300.kelvins,6.85.celsius + 68.fahrenheits)
     }
 
     @Test internal fun `The Quantities can be subsctracted`() {
         assertEquals(Quantity(0.5, Unit.ounce),Quantity(6, Unit.teaspoon) - Quantity(1, Unit.tablespoon))
         assertEquals(Quantity(1, Unit.ounce),3.teaspoons - Quantity(- 1, Unit.tablespoon))
         assertEquals(Quantity(0.5, Unit.ounce),Quantity(+6, Unit.teaspoon) - +Quantity(+1, Unit.tablespoon))
-//        assertEquals((-10).celsius, (-50).fahrenheits)            Temperatures can't be substracted
-//        assertEquals(10.celsius, 20.celsius - 50.fahrenheits)
-
     }
 
     @Test internal fun `A Quantity of distance cannot be equal to one of volume`() {
@@ -79,6 +75,21 @@ internal class QuantityTest {
 //        assertEquals(2.gasmarks, 149.celsius)
 //        assertEquals(7.92.gasmarks, 232.celsius)
 //        assertEquals(225.fahrenheits, 0.25.gasmarks)
+    }
+
+    @Test internal fun `Substraction does not work on temperature`(){
+        assertFailsWith<IllegalArgumentException> {
+            (-10).celsius -  (-50).fahrenheits
+        }
+        assertFailsWith<IllegalArgumentException> {
+            20.celsius - 50.fahrenheits
+        }
+    }
+
+    @Test internal fun `Addition does not work on temperature`(){
+        assertFailsWith<IllegalArgumentException> {
+            10.celsius + 10.celsius
+        }
     }
 
 }

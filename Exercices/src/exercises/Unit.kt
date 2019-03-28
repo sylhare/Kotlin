@@ -1,5 +1,15 @@
 package exercises
 
+/*
+Type of Unit
+
+Nominal (distance, volume)
+Ordinal (scale-like representing a rank)
+Interval (dates, temperature)
+Ratio (days)
+
+
+ */
 class Unit {
     private val baseUnitRatio: Double
     private val type: Any
@@ -52,8 +62,5 @@ class Unit {
     internal fun convertedAmount(amount: Number, other: Unit) =
             (amount.toDouble() - other.offset) * other.baseUnitRatio / this.baseUnitRatio + this.offset
 
-    fun oppositeAmount(amount: Double): Number {
-        return - (amount -offset) + offset
-    }
 }
 

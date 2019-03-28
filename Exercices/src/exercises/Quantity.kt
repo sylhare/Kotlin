@@ -4,14 +4,15 @@ import kotlin.math.absoluteValue
 
 // Quantity - Analysis pattern by Martin Fowler
 
-class Quantity(amount: Number, private val unit: Unit) {
+open class Quantity internal constructor(amount: Number, private val unit: Unit) {
 
     private val amount = amount.toDouble()
     private val delta = 0.1
 
+
     private fun convertedAmount(other: Quantity) = this.unit.convertedAmount(other.amount, other.unit)
 
-    operator fun plus(other: Quantity) = Quantity(this.amount + convertedAmount(other), this.unit)
+    open operator fun plus(other: Quantity): Quantity = Quantity(this.amount + convertedAmount(other), this.unit)
     operator fun unaryPlus() = this
     operator fun minus(other: Quantity) = this + - other
     operator fun unaryMinus() = Quantity(- amount, unit)
