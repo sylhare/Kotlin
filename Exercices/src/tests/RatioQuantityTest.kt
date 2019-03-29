@@ -75,13 +75,14 @@ internal class RatioQuantityTest {
 //        assertEquals(225.fahrenheits, 0.25.gasmarks)
     }
 
-    @Test internal fun `Substraction does not work on temperature`(){
-            // - (-50).fahrenheits
-            // 20.celsius - 50.kelvins
-    }
-
-    @Test internal fun `Addition does not work on temperature`(){
-            // 10.celsius + 10.fahrenheits
-    }
+// Should not compile
+//    @Test internal fun `Substraction does not work on temperature`(){
+//             - (-50).fahrenheits
+//             20.celsius - 50.kelvins
+//    }
+//
+//    @Test internal fun `Addition does not work on temperature`(){
+//             10.celsius + 10.fahrenheits
+//    }
 
 }

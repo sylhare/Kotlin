@@ -4,7 +4,6 @@ package quantity
 
 class RatioQuantity internal constructor(amount: Number, private val unit: Unit) : IntervalQuantity(amount, unit) {
 
-    private val amount = amount.toDouble()
 
     operator fun plus(other: RatioQuantity): RatioQuantity = RatioQuantity(this.amount + convertedAmount(other), this.unit)
     operator fun unaryPlus() = this
