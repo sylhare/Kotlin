@@ -18,9 +18,12 @@ kotlinc hello.kt
 
 Some principles
 
-- Inheritance : kill off duplicate codes
+- Inheritance : kill off duplicate codes 
+	- Implement with a Mother class implemented by a daughter class
 - Polymorphism : abstraction of implementation
+	- Implement using interface and generic functions 
 - Encapsulation : hiding the changes, protects data
+	- Implement by using restrictive access to data or contructers
 
 Objects comparison:
 
@@ -55,15 +58,20 @@ val Number.teaspoons get() = Quantity(this, Unit.teaspoon)
 Quantity(1.5, Unit.teasponn) 
 // Can now be written
 1.5.teaspoons
-
 ```
 
 ## Keywords
 
-- `Any?` for any type or null
+- `Any` for any type
 - The `?` is used in Kotlin to handle null:
 
+```kotlin
+// The Rectangle? makes the function returns Rectangle or null
+fun mayReturnRectangleOrNull() : Rectangle? { ... }
 
+// With "?." the .rectangleMethod() will only occur when mayReturnRectangleOrNull() returns a rectangle
+mayReturnRectangleOrNull()?.rectangleMethod() 
+```
 - `init {}` to check the values inputed at the creation of the class
 - `override` at the beginning of the function to override it:
 
