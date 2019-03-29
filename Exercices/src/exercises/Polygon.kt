@@ -2,7 +2,7 @@ package exercises
 
 // Exercise : There is no square
 // Understand that a polygon with 4 sides and have a right angle
-class Polygon internal constructor(length: Number, width: Number) {
+class Polygon internal constructor(length: Number, width: Number) : Comparable<Polygon>{
 
     private val width = width.toDouble()
     private val length = length.toDouble()
@@ -24,6 +24,8 @@ class Polygon internal constructor(length: Number, width: Number) {
             }
         }
     }
+
+    override fun isGreaterThan(other: Polygon): Boolean = this.area().toDouble() > other.area().toDouble()
 
     fun perimeter(): Number = (length + width) * 2
     fun area(): Number = length * width

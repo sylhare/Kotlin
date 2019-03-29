@@ -53,5 +53,16 @@ internal class ProbabilityTest {
         assertEquals(Probability(0.92), Probability(0.8).or(Probability(0.6)))
     }
 
+    @Test fun `Find greatest likelyhood`() {
+        assertEquals(Probability(0.7), Probability.greatestOf(arrayOf(Probability(0.5), Probability(0.3), Probability(0.7))))
+        assertEquals(Probability(0.7), Probability.greatestOf(arrayOf(Probability(0.5), Probability(0.7), Probability(0.7).not())))
+    }
+
+    @Test fun `Do not accept empty arrays`(){
+        //assertFailsWith<java.lang.IllegalArgumentException> { Probability.greatestOf(emptyArray()) }
+        assertNull(Probability.greatestOf(emptyArray()))
+    }
+
+
 
 }
