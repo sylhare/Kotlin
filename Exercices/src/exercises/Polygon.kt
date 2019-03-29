@@ -16,6 +16,13 @@ class Polygon internal constructor(length: Number, width: Number) {
     companion object {
         fun square(side: Number) = Polygon(side, side)
         fun rectangle(length: Number, width: Number) = Polygon(length, width)
+
+        fun biggestAreaPolygon(polygons: Array<Polygon>): Polygon? {
+            if (polygons.isEmpty()) return null
+            return polygons.reduce{
+                champion, challenger -> if (champion.area().toDouble() < challenger.area().toDouble()) challenger else champion
+            }
+        }
     }
 
     fun perimeter(): Number = (length + width) * 2

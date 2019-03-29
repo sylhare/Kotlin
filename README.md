@@ -48,6 +48,7 @@ fun `valid parameters` { ... }
 ```
 
 - Overload Objects to generates new ones easily:
+
 ```kotlin
 val Number.teaspoons get() = Quantity(this, Unit.teaspoon)
 
@@ -59,7 +60,10 @@ Quantity(1.5, Unit.teasponn)
 
 ## Keywords
 
-- `Any?` for any type
+- `Any?` for any type or null
+- The `?` is used in Kotlin to handle null:
+
+
 - `init {}` to check the values inputed at the creation of the class
 - `override` at the beginning of the function to override it:
 
