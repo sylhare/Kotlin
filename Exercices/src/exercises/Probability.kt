@@ -11,17 +11,6 @@ class Probability(private val value: Double) : Comparable<Probability> {
             throw IllegalArgumentException("Should be between 0 and 1")
     }
 
-//    companion object {
-//
-//        fun greatestOf(probabilities: Array<Probability>): Probability {
-//            if (probabilities.isEmpty()) throw IllegalArgumentException("Array is empty")
-//
-//            return probabilities.reduce { champion, challenger ->
-//                if (champion > challenger) champion else challenger
-//            }
-//        }
-//    }
-
     override fun isGreaterThan(other: Probability) = this.value > other.value
 
     override fun equals(other: Any?) =

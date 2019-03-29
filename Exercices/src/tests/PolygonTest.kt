@@ -1,5 +1,6 @@
 package tests
 
+import exercises.Comparable
 import exercises.Polygon
 import exercises.Polygon.Companion.rectangle
 import exercises.Polygon.Companion.square
@@ -40,13 +41,10 @@ class PolygonTest {
         assertEquals(square(2).scale(2).perimeter(), rectangle(2, 2).scale(2).perimeter())
     }
 
-
-    // The Rectangle? makes the function returns Rectangle or null
-    // mayReturnRectangleOrNull()?.rectanglestuff() the .rectanglestuff() will only occur when mayReturnRectangleOrNull returns a rectangle
     @Test fun `Get the biggest rectange`() {
         assertEquals(rectangle(4,4).area(),
-                Polygon.biggestAreaPolygon(arrayOf(rectangle(4,1), rectangle(1,2 ), rectangle(1, 3), rectangle(4, 4)))?.area())
-        assertNull(Polygon.biggestAreaPolygon(emptyArray()))
+                Comparable.greatestOf(arrayOf(rectangle(4,1), rectangle(1,2 ), rectangle(1, 3), rectangle(4, 4)))?.area())
+        assertNull(Comparable.greatestOf(emptyArray<Polygon>()))
     }
 
 

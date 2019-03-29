@@ -1,6 +1,8 @@
 package tests
 
+import exercises.Comparable
 import exercises.Probability
+import exercises.best
 import org.junit.Assert.*
 import org.junit.Test
 import kotlin.test.assertFailsWith
@@ -54,13 +56,13 @@ internal class ProbabilityTest {
     }
 
     @Test fun `Find greatest likelyhood`() {
-        assertEquals(Probability(0.7), Probability.greatestOf(arrayOf(Probability(0.5), Probability(0.3), Probability(0.7))))
-        assertEquals(Probability(0.7), Probability.greatestOf(arrayOf(Probability(0.5), Probability(0.7), Probability(0.7).not())))
+        assertEquals(Probability(0.7), arrayOf(Probability(0.5), Probability(0.3), Probability(0.7)).best())
+        assertEquals(Probability(0.7), arrayOf(Probability(0.5), Probability(0.7), Probability(0.7).not()).best())
     }
 
     @Test fun `Do not accept empty arrays`(){
         //assertFailsWith<java.lang.IllegalArgumentException> { Probability.greatestOf(emptyArray()) }
-        assertNull(Probability.greatestOf(emptyArray()))
+        assertNull(Comparable.greatestOf(emptyArray<Probability>()))
     }
 
 
