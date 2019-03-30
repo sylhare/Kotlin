@@ -74,6 +74,12 @@ internal class QuantityTest {
         assertEquals(8.gasmarks, 232.222222222222222.celsius)   // Gasmarks sucks with celsius, it is a fahrenheit made unit
     }
 
+    @Test internal fun `rankine to else`() {
+        assertEquals(0.rankines, 0.kelvins)
+        assertEquals(527.67.rankines, 20.celsius)
+        assertEquals((-458.67).fahrenheits, 1.rankines)
+    }
+
 // Should not compile
 //    @Test internal fun `Substraction and Addition do not work on temperature`(){
 //             - (-50).fahrenheits
