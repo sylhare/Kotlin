@@ -1,6 +1,6 @@
 package quantity
 
-// RatioQuantity - Analysis pattern by Martin Fowler
+// Quantity - Analysis pattern by Martin Fowler
 
 class RatioQuantity internal constructor(amount: Number, private val unit: Unit) : IntervalQuantity(amount, unit) {
 

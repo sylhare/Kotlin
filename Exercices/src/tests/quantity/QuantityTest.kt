@@ -68,20 +68,16 @@ internal class QuantityTest {
         assertEquals(105.85.celsius, 379.kelvins)
     }
 
-    @Test internal fun `Gas Mark can be Celsius and Fahrenheit`() { // Gasmarks sucks
-//        assertEquals(2.gasmarks, 300.fahrenheits)
-//        assertEquals(2.gasmarks, 149.celsius)
-//        assertEquals(7.92.gasmarks, 232.celsius)
-//        assertEquals(225.fahrenheits, 0.25.gasmarks)
+    @Test internal fun `Gas Mark can be Celsius and Fahrenheit`() {
+        assertEquals(3.gasmarks, 325.fahrenheits)
+        assertEquals(325.fahrenheits, 3.gasmarks)
+        assertEquals(8.gasmarks, 232.222222222222222.celsius)   // Gasmarks sucks with celsius, it is a fahrenheit made unit
     }
 
 // Should not compile
-//    @Test internal fun `Substraction does not work on temperature`(){
+//    @Test internal fun `Substraction and Addition do not work on temperature`(){
 //             - (-50).fahrenheits
 //             20.celsius - 50.kelvins
-//    }
-//
-//    @Test internal fun `Addition does not work on temperature`(){
 //             10.celsius + 10.fahrenheits
 //    }
 

@@ -7,8 +7,6 @@ Nominal (distance, volume)
 Ordinal (scale-like representing a rank)
 IntervalQuantity (dates, temperature)
 Ratio (days)
-
-
  */
 internal class Unit {
     private val baseUnitRatio: Double
@@ -52,7 +50,7 @@ internal class Unit {
         val celsius = Unit()
         val fahrenheit = Unit(5.0 / 9.0, celsius, 32.0)
         val kelvin = Unit(1.0, celsius, 273.15)
-        val gasmark = Unit(14.0, celsius, -121.0 / 14.0)
+        val gasmark = Unit(125/9.0, celsius, -218.0/25)
     }
 
     internal fun hashCode(amount: Double) = (baseUnitRatio * (amount - offset)).hashCode()
