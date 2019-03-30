@@ -11,7 +11,7 @@ open class IntervalQuantity internal constructor(amount: Number, private val uni
 
     override fun equals(other: Any?) =
             this === other ||
-                    other is IntervalQuantity && this.unit.isCompatibleWith(other.unit) &&
+                    other is IntervalQuantity && this.unit isCompatibleWith other.unit &&
                     (convertedAmount(other) - this.amount).absoluteValue < delta
 
     override fun hashCode() = unit.hashCode(this.amount)

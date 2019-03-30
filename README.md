@@ -83,3 +83,14 @@ override fun equals(other: Any?) { ... }
 ```kotlin
 operator fun compareTo(other: Probability) { ... }
 ```
+- `infix` function are function where you can omit the `.`:
+
+```kotlin
+infix fun isCompatibleWith(other: Unit): Boolean { ... }
+
+// calling the function using the infix notation
+unit isCompatibleWith otherUnit
+
+// is the same as
+unit.isCompatibleWith(otherUnit)
+```

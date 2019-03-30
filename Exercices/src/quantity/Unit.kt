@@ -56,7 +56,7 @@ internal class Unit {
 
     internal fun hashCode(amount: Double) = (baseUnitRatio * (amount - offset)).hashCode()
 
-    internal fun isCompatibleWith(other: Unit) = other.type == this.type
+    internal infix fun isCompatibleWith(other: Unit) = other.type == this.type
 
     internal fun convertedAmount(amount: Number, other: Unit) =
             (amount.toDouble() - other.offset) * other.baseUnitRatio / this.baseUnitRatio + this.offset
