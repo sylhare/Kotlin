@@ -1,4 +1,4 @@
-package tests
+package tests.quantity
 
 
 import quantity.Metric.Metric

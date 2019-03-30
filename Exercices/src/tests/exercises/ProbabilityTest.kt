@@ -1,4 +1,4 @@
-package tests
+package tests.exercises
 
 import exercises.Comparable
 import exercises.Probability

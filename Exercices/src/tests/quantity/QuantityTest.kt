@@ -1,11 +1,11 @@
-package tests
+package tests.quantity
 
 import quantity.Unit
 import org.junit.Assert.*
 import org.junit.Test
 import quantity.*
 
-internal class RatioQuantityTest {
+internal class QuantityTest {
 
     @Test internal fun `Same quantity on different metrics should be equal`() {
         assertEquals(3.teaspoons, 1.tablespoons)
