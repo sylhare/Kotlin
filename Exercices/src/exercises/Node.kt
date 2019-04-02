@@ -18,7 +18,7 @@ class Node internal constructor() {
         if (this in visitedNodes) return false
         visitedNodes.add(this)
 
-        return siblings.any{ it.canReach(other, visitedNodes) }
+        return siblings.any { it.canReach(other, visitedNodes) }
     }
 
     fun hopsCount(destination: Node): Int {
@@ -32,11 +32,10 @@ class Node internal constructor() {
         if (this in visitedNodes) return unreachable
         visitedNodes.add(this)
 
-        for (node in siblings){
+        siblings.map { node ->
             node.hopsCount(destination, visitedNodes).apply {
                 if (this != unreachable) return this + 1
             }
-
         }
 
         return unreachable
