@@ -4,6 +4,8 @@ import exercises.Node
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import java.lang.IllegalArgumentException
+import kotlin.test.assertFailsWith
 
 class NodeTest {
     companion object {
@@ -20,12 +22,10 @@ class NodeTest {
     @Before()
     fun init() {
         B to A
-        B to C
+        B to C to D to E
         B to F
         C to D
-        C to D
         C to E
-        D to E
         E to B
         H to B
     }
@@ -42,6 +42,15 @@ class NodeTest {
 
     @Test fun `Cannot reach not connected nodes`(){
         assertFalse(B canReach G)
+    }
+
+    @Test fun `Count hops`(){
+        assertEquals(0, B.hopsCount(B))
+        assertEquals(1, B.hopsCount(C))
+        assertEquals(2, B.hopsCount(D))
+        assertEquals(3, B.hopsCount(E))
+        assertEquals(4, H.hopsCount(E))
+        assertFailsWith<IllegalArgumentException> {  B.hopsCount(G) }
     }
 
 }
