@@ -2,7 +2,7 @@ package exercises
 
 class Node internal constructor() {
     private val siblings = mutableListOf<Node>()
-    private val unreachable = Int.MAX_VALUE
+    private val unreachable = Double.POSITIVE_INFINITY
 
     infix fun to(other: Node): Node {
         siblings.add(other)
@@ -21,14 +21,12 @@ class Node internal constructor() {
         return siblings.any { it.canReach(other, visitedNodes) }
     }
 
-    fun hopsCount(destination: Node): Int {
-        return hopsCount(destination, mutableListOf()).apply {
-             if (this == unreachable) throw IllegalArgumentException("Can't reach")
-        }
-    }
+    infix fun hopsCount(destination: Node): Int = hopsCount(destination, mutableListOf()).apply {
+         if (this == unreachable) throw IllegalArgumentException("Can't reach")
+    }.toInt()
 
-    fun hopsCount(destination: Node, visitedNodes: List<Node>): Int {
-        if (this === destination) return 0
+    fun hopsCount(destination: Node, visitedNodes: List<Node>): Double {
+        if (this === destination) return 0.0
         if (this in visitedNodes) return unreachable
 
         siblings.map { it.hopsCount(destination, visitedNodes.plus(this)) }

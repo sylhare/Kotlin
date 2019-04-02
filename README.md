@@ -60,6 +60,12 @@ Quantity(1.5, Unit.teasponn)
 1.5.teaspoons
 ```
 
+- The `!!` to force the function to operate eventhough it can be null:
+
+```kotlin
+list.min()!! + 1 //list can be null, without !! it would complain
+```
+
 ## Keywords
 
 - `Any` for any type
