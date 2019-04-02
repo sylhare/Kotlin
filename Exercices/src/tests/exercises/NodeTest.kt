@@ -17,17 +17,14 @@ class NodeTest {
         val F = Node()
         val G = Node()
         val H = Node()
-    }
 
-    @Before()
-    fun init() {
-        B to A
-        B to C to D to E
-        B to F
-        C to D
-        C to E
-        E to B
-        H to B
+        init {
+            B to A
+            B to C to D to E to B to F
+            C to D
+            C to E
+            H to B
+        }
     }
 
     @Test fun `Can reach siblings`() {
@@ -45,12 +42,12 @@ class NodeTest {
     }
 
     @Test fun `Count hops`(){
-        assertEquals(0, B hopsCount B)
-        assertEquals(3, C hopsCount F)
-        assertEquals(1, B hopsCount C)
-        assertEquals(2, B hopsCount D)
-        assertEquals(2, B hopsCount E)
-        assertEquals(3, H hopsCount E)
-        assertFailsWith<IllegalArgumentException> {  B hopsCount G }
+        assertEquals(0, B hops B)
+        assertEquals(3, C hops F)
+        assertEquals(1, B hops C)
+        assertEquals(2, B hops D)
+        assertEquals(2, B hops E)
+        assertEquals(3, H hops E)
+        assertFailsWith<IllegalArgumentException> {  B hops G }
     }
 }

@@ -60,15 +60,8 @@ Quantity(1.5, Unit.teasponn)
 1.5.teaspoons
 ```
 
-- The `!!` to force the function to operate eventhough it can be null:
+### Handling null
 
-```kotlin
-list.min()!! + 1 //list can be null, without !! it would complain
-```
-
-## Keywords
-
-- `Any` for any type
 - The `?` is used in Kotlin to handle null:
 
 ```kotlin
@@ -78,6 +71,22 @@ fun mayReturnRectangleOrNull() : Rectangle? { ... }
 // With "?." the .rectangleMethod() will only occur when mayReturnRectangleOrNull() returns a rectangle
 mayReturnRectangleOrNull()?.rectangleMethod() 
 ```
+
+- The `!!` to force the function to operate eventhough it can be null:
+
+```kotlin
+return if (list.isEmpty) -1 else list.min()!! //list can be null, without !! it would complain, but can still return null
+```
+
+- The `?:` is an operator that checks for null and then you say what you want to do:
+
+```kotlin
+return list.min() ?: -1 // so it won't return null
+```
+
+## Keywords
+
+- `Any` for any type
 - `init {}` to check the values inputed at the creation of the class
 - `override` at the beginning of the function to override it:
 
