@@ -46,11 +46,11 @@ class NodeTest {
 
     @Test fun `Count hops`(){
         assertEquals(0, B.hopsCount(B))
+        assertEquals(3, C.hopsCount(F))
         assertEquals(1, B.hopsCount(C))
         assertEquals(2, B.hopsCount(D))
-        assertEquals(3, B.hopsCount(E))
-        assertEquals(4, H.hopsCount(E))
+        assertEquals(2, B.hopsCount(E))
+        assertEquals(3, H.hopsCount(E))
         assertFailsWith<IllegalArgumentException> {  B.hopsCount(G) }
     }
-
 }
