@@ -1,10 +1,10 @@
 package exercises
 
-import exercises.Connexion.strategy.fewestHops
-import exercises.Connexion.strategy.leastCost
+import exercises.Connexion.Companion.fewestHops
+import exercises.Connexion.Companion.leastCost
 
 
-class Node internal constructor() {
+class Node {
     private val connexions = mutableListOf<Connexion>()
     private val unreachable = Double.POSITIVE_INFINITY
 
@@ -31,6 +31,19 @@ class Node internal constructor() {
 
     infix fun cost(amount: Number): ConnexionBuilder {
         return ConnexionBuilder(amount.toDouble(), connexions)
+    }
+
+    infix fun path(destination: Node): Path {
+        return path(destination, mutableListOf()) ?: throw IllegalArgumentException("Can't reach")
+    }
+
+    internal fun path(destination: Node, visitedNodes: List<Node>): Path? {
+        if (this === destination) return Path()
+        if (this in visitedNodes) return null
+
+        return connexions
+                .map { it.path(destination, visitedNodes + this) }
+                .minBy { it?.cost() ?: Double.POSITIVE_INFINITY }
     }
 
 }

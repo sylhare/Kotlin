@@ -6,7 +6,7 @@ import org.junit.Test
 import java.lang.IllegalArgumentException
 import kotlin.test.assertFailsWith
 
-class NodeTest {
+internal class NodeTest {
     companion object {
         val A = Node()
         val B = Node()
@@ -28,21 +28,21 @@ class NodeTest {
         }
     }
 
-    @Test fun `Can reach siblings`() {
+    @Test internal fun `Can reach siblings`() {
         assertTrue(B canReach C)
         assertTrue(B canReach B)
     }
 
-    @Test fun `Can reach not direct siblings`() {
+    @Test internal fun `Can reach not direct siblings`() {
         assertTrue(B canReach D)
         //assertTrue(H canReach E)
     }
 
-    @Test fun `Cannot reach not connected nodes`(){
+    @Test internal fun `Cannot reach not connected nodes`(){
         assertFalse(B canReach G)
     }
 
-    @Test fun `Count hops`(){
+    @Test internal fun `Count hops`(){
         assertEquals(0, B hops B)
         assertEquals(3, C hops F)
         assertEquals(1, B hops C)
@@ -52,7 +52,42 @@ class NodeTest {
         assertFailsWith<IllegalArgumentException> {  B hops G }
     }
 
-    @Test fun `Cost of a path`() {
+    @Test internal fun `Cost of a path`() {
         assertTrue(10.0 == C cost F)
     }
+
+    @Test internal fun `Return Path with the least cost`(){
+        assertEquals(0.0, B.path(B).cost(), 0.001)
+        assertEquals(5.0, B.path(A).cost(), 0.001)
+        assertEquals(9.0, B.path(E).cost(), 0.001)
+        assertEquals(10.0, C.path(F).cost(), 0.001)
+        assertEquals(4, C.path(F).hopCount())
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
