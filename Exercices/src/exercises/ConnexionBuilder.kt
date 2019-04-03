@@ -6,3 +6,4 @@ class ConnexionBuilder(val cost: Double, val connexions: MutableList<Connexion>)
         return node
     }
 }
+

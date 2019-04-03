@@ -2,7 +2,6 @@ package tests.exercises
 
 import exercises.Node
 import org.junit.Assert.*
-import org.junit.Before
 import org.junit.Test
 import java.lang.IllegalArgumentException
 import kotlin.test.assertFailsWith
@@ -54,6 +53,6 @@ class NodeTest {
     }
 
     @Test fun `Cost of a path`() {
-        assertTrue(10.0 == C costTo F)
+        assertTrue(10.0 == C cost F)
     }
 }
