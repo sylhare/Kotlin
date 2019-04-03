@@ -1,4 +1,4 @@
-package exercises
+package graph
 
 class Connexion(private val node: Node, private val cost: Double) {
 

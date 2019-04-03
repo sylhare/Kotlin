@@ -1,4 +1,8 @@
-package exercises
+package graph
+
+import graph.Connexion
+import graph.Path
+import graph.totalCost
 
 
 class ValidPath internal constructor(): Path {

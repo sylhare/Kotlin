@@ -1,8 +1,8 @@
-package exercises
+package graph
 
-import exercises.Connexion.Companion.fewestHops
-import exercises.Connexion.Companion.leastCost
-import exercises.NoPath.Companion.noPath
+import graph.Connexion.Companion.fewestHops
+import graph.Connexion.Companion.leastCost
+import graph.NoPath.Companion.noPath
 
 
 class Node {

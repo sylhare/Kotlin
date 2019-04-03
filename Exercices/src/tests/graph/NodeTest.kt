@@ -1,6 +1,6 @@
-package tests.exercises
+package tests.graph
 
-import exercises.Node
+import graph.Node
 import org.junit.Assert.*
 import org.junit.Test
 import java.lang.IllegalArgumentException
@@ -22,7 +22,7 @@ internal class NodeTest {
             B cost 6 to C cost 1 to D cost 2 to E cost 3 to B cost 4 to F
             C cost 7 to D
             C cost 8 to E
-//            H cost 1.0 to B
+            H cost 1 to B
 
         }
     }
@@ -34,7 +34,7 @@ internal class NodeTest {
 
     @Test internal fun `Can reach not direct siblings`() {
         assertTrue(B canReach D)
-        //assertTrue(H canReach E)
+        assertTrue(H canReach E)
     }
 
     @Test internal fun `Cannot reach not connected nodes`(){
@@ -47,7 +47,7 @@ internal class NodeTest {
         assertEquals(1, B hops C)
         assertEquals(2, B hops D)
         assertEquals(2, B hops E)
-        //assertEquals(3, H hops E)
+        assertEquals(3, H hops E)
         assertFailsWith<IllegalArgumentException> {  B hops G }
     }
 

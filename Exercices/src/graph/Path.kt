@@ -1,4 +1,4 @@
-package exercises
+package graph
 
 interface Path {
 

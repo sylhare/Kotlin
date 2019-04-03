@@ -1,4 +1,4 @@
-package exercises
+package graph
 
 class NoPath private constructor(): Path {
 
