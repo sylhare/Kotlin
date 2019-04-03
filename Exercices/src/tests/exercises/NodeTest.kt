@@ -24,7 +24,6 @@ internal class NodeTest {
             C cost 8 to E
 //            H cost 1.0 to B
 
-
         }
     }
 
@@ -62,6 +61,7 @@ internal class NodeTest {
         assertEquals(9.0, B.path(E).cost(), 0.001)
         assertEquals(10.0, C.path(F).cost(), 0.001)
         assertEquals(4, C.path(F).hopCount())
+        assertFailsWith<IllegalArgumentException> { G.path(B) }
     }
 }
 

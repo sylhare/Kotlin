@@ -12,8 +12,8 @@ class Connexion(private val node: Node, private val cost: Double) {
         return node.cost(destination, visitedNodes, strategy) + strategy(cost)
     }
 
-    fun path(destination: Node, visitedNodes: List<Node>): Path? {
-        return node.path(destination, visitedNodes)?.apply { this.prepend(this@Connexion) }  //this is the object you are applying, this@Connexion is the this of the object
+    fun path(destination: Node, visitedNodes: List<Node>): Path {
+        return node.path(destination, visitedNodes).apply { this.prepend(this@Connexion) }  //this is the object you are applying, this@Connexion is the this of the object
     }
 }
 // Extension method to List<Connexion> that call static method inside connexion

@@ -34,16 +34,18 @@ class Node {
     }
 
     infix fun path(destination: Node): Path {
-        return path(destination, mutableListOf()) ?: throw IllegalArgumentException("Can't reach")
+        return path(destination, mutableListOf()).apply {
+            if (this == Path.invalidPath) throw IllegalArgumentException("Can't reach")
+        }
     }
 
-    internal fun path(destination: Node, visitedNodes: List<Node>): Path? {
+    internal fun path(destination: Node, visitedNodes: List<Node>): Path {
         if (this === destination) return Path()
-        if (this in visitedNodes) return null
+        if (this in visitedNodes) return Path.invalidPath
 
         return connexions
                 .map { it.path(destination, visitedNodes + this) }
-                .minBy { it?.cost() ?: Double.POSITIVE_INFINITY }
+                .minPath()
     }
 
 }
