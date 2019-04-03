@@ -1,24 +1,17 @@
 package exercises
 
+interface Path {
 
-class Path internal constructor() {
-    private var connexions = mutableListOf<Connexion>()
+    fun cost(): Double
+    fun hopCount(): Int
+    fun prepend(connexion: Connexion)
 
     companion object {
         fun min(paths: List<Path>): Path {
-            if (paths.isEmpty()) return invalidPath
+            if (paths.isEmpty()) return NoPath.noPath
             return paths.reduce { champion, challenger -> if (challenger.cost() < champion.cost()) challenger else champion }
         }
-
-        val invalidPath = Path()
-
     }
-
-    fun cost() = connexions.totalCost()
-
-    fun hopCount() = connexions.size
-
-    fun prepend(connexion: Connexion) = connexions.add(0, connexion)
 }
 
-internal fun List<Path>.minPath() = Path.min(this)
+internal fun List<Path>.min() = Path.min(this)

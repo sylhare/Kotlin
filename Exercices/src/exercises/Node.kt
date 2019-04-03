@@ -2,6 +2,7 @@ package exercises
 
 import exercises.Connexion.Companion.fewestHops
 import exercises.Connexion.Companion.leastCost
+import exercises.NoPath.Companion.noPath
 
 
 class Node {
@@ -35,17 +36,15 @@ class Node {
 
     infix fun path(destination: Node): Path {
         return path(destination, mutableListOf()).apply {
-            if (this == Path.invalidPath) throw IllegalArgumentException("Can't reach")
+            if (this == noPath) throw IllegalArgumentException("Can't reach")
         }
     }
 
     internal fun path(destination: Node, visitedNodes: List<Node>): Path {
-        if (this === destination) return Path()
-        if (this in visitedNodes) return Path.invalidPath
+        if (this === destination) return ValidPath()
+        if (this in visitedNodes) return noPath
 
         return connexions
-                .map { it.path(destination, visitedNodes + this) }
-                .minPath()
+                .map { it.path(destination, visitedNodes + this) }.min()
     }
-
 }
