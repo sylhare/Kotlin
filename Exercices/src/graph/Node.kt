@@ -1,22 +1,19 @@
 package graph
 
-import graph.Path.Companion.fewestHops
-import graph.Path.Companion.leastCost
-
 
 class Node {
     private val connexions = mutableListOf<Connexion>()
 
-    infix fun canReach(destination: Node) = path(destination, mutableListOf(), fewestHops) != Path.invalid
+    infix fun canReach(destination: Node) = path(destination) != Path.invalid
 
-    infix fun hops(destination: Node): Int = cost(destination, fewestHops).toInt()
+    infix fun hops(destination: Node): Int = path(destination, Path::hopCount).hopCount()
 
-    infix fun cost(destination: Node): Double = path(destination).cost()
+    infix fun cost(destination: Node): Double = path(destination, Path::cost).cost()
 
-    private fun cost(destination: Node, strategy: CostStrategy): Double {
+    private fun path(destination: Node, strategy: CostStrategy): Path {
         return path(destination, mutableListOf(), strategy).apply {
             if (this == Path.invalid) throw IllegalArgumentException("Can't reach")
-        }.cost(strategy)
+        }
     }
 
     infix fun cost(amount: Number): ConnexionBuilder {
@@ -24,7 +21,7 @@ class Node {
     }
 
     infix fun path(destination: Node): Path {
-        return path(destination, mutableListOf(), strategy = leastCost).apply {
+        return path(destination, mutableListOf(), Path::cost).apply {
             if (this == Path.invalid) throw IllegalArgumentException("Can't reach")
         }
     }
@@ -34,7 +31,7 @@ class Node {
         if (this in visitedNodes) return Path.invalid
 
         return connexions
-                .map { it.path(destination, visitedNodes + this, strategy) } //.min()
-                .minBy{ it.cost(strategy) } ?: Path.invalid
+                .map { it.path(destination, visitedNodes + this, strategy) }
+                .minBy{ strategy(it).toDouble() } ?: Path.invalid
     }
 }

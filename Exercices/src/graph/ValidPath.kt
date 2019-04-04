@@ -4,7 +4,7 @@ package graph
 class ValidPath internal constructor() : Path() {
     private var connexions = mutableListOf<Connexion>()
 
-    override fun cost(strategy: CostStrategy) = connexions.totalCost(strategy)
+    override fun cost() = connexions.totalCost()
 
     override fun hopCount() = connexions.size
 
