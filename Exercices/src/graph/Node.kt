@@ -1,32 +1,22 @@
 package graph
 
-import graph.Connexion.Companion.fewestHops
-import graph.Connexion.Companion.leastCost
+import graph.Path.Companion.fewestHops
+import graph.Path.Companion.leastCost
 
 
 class Node {
     private val connexions = mutableListOf<Connexion>()
-    private val unreachable = Double.POSITIVE_INFINITY
 
-    infix fun canReach(destination: Node) = cost(destination, mutableListOf(), fewestHops) != unreachable
+    infix fun canReach(destination: Node) = path(destination, mutableListOf(), fewestHops) != Path.invalid
 
     infix fun hops(destination: Node): Int = cost(destination, fewestHops).toInt()
 
-    infix fun cost(destination: Node): Double = cost(destination, leastCost)
+    infix fun cost(destination: Node): Double = path(destination).cost()
 
     private fun cost(destination: Node, strategy: CostStrategy): Double {
-        return cost(destination, mutableListOf(), strategy).apply {
-            if (this == unreachable) throw IllegalArgumentException("Can't reach")
-        }
-    }
-
-    internal fun cost(destination: Node, visitedNodes: List<Node>, strategy: CostStrategy): Double {
-        if (this === destination) return 0.0
-        if (this in visitedNodes) return unreachable
-
-        return connexions
-                .map { it.cost(destination, visitedNodes + this, strategy) }
-                .min() ?: unreachable
+        return path(destination, mutableListOf(), strategy).apply {
+            if (this == Path.invalid) throw IllegalArgumentException("Can't reach")
+        }.cost(strategy)
     }
 
     infix fun cost(amount: Number): ConnexionBuilder {
@@ -34,17 +24,17 @@ class Node {
     }
 
     infix fun path(destination: Node): Path {
-        return path(destination, mutableListOf()).apply {
+        return path(destination, mutableListOf(), strategy = leastCost).apply {
             if (this == Path.invalid) throw IllegalArgumentException("Can't reach")
         }
     }
 
-    internal fun path(destination: Node, visitedNodes: List<Node>): Path {
+    internal fun path(destination: Node, visitedNodes: List<Node>, strategy: CostStrategy): Path {
         if (this === destination) return ValidPath()
         if (this in visitedNodes) return Path.invalid
 
         return connexions
-                .map { it.path(destination, visitedNodes + this) }.min()
-                //.minBy{it.cost()} ?: Path.invalid
+                .map { it.path(destination, visitedNodes + this, strategy) } //.min()
+                .minBy{ it.cost(strategy) } ?: Path.invalid
     }
 }
