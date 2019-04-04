@@ -39,6 +39,7 @@ internal class NodeTest {
 
     @Test internal fun `Cannot reach not connected nodes`(){
         assertFailsWith<IllegalArgumentException> { B canReach G }
+        assertFailsWith<IllegalArgumentException> { A canReach B }
     }
 
     @Test internal fun `Count hops`(){
@@ -49,6 +50,7 @@ internal class NodeTest {
         assertEquals(2, B hops E)
         assertEquals(3, H hops E)
         assertFailsWith<IllegalArgumentException> {  B hops G }
+        assertFailsWith<IllegalArgumentException> {  A hops B }
     }
 
     @Test internal fun `Cost of a path`() {
@@ -62,11 +64,12 @@ internal class NodeTest {
         assertEquals(10.0, C.path(F).cost(), 0.001)
     }
 
-    @Test internal fun `Return Path with least hop count`() {
-        assertEquals(4, (C path F).hopCount())
-        assertEquals(0, (C path C).hopCount())
-        assertFailsWith<IllegalArgumentException> { G.path(B) }
+    @Test internal fun `Return Paths`() {
+        assertEquals(3, (B paths E).size)
+        assertEquals(0, (C paths C).size)
+        assertEquals(0, (C paths G).size)
     }
+
 }
 
 

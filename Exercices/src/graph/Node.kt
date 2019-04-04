@@ -32,6 +32,16 @@ class Node {
 
         return connexions
                 .map { it.path(destination, visitedNodes + this, strategy) }
-                .minBy{ strategy(it).toDouble() } ?: Path.invalid
+                .minBy { strategy(it).toDouble() } ?: Path.invalid
+    }
+
+    infix fun paths(destination: Node): List<Path> = paths(destination, mutableListOf())
+
+    internal fun paths(destination: Node, visitedNodes: List<Node>): List<Path> {
+        if (this === destination) return listOf(ValidPath())
+        if (this in visitedNodes) return emptyList()
+
+        return connexions
+                .flatMap { it.paths(destination, visitedNodes + this) }    // tranform a list of list of stuff into a simple list of stuff
     }
 }

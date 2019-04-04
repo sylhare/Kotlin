@@ -1,6 +1,6 @@
 package graph
 
-class InvalidPath internal constructor(): Path() {
+class InvalidPath internal constructor() : Path() {
 
     override fun cost(): Double = Double.POSITIVE_INFINITY
 
