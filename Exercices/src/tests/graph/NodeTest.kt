@@ -70,6 +70,12 @@ internal class NodeTest {
         assertEquals(0, (C paths G).size)
     }
 
+    @Test internal fun `All paths`() {
+        assertEquals(7, E.paths.size)
+        assertEquals(15, C.paths.size)
+        assertEquals(1, G.paths.size)
+    }
+
 }
 
 
