@@ -1,15 +1,14 @@
 package graph
 
-abstract class Path internal constructor() {
+class Path internal constructor() {
 
-    abstract fun cost(): Double
-    abstract fun hopCount(): Int
-    internal open fun prepend(connexion: Connexion) { /* Do nothing */
-    }
+    private var connexions = mutableListOf<Connexion>()
 
-    companion object {
-        val invalid = InvalidPath()
-    }
+    fun cost() = connexions.totalCost()
+
+    fun hopCount() = connexions.size
+
+    fun prepend(connexion: Connexion) = connexions.add(0, connexion)
 }
 
 // Short function that takes a double and return a double, a name for a function signature

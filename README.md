@@ -60,6 +60,11 @@ Quantity(1.5, Unit.teasponn)
 1.5.teaspoons
 ```
 
+- Before a recursion, ask yourself these questions:
+	- What is the original question?
+	- What is the recursive question?
+	- What are the Terminal condition? (when the recursive stops)
+
 ### Handling null
 
 - The `?` is used in Kotlin to handle null:
@@ -70,6 +75,10 @@ fun mayReturnRectangleOrNull() : Rectangle? { ... }
 
 // With "?." the .rectangleMethod() will only occur when mayReturnRectangleOrNull() returns a rectangle
 mayReturnRectangleOrNull()?.rectangleMethod() 
+
+// Elvis ?: to have another value if the preceeding one return null
+val somethingNotNull = emptyRectangle()
+return mayReturnRectangleOrNull() ?: somethingNotNull 
 ```
 
 - The `!!` to force the function to operate eventhough it can be null:

@@ -38,8 +38,8 @@ internal class NodeTest {
     }
 
     @Test internal fun `Cannot reach not connected nodes`(){
-        assertFailsWith<IllegalArgumentException> { B canReach G }
-        assertFailsWith<IllegalArgumentException> { A canReach B }
+        assertFalse(B canReach G)
+        assertFalse(A canReach B)
     }
 
     @Test internal fun `Count hops`(){
@@ -66,7 +66,7 @@ internal class NodeTest {
 
     @Test internal fun `Return Paths`() {
         assertEquals(3, (B paths E).size)
-        assertEquals(0, (C paths C).size)
+        assertEquals(1, (C paths C).size)
         assertEquals(0, (C paths G).size)
     }
 
