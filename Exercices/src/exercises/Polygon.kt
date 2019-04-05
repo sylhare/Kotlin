@@ -2,7 +2,7 @@ package exercises
 
 // Exercise : There is no square
 // Understand that a polygon with 4 sides and have a right angle
-class Polygon internal constructor(length: Number, width: Number) : Comparable<Polygon>{
+class Polygon internal constructor(length: Number, width: Number) : Comparable<Polygon> {
 
     private val width = width.toDouble()
     private val length = length.toDouble()

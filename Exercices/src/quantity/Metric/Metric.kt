@@ -8,7 +8,7 @@ class Metric(value: Number, metrics: Metrics) {
     private val measure: Double = value.toDouble() * metrics.value
 
     override fun equals(other: Any?) =
-        this === other || other is Metric && this.measure  == other.measure
+            this === other || other is Metric && this.measure == other.measure
 
     override fun hashCode() = measure.toInt()
 

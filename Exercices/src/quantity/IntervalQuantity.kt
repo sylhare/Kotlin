@@ -2,7 +2,7 @@ package quantity
 
 import kotlin.math.absoluteValue
 
-open class IntervalQuantity internal constructor(amount: Number, private val unit: Unit)  {
+open class IntervalQuantity internal constructor(amount: Number, private val unit: Unit) {
 
     internal val amount = amount.toDouble()
     private val delta = 0.0000000001

@@ -18,7 +18,7 @@ internal class NodeTest {
         val H = Node()
 
         init {
-            B cost 5 to A
+            B cost 5 to A  // B cost 5.yards to a with Unit()
             B cost 6 to C cost 1 to D cost 2 to E cost 3 to B cost 4 to F
             C cost 7 to D
             C cost 8 to E

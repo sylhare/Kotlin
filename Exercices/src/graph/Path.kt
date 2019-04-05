@@ -10,7 +10,6 @@ class Path internal constructor() {
     }
 
     fun cost() = connexions.totalCost()
-
     fun hopCount() = connexions.size
 
     infix fun prepend(connexion: Connexion) = connexions.add(0, connexion)
