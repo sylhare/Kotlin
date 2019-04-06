@@ -87,11 +87,7 @@ return mayReturnRectangleOrNull() ?: somethingNotNull
 return if (list.isEmpty) -1 else list.min()!! //list can be null, without !! it would complain, but can still return null
 ```
 
-- The `?:` is an operator that checks for null and then you say what you want to do:
-
-```kotlin
-return list.min() ?: -1 // so it won't return null
-```
+- Using the `this@Class` inside of a `list.apply { this.prepend(this@Class) }`, you are calling the `this` of the class (so `this@Class` to differentiate from the other `this` (element of the list that you apply to).
 
 ## Keywords
 
@@ -118,3 +114,19 @@ unit isCompatibleWith otherUnit
 // is the same as
 unit.isCompatibleWith(otherUnit)
 ```
+
+- `typealias` is used to define a name for a function signature (hence alias) usually used to simplify simple functions into a type:
+```kotlin
+internal typealias CostStrategy = (Double) -> Double
+```
+
+### Operation on lists
+
+- `flatMap` tranforms a list of list of stuff into a simple list of stuff
+```kotlin
+list.flatMap { List<List<Path>> } // returns List<Path>
+```
+
+- `onEach` is the same as `list.map{ this.apply { ... } }`
+
+- `sumByDouble` is the same as  `list.map{}.sum{}`
