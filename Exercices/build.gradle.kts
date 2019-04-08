@@ -15,3 +15,7 @@ dependencies {
 tasks.withType<Wrapper> {
     gradleVersion = "5.3.1"
 }
+
+fun testImplementation(kotlin: Any) {
+    // I have no idea what I am doing 
+}

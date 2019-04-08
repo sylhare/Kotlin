@@ -19,7 +19,7 @@ kotlinc hello.kt
 
 ### With gradle
 
-You need to create the gradle file `build.gradle.kts` then add dependencies and configurations.
+You need to create the gradle file `build.gradle` (support [groovy or kotlin](https://kotlinlang.org/docs/reference/using-gradle.html)) then add dependencies and configurations.
 
 For gradle to pick up the source and test files, you will need to organise your folders like:
 
