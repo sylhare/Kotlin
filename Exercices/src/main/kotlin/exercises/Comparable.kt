@@ -1,4 +1,4 @@
-package main.kotlin.exercises
+package exercises
 
 interface Comparable<T> {
 

@@ -1,4 +1,4 @@
-package main.kotlin.quantity.Metric
+package quantity.Metric
 
 // Should not use an ENUM, sign of a code smell
 // Breaks encapsulation

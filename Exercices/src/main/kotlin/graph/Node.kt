@@ -1,5 +1,7 @@
 package main.kotlin.graph
 
+import graph.*
+
 
 class Node {
     val paths get() = paths()

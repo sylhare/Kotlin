@@ -1,4 +1,4 @@
-package main.kotlin.quantity
+package quantity
 
 /*
 Type of Unit

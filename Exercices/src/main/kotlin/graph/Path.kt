@@ -1,4 +1,6 @@
-package main.kotlin.graph
+package graph
+
+import main.kotlin.graph.Node
 
 class Path internal constructor() {
 

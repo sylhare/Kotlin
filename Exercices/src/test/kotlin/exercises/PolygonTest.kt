@@ -1,12 +1,9 @@
-package test.kotlin.exercises
+package exercises
 
-import main.kotlin.exercises.Comparable
-import main.kotlin.exercises.Polygon
-import main.kotlin.exercises.Polygon.Companion.rectangle
-import main.kotlin.exercises.Polygon.Companion.square
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import exercises.Polygon.Companion.rectangle
+import exercises.Polygon.Companion.square
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNull
 

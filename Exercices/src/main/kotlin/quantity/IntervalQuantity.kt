@@ -1,4 +1,4 @@
-package main.kotlin.quantity
+package quantity
 
 import kotlin.math.absoluteValue
 

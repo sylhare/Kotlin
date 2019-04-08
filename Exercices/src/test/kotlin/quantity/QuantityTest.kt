@@ -1,9 +1,7 @@
-package test.kotlin.quantity
+package quantity
 
-import main.kotlin.quantity.Unit
-import org.junit.Assert.*
-import org.junit.Test
-import main.kotlin.quantity.*
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 internal class QuantityTest {
 

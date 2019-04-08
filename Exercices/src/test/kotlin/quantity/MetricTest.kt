@@ -1,10 +1,10 @@
-package test.kotlin.quantity
+package quantity
 
 
-import main.kotlin.quantity.Metric.Metric
-import main.kotlin.quantity.Metric.Metrics.*
-import org.junit.Assert.*
-import org.junit.Test
+import quantity.Metric.Metric
+import quantity.Metric.Metrics.*
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class MetricTest {
 

@@ -1,10 +1,7 @@
-package test.kotlin.exercises
+package exercises
 
-import main.kotlin.exercises.Comparable
-import main.kotlin.exercises.Probability
-import main.kotlin.exercises.best
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import kotlin.test.assertFailsWith
 
 internal class ProbabilityTest {
@@ -43,9 +40,9 @@ internal class ProbabilityTest {
     }
 
     @Test fun `And`() {
-        assertEquals(Probability(0.16),Probability(0.4).and(Probability(0.4)))
-        assertEquals(Probability(0.07),Probability(0.1).and(Probability(0.7)))
-        assertEquals(Probability(0.064),Probability(0.4).and(Probability(0.4)).and(Probability(0.4)))
+        assertEquals(Probability(0.16), Probability(0.4).and(Probability(0.4)))
+        assertEquals(Probability(0.07), Probability(0.1).and(Probability(0.7)))
+        assertEquals(Probability(0.064), Probability(0.4).and(Probability(0.4)).and(Probability(0.4)))
     }
 
     @Test fun `Or`() {
