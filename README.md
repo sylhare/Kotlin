@@ -8,10 +8,35 @@ See their website here:
   - [Getting started](https://kotlinlang.org/docs/tutorials/getting-started.html)
 
 ## Get started
+
+### With kotlinc
+
 If you are not using intellij, you can run with:
 
 ```bash
 kotlinc hello.kt
+```
+
+### With gradle
+
+You need to create the gradle file `build.gradle.kts` then add dependencies and configurations.
+
+For gradle to pick up the source and test files, you will need to organise your folders like:
+
+```bash
+└── src
+    ├── main
+    │   └── kotlin
+    │       └── package
+    └── test
+        └── kotlin
+            └── package
+
+```
+
+You can now try to run the tests:
+```bash
+gradle test
 ```
 
 ## Object oriented
