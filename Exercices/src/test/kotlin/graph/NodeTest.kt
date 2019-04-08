@@ -1,6 +1,6 @@
-package tests.graph
+package test.kotlin.graph
 
-import graph.Node
+import main.kotlin.graph.Node
 import org.junit.Assert.*
 import org.junit.Test
 import java.lang.IllegalArgumentException

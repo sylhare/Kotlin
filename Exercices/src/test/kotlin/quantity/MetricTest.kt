@@ -1,8 +1,8 @@
-package tests.quantity
+package test.kotlin.quantity
 
 
-import quantity.Metric.Metric
-import quantity.Metric.Metrics.*
+import main.kotlin.quantity.Metric.Metric
+import main.kotlin.quantity.Metric.Metrics.*
 import org.junit.Assert.*
 import org.junit.Test
 

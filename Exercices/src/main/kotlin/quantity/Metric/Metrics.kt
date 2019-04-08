@@ -1,4 +1,4 @@
-package quantity.Metric
+package main.kotlin.quantity.Metric
 
 // Enum have no behaviours their data is only stolen away without control
 // Breaks encapsulation

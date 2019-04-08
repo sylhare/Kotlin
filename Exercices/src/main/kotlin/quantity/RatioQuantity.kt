@@ -1,4 +1,4 @@
-package quantity
+package main.kotlin.quantity
 
 // Quantity - Analysis pattern by Martin Fowler
 

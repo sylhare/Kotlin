@@ -1,9 +1,9 @@
-package tests.quantity
+package test.kotlin.quantity
 
-import quantity.Unit
+import main.kotlin.quantity.Unit
 import org.junit.Assert.*
 import org.junit.Test
-import quantity.*
+import main.kotlin.quantity.*
 
 internal class QuantityTest {
 

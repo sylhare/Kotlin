@@ -1,8 +1,8 @@
-package tests.exercises
+package test.kotlin.exercises
 
-import exercises.Comparable
-import exercises.Probability
-import exercises.best
+import main.kotlin.exercises.Comparable
+import main.kotlin.exercises.Probability
+import main.kotlin.exercises.best
 import org.junit.Assert.*
 import org.junit.Test
 import kotlin.test.assertFailsWith

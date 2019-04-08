@@ -1,4 +1,4 @@
-package graph
+package main.kotlin.graph
 
 class Connexion(private val node: Node, private val cost: Double) {
 

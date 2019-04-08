@@ -1,4 +1,4 @@
-/*package tests
+/*package test.kotlin.tests
 
 import org.junit.jupiter.api.Assertions.*
 

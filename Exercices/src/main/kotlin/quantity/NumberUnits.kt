@@ -1,4 +1,4 @@
-package quantity
+package main.kotlin.quantity
 
 val Number.teaspoons get() = RatioQuantity(this, Unit.teaspoon)
 val Number.tablespoons get() = RatioQuantity(this, Unit.tablespoon)
