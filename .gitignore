@@ -11,7 +11,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -30,3 +29,6 @@ Experiments/out/*
 *.kotlin_module
 Exercices/src/exercises/Node.kt___jb_tmp___
 microservice_workshop/
+Exercices/.gradle/
+Exercices/build/*
+Experiments/lib/*
