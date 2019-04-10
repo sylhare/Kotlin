@@ -32,3 +32,4 @@ microservice_workshop/
 Exercices/.gradle/
 Exercices/build/*
 Experiments/lib/*
+Exercices/jacoco/*
