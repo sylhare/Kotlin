@@ -1,0 +1,25 @@
+env:
+  global:
+    - secure: OzJVJFWHrrQTuEDWk5A8Oc0H79dfwMVQxeFDV3Q+xHvIVCoA40Z9cUq07Bk7HPhjmB+dpw8cC0DBU2CiHJmEDN90YCSn/YsrW9moml9uMr9D2KUsad5R8f0S+SgoNYyqfl4zYwxQs7QyIBzcWa2BjvfOc6xWrBZUd7vEgp+lgYtM7O9x2XHhuaE/lHCOQIABviq0Eo00ZKp1FSpAZlpg88Mrbjsla6U1V25IHzsE+YlRF42E6vETAXr14MZqyiPTn6tU6Yzg/4RLmnaaif7QSokER3x34ol59YFUeXgHvT0Thg1kMe6j2ADcE0EqA/hosLONh3NAYyiLOB8tl3shIZY864sMnkuOsvTIouxKK41IQiRV6B9QsnfrZTtztebXWuOJeCDxIh/R09JHrHBiFDDwYtpPdwqbEAaNJFsv5z5hU5nIEhFQwGCGHj+mLNP4XhJTLp8lk3A0QfUg/KMQGZl8FLK2jy3dDV8MfSx2591DJ+RFQRkjYuo9OkMsCw6+JRbf1a8Qnv4zFtYRqxsgDFnR0yY256SzEcnC56prosGipp6K//hXYg18u3rDVRiJaF7mH10PbVnjREq8XCYzPmv8 IVx9JxGDGk3T9BGwTjzT7CxkD3r3vw9mQjnK+80wlP3nEhwle4DelrH4lX9Q+tfLp8pU8o9pl5klULsvOr0=
+    - secure: BuvfDbL2GqbbkV2bOdZssCjs3Rnb4FWDIZeM+CBrDTsB4PFbs0TwYtI9co26qHxLqANy44L43gObfqIqbsMa7bTpJeAVx4bE6eeVyTt6pxREYYQd84z56Vjcsx5I5A8w0t0UBTCN6yfw5IJG3yXZFNzDlD6t/q5BcXJ2ebrocGQ1UvleiS+i59t+l5T/95XP27Q/D9i4+9mrvitwwNpB+hiX+cLJj5va5ZKv2MIcRSyqdYs5IGn76oj/JSE/93L+kzFe5PI0E3kcoxXKwpOiS6yocniJAmR6fOXMMOxe2Cra5AjlnBKROnTptex0JoBQxtYsYGSIj3PRXe6S5xBLZagzmExIirlpKVBdOdOpENNKicI4bB+ieQY/H94yp13ZTBAU1lkiznMjuT4MAIpcYBszqmdeTFLhsY2yez97Ps2J+SIr34URhjPFa+rkw21RZ35qMes3Zhi05NmnN7y0KnQhcigO/ATr7lVxxhATp0FZQIHBsFUjhNFkfOkk679/G32ovQBYEzzaMa6gcJz8b46mrs/Kd0zhRglchFgM5ckwhfOCjah/SxUCieQd/oDtLOdAo1zn1oYccXUJ7fQ1NGs0TADjIkzDqSaRqe2mUBsddCZTB0vwb4NE+kgBK81a4F5P6CK1qv/ap4OxRsGXkYWyu7RWO7yP/Gl+T1mUBB4=
+  
+language: java
+
+jdk:
+  - oraclejdk8
+
+install: true
+sudo: false
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - "./cc-test-reporter before-build"
+
+script:
+  - cd Exercices/
+  - gradle clean build test
+
+after_script:
+  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+  - bash <(curl -s https://codecov.io/bash)
