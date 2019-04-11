@@ -118,6 +118,13 @@ return if (list.isEmpty) -1 else list.min()!! //list can be null, without !! it 
 
 - Using the `this@Class` inside of a `list.apply { this.prepend(this@Class) }`, you are calling the `this` of the class (so `this@Class` to differentiate from the other `this` (element of the list that you apply to).
 
+### Work with recursive
+
+When you have to create a recursive function, you first answer this three questions:
+  - What is the original question: What you are actually trying to do?
+  - What is the recursive question: What will you base your recursion on?
+  - What are the terminal coniditions: When should the recursive question stopped and return an answer?
+
 ## Keywords
 
 - `Any` for any type
