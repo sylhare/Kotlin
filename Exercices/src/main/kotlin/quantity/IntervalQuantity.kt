@@ -15,8 +15,6 @@ open class IntervalQuantity internal constructor(amount: Number, private val uni
                     (convertedAmount(other) - this.amount).absoluteValue < delta
 
     override fun hashCode() = unit.hashCode(this.amount)
-    override fun toString(): String {
-        return "Quantity(unit=$unit, amount=$amount, delta=$delta)"
-    }
+    override fun toString() = "Quantity(unit=$unit, amount=$amount)"
 
 }

@@ -5,7 +5,14 @@ import org.junit.jupiter.api.Test
 
 internal class QuantityTest {
 
+    @Test internal fun `do toString need to be tested?`() {
+        assertTrue(3.teaspoons.toString().contains("Quantity(unit="))
+        assertTrue(3.teaspoons.toString().contains("amount="))
+    }
+
     @Test internal fun `Same quantity on different metrics should be equal`() {
+        val quart = 1.quarts
+        assertEquals(quart, quart)
         assertEquals(3.teaspoons, 1.tablespoons)
         assertNotEquals(0.5.teaspoons, 1.tablespoons)
         assertEquals(1.pints, 16.ounces)
@@ -46,7 +53,10 @@ internal class QuantityTest {
     }
 
     @Test internal fun `Celsius to Fahrenheit`() {
+        val celsius = 1.celsius
+        assertEquals(celsius, celsius)
         assertEquals(0.celsius, 32.fahrenheits)
+        assertNotEquals(32.celsius, 32.fahrenheits)
         assertEquals(10.celsius, 50.fahrenheits)
         assertEquals(100.celsius, 212.fahrenheits)
         assertEquals((-40).celsius, (-40).fahrenheits)
@@ -64,10 +74,12 @@ internal class QuantityTest {
         assertEquals((-441.67).fahrenheits, 10.kelvins)
         assertEquals(27.kelvins, (-246.15).celsius)
         assertEquals(105.85.celsius, 379.kelvins)
+        assertNotEquals(0.celsius, 0.kelvins)
     }
 
     @Test internal fun `Gas Mark can be Celsius and Fahrenheit`() {
         assertEquals(3.gasmarks, 325.fahrenheits)
+        assertNotEquals(10.gasmarks, 0.fahrenheits)
         assertEquals(325.fahrenheits, 3.gasmarks)
         assertEquals(8.gasmarks, 232.222222222222222.celsius)   // Gasmarks sucks with celsius, it is a fahrenheit made unit
     }
@@ -76,6 +88,15 @@ internal class QuantityTest {
         assertEquals(0.rankines, 0.kelvins)
         assertEquals(527.67.rankines, 20.celsius)
         assertEquals((-458.67).fahrenheits, 1.rankines)
+    }
+
+
+    @Test internal fun `Ratio and Interval quantities can't mix`() {
+        assertNotEquals(0.teaspoons, 0.kelvins)
+        assertNotEquals(2.yards, 2.celsius)
+        assertNotEquals(2.yards, 2)
+        assertNotEquals(2.celsius, 2)
+        assertNotEquals((-50).fahrenheits, 50.furlongs)
     }
 
 // Should not compile

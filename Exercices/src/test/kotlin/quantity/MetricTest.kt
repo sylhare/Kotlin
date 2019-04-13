@@ -6,9 +6,12 @@ import quantity.Metric.Metrics.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class MetricTest {
+internal class MetricTest {
 
-    @Test fun `Equals`() {
+    private val metric = Metric(1, QUART)
+
+    @Test internal fun `Equals`() {
+        assertEquals(metric, metric)
         assertEquals(Metric(1, TABLESPOON), Metric(3, TEASPOON))
         assertEquals(Metric(1, OUNCE), Metric(2, TABLESPOON))
         assertEquals(Metric(1, CUP), Metric(8, OUNCE))
@@ -18,14 +21,17 @@ class MetricTest {
         assertEquals(Metric(1, CUP), Metric(16, TABLESPOON))
         assertEquals(Metric(0.5, CUP), Metric(4, OUNCE))
         assertEquals(Metric(4, TABLESPOON), Metric(0.25, CUP))
+        assertNotEquals(Metric(1, TABLESPOON), Metric(1, CUP))
+        assertNotEquals(Metric(1, TABLESPOON), 1)
     }
 
-    @Test fun `hasCode`() {
+    @Test internal fun `hasCode`() {
+        assertEquals(hashSetOf(metric), hashSetOf(metric))
         assertTrue(hashSetOf(Metric(0.75, TEASPOON)).contains(Metric(0.75, TEASPOON)))
         assertTrue(hashSetOf(Metric(4, TABLESPOON)).contains(Metric(0.25, CUP)))
     }
 
-    @Test fun `Add`() {
+    @Test internal fun `Add`() {
         assertEquals(Metric(1, CUP), Metric(0.5, CUP) + (Metric(0.5, CUP)))
         assertEquals(Metric(0.75, PINT), Metric(1, CUP) + (Metric(4, OUNCE)))
     }
