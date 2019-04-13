@@ -18,7 +18,7 @@ class Probability(private val value: Double) : Comparable<Probability> {
 
     override fun hashCode() = value.hashCode()
 
-    override fun isGreaterThan(other: Probability) = this.value > other.value
+    override infix fun isGreaterThan(other: Probability) = this.value > other.value
     operator fun not() = Probability(max - value)
     operator fun compareTo(other: Probability) = this.value.compareTo(other.value)
     fun and(other: Probability) = Probability(this.value * other.value)
