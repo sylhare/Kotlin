@@ -1,4 +1,5 @@
-import exercises.Polygon
+package exercises
+
 import exercises.Polygon.Companion.rectangle
 import exercises.Polygon.Companion.square
 import org.junit.jupiter.api.Assertions.*
@@ -39,7 +40,7 @@ internal class PolygonTest {
 
     @Test internal fun `Get the biggest rectange`() {
         assertEquals(rectangle(4,4).area(),
-                Comparable.greatestOf(arrayOf(rectangle(4,1), rectangle(1,2 ), rectangle(1, 3), rectangle(4, 4)))?.area())
+                Comparable.greatestOf(arrayOf(rectangle(4, 1), rectangle(1, 2), rectangle(1, 3), rectangle(4, 4)))?.area())
         assertNull(Comparable.greatestOf(emptyArray<Polygon>()))
     }
 

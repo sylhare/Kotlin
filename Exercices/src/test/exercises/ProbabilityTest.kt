@@ -1,4 +1,5 @@
-import exercises.Probability
+package exercises
+
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
@@ -58,11 +59,11 @@ internal class ProbabilityTest {
     @Test internal fun `Find greatest likelyhood`() {
         assertEquals(Probability(0.7), arrayOf(Probability(0.5), Probability(0.3), Probability(0.7)).best())
         assertEquals(Probability(0.7), arrayOf(Probability(0.5), Probability(0.7), Probability(0.7).not()).best())
-        assertEquals(Probability(0.7), Comparable.greatestOf(arrayOf(Probability(0.5), Probability(0.3), Probability(0.7))))
+        assertEquals(Probability(0.7), Comparable.Companion.greatestOf(arrayOf(Probability(0.5), Probability(0.3), Probability(0.7))))
     }
 
     @Test internal fun `Do not accept empty arrays`(){
-        assertNull(Comparable.greatestOf(emptyArray<Probability>()))
+        assertNull(Comparable.Companion.greatestOf(emptyArray<Probability>()))
         assertEquals(null, emptyArray<Probability>().best())
     }
 
