@@ -2,7 +2,7 @@ package exercises
 
 import kotlin.math.absoluteValue
 
-// Could be rewritten with a main.kotlin.graph
+// Could be rewritten with a kotlin.hello.main.kotlin.graph
 class Probability(private val value: Double) : Comparable<Probability> {
     private val max = 1.0
 

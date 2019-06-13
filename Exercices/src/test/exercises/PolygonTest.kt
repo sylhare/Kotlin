@@ -1,5 +1,4 @@
-package exercises
-
+import exercises.Polygon
 import exercises.Polygon.Companion.rectangle
 import exercises.Polygon.Companion.square
 import org.junit.jupiter.api.Assertions.*
@@ -23,9 +22,9 @@ internal class PolygonTest {
     }
 
     @Test internal fun validParameters() {
-        assertFailsWith<IllegalArgumentException> { Polygon(0,0) }
-        assertFailsWith<IllegalArgumentException> { Polygon(-2 ,1) }
-        assertFailsWith<IllegalArgumentException> { Polygon(1,-2) }
+        assertFailsWith<IllegalArgumentException> { Polygon(0, 0) }
+        assertFailsWith<IllegalArgumentException> { Polygon(-2, 1) }
+        assertFailsWith<IllegalArgumentException> { Polygon(1, -2) }
     }
 
     @Test internal fun canBeScaled() {
