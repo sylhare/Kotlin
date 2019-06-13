@@ -24,12 +24,13 @@ hs_err_pid*
 *.iml
 /.idea/
 out/*
-Experiments/out/*
+hello.Experiments/out/*
 .DS_Store
 *.kotlin_module
 Exercices/src/exercises/Node.kt___jb_tmp___
 microservice_workshop/
 Exercices/.gradle/
 Exercices/build/*
-Experiments/lib/*
+hello.Experiments/lib/*
 Exercices/jacoco/*
+.gradle/*
