@@ -18,6 +18,9 @@ internal class ExperimentsTest {
         assertEquals("1234", listOf(1.exp, 2.exp, 3.exp, 4.exp).concatenate())
         assertEquals("1234", listOf("1", "2", "3", "4").concat())
         assertEquals("1234", listOf("1", "2", "3", "4", "+", "3").concat())
+        assertEquals("1234", listOf("1", "2", "3", "4", "+", "3").concatNotInternal())
+        assertEquals("1234", listOf("1", "2", "3", "4", "+", "3").concatRegex())
+        assertEquals("1234", listOf("1", "2", "3", "4", "+", "3").concatOther())
     }
 
     @Test
