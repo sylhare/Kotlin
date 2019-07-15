@@ -1,7 +1,5 @@
 package graph
 
-import main.kotlin.graph.Node
-
 class Path internal constructor() {
 
     private var connexions = mutableListOf<Connexion>()

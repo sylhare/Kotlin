@@ -1,6 +1,4 @@
-package main.kotlin.graph
-
-import graph.*
+package graph
 
 
 class Node {
@@ -16,8 +14,7 @@ class Node {
     infix fun cost(amount: Number): ConnexionBuilder = ConnexionBuilder(amount.toDouble(), connexions)
 
     private fun path(destination: Node, strategy: CostStrategy) =
-            paths(destination).minBy { strategy(it).toDouble() }
-                    ?: throw IllegalArgumentException("Can't reach")
+            paths(destination).minBy { strategy(it).toDouble() } ?: throw IllegalArgumentException("Can't reach")
 
     private fun paths(): List<Path> = paths(mutableListOf())
 

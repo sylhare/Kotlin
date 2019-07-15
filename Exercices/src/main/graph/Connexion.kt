@@ -1,7 +1,5 @@
 package graph
 
-import main.kotlin.graph.Node
-
 class Connexion(private val node: Node, private val cost: Double) {
 
     internal companion object {
