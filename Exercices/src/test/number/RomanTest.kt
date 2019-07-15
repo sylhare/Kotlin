@@ -15,4 +15,13 @@ internal class RomanTest {
         assertEquals( "X", Converter.simpleConvert(10))
     }
 
+    @Test
+    fun lessSimple() {
+        assertEquals( "I", Roman.convertBasedUnit(1, RomanUnit()))
+        assertEquals( "III", Roman.convertBasedUnit(3, RomanUnit()))
+        assertEquals( "IV", Roman.convertBasedUnit(4, RomanUnit()))
+        assertEquals( "VII", Roman.convertBasedUnit(7, RomanUnit()))
+        assertEquals( "IX", Roman.convertBasedUnit(9, RomanUnit()))
+        assertEquals( "X", Roman.convertBasedUnit(10, RomanUnit()))
+    }
 }
