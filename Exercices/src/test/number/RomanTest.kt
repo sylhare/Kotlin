@@ -24,4 +24,19 @@ internal class RomanTest {
         assertEquals( "IX", Roman.convertBasedUnit(9, RomanUnit()))
         assertEquals( "X", Roman.convertBasedUnit(10, RomanUnit()))
     }
+
+    @Test
+    fun fullConvert() {
+        assertEquals( "MMM", Converter.complexConvert(3000))
+        assertEquals( "MCMXCIX", Converter.complexConvert(1999))
+        assertEquals( "CXXVIII", Converter.complexConvert(128))
+        assertEquals( "XLIX", Converter.complexConvert(49))
+        assertEquals( "I", Converter.complexConvert(1))
+        assertEquals( "III", Converter.complexConvert(3))
+        assertEquals( "IV", Converter.complexConvert(4))
+        assertEquals( "VII", Converter.complexConvert(7))
+        assertEquals( "IX", Converter.complexConvert(9))
+        assertEquals( "X", Converter.complexConvert(10))
+    }
+
 }

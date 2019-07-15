@@ -19,6 +19,33 @@ class Converter {
                 "I".repeat(number)
             }
         }
+
+        fun complexConvert(n: Int): String {
+            var solution: String
+
+            val r1 = n/ 1_000
+            solution = "M".repeat(r1)
+
+            //if (((n + 100) / 1_000) == 1) solution += "CM"
+            val r2 = (n - (r1 * 1_000)) / 100
+            if (r2 >= 5) solution += if (r2 == 9) "CM" else "D" + "C".repeat(r2 - 5)
+            if (r2 == 4) solution += "CD"
+            if (r2 < 4) solution += "C".repeat(r2)
+
+            //if ((((n - (r1 * 1_000)) + 10) / 100) == 1) solution += "XC"
+            val r3 = (n - (r1 * 1_000 + r2 * 100)) / 10
+            if (r3 >= 5) solution += if (r3 == 9) "XC" else "L" + "X".repeat(r3 - 5)
+            if (r3 == 4) solution += "XL"
+            if (r3 < 4) solution+= "X".repeat(r3)
+
+            //if (((n - (r1 * 1_000 + r2 * 100) + 1) / 10) == 1) solution += "IX"
+            val r4 = n - (r1 * 1_000 + r2 * 100 + r3 * 10)
+            if (r4 >= 5) solution += if (r4 == 9) "IX" else "V" + "I".repeat(r4 -5)
+            if (r4 == 4) solution += "IV"
+            if (r4 < 4) solution+= "I".repeat(r4)
+
+            return solution
+        }
     }
 }
 
