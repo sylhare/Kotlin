@@ -3,7 +3,8 @@ package number
 class Converter {
 
     companion object {
-        val roman = mapOf(0 to "", 1 to "I", 5 to "V", 10 to "X")
+        val roman = mapOf(1 to "I", 5 to "V", 10 to "X", 50 to "L", 100 to "C", 500 to "D", 1000 to "M")
+        val romanMap = mapOf(100 to listOf("CM", "D", "C"), 10 to listOf("XC", "L", "X"), 1 to listOf("IX", "V", "I"))
 
         fun simpleConvert(number: Int): String {
             if (number == 10) return "X"
@@ -23,7 +24,7 @@ class Converter {
         fun complexConvert(n: Int): String {
             var solution: String
 
-            val r1 = n/ 1_000
+            val r1 = n / 1_000
             solution = "M".repeat(r1)
 
             //if (((n + 100) / 1_000) == 1) solution += "CM"
@@ -33,16 +34,34 @@ class Converter {
             if (r2 < 4) solution += "C".repeat(r2)
 
             //if ((((n - (r1 * 1_000)) + 10) / 100) == 1) solution += "XC"
-            val r3 = (n - (r1 * 1_000 + r2 * 100)) / 10
+            val r3 = (n - (r1 * 1_000) - (r2 * 100)) / 10
             if (r3 >= 5) solution += if (r3 == 9) "XC" else "L" + "X".repeat(r3 - 5)
             if (r3 == 4) solution += "XL"
-            if (r3 < 4) solution+= "X".repeat(r3)
+            if (r3 < 4) solution += "X".repeat(r3)
 
             //if (((n - (r1 * 1_000 + r2 * 100) + 1) / 10) == 1) solution += "IX"
-            val r4 = n - (r1 * 1_000 + r2 * 100 + r3 * 10)
-            if (r4 >= 5) solution += if (r4 == 9) "IX" else "V" + "I".repeat(r4 -5)
+            val r4 = n - (r1 * 1_000) - (r2 * 100) - (r3 * 10)
+            if (r4 >= 5) solution += if (r4 == 9) "IX" else "V" + "I".repeat(r4 - 5)
             if (r4 == 4) solution += "IV"
-            if (r4 < 4) solution+= "I".repeat(r4)
+            if (r4 < 4) solution += "I".repeat(r4)
+
+            return solution
+        }
+
+        fun loopConvert(n: Int): String {
+            var solution = ""
+            var reminder = n / 1000
+            var modulo = reminder * 1000
+
+            solution += "M".repeat(reminder)
+
+            for (x in listOf(100, 10, 1)) {
+                reminder = (n - modulo) / x
+                modulo += reminder * x
+                if (reminder >= 5) solution += if (reminder == 9) romanMap[x]?.get(0) else romanMap[x]?.get(1) + romanMap[x]?.get(2)?.repeat(reminder - 5)
+                if (reminder == 4) solution += romanMap[x]?.get(2) + romanMap[x]?.get(1)
+                if (reminder < 4) solution += romanMap[x]?.get(2)?.repeat(reminder)
+            }
 
             return solution
         }
