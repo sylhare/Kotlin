@@ -56,7 +56,6 @@ internal class RomanUnitTest {
 
     @Test
     fun romanUnitConvert() {
-
         assertEquals( "MMM", RomanConversion.of(3000))
         assertEquals( "MCMXCIX", RomanConversion.of(1999))
         assertEquals( "CXXVIII", RomanConversion.of(128))

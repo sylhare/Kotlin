@@ -7,11 +7,11 @@ abstract class RomanGroup {
 
     open fun parse(number: Int): String {
         if (number == 0) return ""
-        return RomanUnit.parse(number, max) + RomanUnit.parse(number, medium) + RomanUnit.parse(number, min)
+        return RomanUnit.singleParse(number, max) + RomanUnit.singleParse(number, medium) + RomanUnit.singleParse(number, min)
     }
 
     open fun multiParse(number: Int) = RomanUnit.multiParse(number, min, medium)
-
+    fun numberToList(n: Int) = n.toString().reversed().map { it.toInt() }
 }
 
 class RomanUni : RomanGroup() {
@@ -38,8 +38,5 @@ class RomanMaxi : RomanGroup() {
     override val min = RomanUnit.M
 
     override fun multiParse(number: Int) = this.parse(number)
-    override fun parse(number: Int): String {
-        if (number == 0) return ""
-        return RomanUnit.parseM(number)
-    }
+    override fun parse(number: Int) = if (number == 0) "" else RomanUnit.parseM(number)
 }

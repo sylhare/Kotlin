@@ -21,5 +21,4 @@ class RomanConversion {
 
         fun of(n: Int) = decompose(n).mapIndexed { i, x -> compose(x, base(MAX - i)) }.joinToString("")
     }
-
 }

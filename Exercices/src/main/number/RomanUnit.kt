@@ -16,20 +16,16 @@ class RomanUnit {
         this.visual = visual
     }
 
-
     companion object {
 
-        fun convertBasedUnit(number: Int, unit: RomanGroup): String {
-            if (unit.parse(number).isNotEmpty()) return unit.parse(number)
-            if (unit.parse(number + 1).isNotEmpty()) return unit.min.visual + unit.parse(number + 1)
-            if (unit.multiParse(number).isNotEmpty()) return unit.multiParse(number)
+        fun convertBasedUnit(number: Int, group: RomanGroup): String {
+            if (group.parse(number).isNotEmpty()) return group.parse(number)  // 1, 5, 10
+            if (group.parse(number + 1).isNotEmpty()) return group.min.visual + group.parse(number + 1) // 4, 9
+            if (group.multiParse(number).isNotEmpty()) return group.multiParse(number) // 2, 3, 6
             return ""
         }
 
-        fun parse(number: Int, romanUnit: RomanUnit) = when (number) {
-            romanUnit.value -> romanUnit.visual
-            else -> ""
-        }
+        fun singleParse(number: Int, romanUnit: RomanUnit) = if (number == romanUnit.value) romanUnit.visual else ""
 
         fun multiParse(number: Int, min: RomanUnit, medium: RomanUnit) = when {
             number > medium.value -> medium.visual + min.visual.repeat(number - medium.value)
@@ -50,6 +46,3 @@ class RomanUnit {
     override fun equals(other: Any?) = this === other || other is RomanUnit && this.value == other.value
     override fun hashCode() = 31 * value + visual.hashCode()
 }
-
-
-
