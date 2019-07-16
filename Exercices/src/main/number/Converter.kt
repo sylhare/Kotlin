@@ -55,12 +55,12 @@ class Converter {
 
             solution += "M".repeat(reminder)
 
-            for (x in listOf(100, 10, 1)) {
-                reminder = (n - modulo) / x
-                modulo += reminder * x
-                if (reminder >= 5) solution += if (reminder == 9) romanMap[x]?.get(0) else romanMap[x]?.get(1) + romanMap[x]?.get(2)?.repeat(reminder - 5)
-                if (reminder == 4) solution += romanMap[x]?.get(2) + romanMap[x]?.get(1)
-                if (reminder < 4) solution += romanMap[x]?.get(2)?.repeat(reminder)
+            listOf(100, 10, 1).forEach {
+                reminder = (n - modulo) / it
+                modulo += reminder * it
+                if (reminder >= 5) solution += if (reminder == 9) romanMap[it]?.get(0) else romanMap[it]?.get(1) + romanMap[it]?.get(2)?.repeat(reminder - 5)
+                if (reminder == 4) solution += romanMap[it]?.get(2) + romanMap[it]?.get(1)
+                if (reminder < 4) solution += romanMap[it]?.get(2)?.repeat(reminder)
             }
 
             return solution
