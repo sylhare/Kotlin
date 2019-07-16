@@ -3,7 +3,7 @@ package number
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class RomanTest {
+internal class RomanUnitTest {
 
     @Test
     fun simple() {
@@ -17,12 +17,12 @@ internal class RomanTest {
 
     @Test
     fun lessSimple() {
-        assertEquals( "I", Roman.convertBasedUnit(1, RomanUnit()))
-        assertEquals( "III", Roman.convertBasedUnit(3, RomanUnit()))
-        assertEquals( "IV", Roman.convertBasedUnit(4, RomanUnit()))
-        assertEquals( "VII", Roman.convertBasedUnit(7, RomanUnit()))
-        assertEquals( "IX", Roman.convertBasedUnit(9, RomanUnit()))
-        assertEquals( "X", Roman.convertBasedUnit(10, RomanUnit()))
+        assertEquals( "I", RomanUnit.convertBasedUnit(1, RomanUni()))
+        assertEquals( "III", RomanUnit.convertBasedUnit(3, RomanUni()))
+        assertEquals( "IV", RomanUnit.convertBasedUnit(4, RomanUni()))
+        assertEquals( "VII", RomanUnit.convertBasedUnit(7, RomanUni()))
+        assertEquals( "IX", RomanUnit.convertBasedUnit(9, RomanUni()))
+        assertEquals( "X", RomanUnit.convertBasedUnit(10, RomanUni()))
     }
 
     @Test
@@ -40,7 +40,7 @@ internal class RomanTest {
     }
 
     @Test
-    fun fullLoopConvert() {
+    fun loopConvert() {
         assertEquals( "MMM", Converter.loopConvert(3000))
         assertEquals( "MCMXCIX", Converter.loopConvert(1999))
         assertEquals( "CXXVIII", Converter.loopConvert(128))
@@ -52,5 +52,7 @@ internal class RomanTest {
         assertEquals( "IX", Converter.loopConvert(9))
         assertEquals( "X", Converter.loopConvert(10))
     }
+
+
 
 }
