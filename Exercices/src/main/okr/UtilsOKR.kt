@@ -9,9 +9,7 @@ private val String.sourcePath get() = File(this).walkTopDown()
         .filter { it.isFile} .toList()
 
 val String.kotlinClasses get() = this.sourcePath.filter { it.path.endsWith(".kt") }
-
 val String.javaClasses get() = this.sourcePath.filter { it.path.endsWith(".java") }
-
 val String.allClasses get() = listOf(this.kotlinClasses, this.javaClasses).flatten()
 
 val String.kotlinPublicClasses
