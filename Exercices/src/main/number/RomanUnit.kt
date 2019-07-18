@@ -32,8 +32,6 @@ class RomanUnit {
             else -> min.visual.repeat(number)
         }
 
-        fun parseM(number: Int) = M.visual.repeat(number)
-
         val I = RomanUnit()
         val V = RomanUnit(5, I, "V")
         val X = RomanUnit(10, I, "X")
