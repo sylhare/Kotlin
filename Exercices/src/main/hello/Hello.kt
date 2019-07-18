@@ -1,5 +1,11 @@
 package hello
 
+import kotlinx.coroutines.*
+import kotlin.system.measureTimeMillis
+
 fun main(args: Array<String>) {
-    println("Hello World!")
+    runBlocking {
+        Coroutines().helloWorld()
+        delay(1000)
+    }
 }

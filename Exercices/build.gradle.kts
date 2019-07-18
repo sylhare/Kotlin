@@ -9,6 +9,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.1")
 
     testRuntime("org.junit.platform:junit-platform-launcher:1.4.1")
