@@ -1,6 +1,6 @@
 package quantity
 
-/*
+/**
 Type of Unit
 
 Nominal (distance, volume)
@@ -8,6 +8,7 @@ Ordinal (scale-like representing a rank)
 IntervalQuantity (dates, temperature)
 Ratio (days)
  */
+
 internal class Unit {
     private val baseUnitRatio: Double
     private val type: Any

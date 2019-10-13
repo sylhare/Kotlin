@@ -6,16 +6,6 @@ import org.junit.jupiter.api.Test
 internal class RomanUnitTest {
 
     @Test
-    fun lessSimple() {
-        assertEquals( "I", RomanUnit.convertBasedUnit(1, RomanUni()))
-        assertEquals( "III", RomanUnit.convertBasedUnit(3, RomanUni()))
-        assertEquals( "IV", RomanUnit.convertBasedUnit(4, RomanUni()))
-        assertEquals( "VII", RomanUnit.convertBasedUnit(7, RomanUni()))
-        assertEquals( "IX", RomanUnit.convertBasedUnit(9, RomanUni()))
-        assertEquals( "X", RomanUnit.convertBasedUnit(10, RomanUni()))
-    }
-
-    @Test
     fun romanUnitConvert() {
         assertEquals( "MMM", RomanConversion.of(3000))
         assertEquals( "MCMXCIX", RomanConversion.of(1999))
