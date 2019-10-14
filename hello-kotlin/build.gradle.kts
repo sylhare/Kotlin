@@ -2,7 +2,7 @@ import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 allprojects {
-    group = "samples"
+    group = "hello"
     version = "1.0"
     repositories {
         jcenter()
@@ -22,14 +22,14 @@ dependencies {
 
 // To work with the `application` plugin of gradle -> gradle run
 application {
-    mainClassName = "samples.MainKt"
+    mainClassName = "hello.MainKt"
 }
 
 // To add manifest in jar, but still get `Exception in thread "main" java.lang.NoClassDefFoundError:
-// kotlin/jvm/internal/Intrinsics at samples.MainKt.main(Main.kt)
+// kotlin/jvm/internal/Intrinsics at hello.MainKt.main(Main.kt)
 val jar by tasks.getting(Jar::class) {
     manifest {
-        attributes["Main-Class"] = "samples.MainKt"
+        attributes["Main-Class"] = "hello.MainKt"
     }
 }
 
@@ -37,7 +37,7 @@ val jar by tasks.getting(Jar::class) {
 val fatJar = task("fatJar", type = Jar::class) {
     baseName = "${project.name}-fat"
     manifest {
-        attributes["Main-Class"] = "samples.MainKt"
+        attributes["Main-Class"] = "hello.MainKt"
     }
     from(
         configurations.runtime.map {
