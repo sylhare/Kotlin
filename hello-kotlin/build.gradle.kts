@@ -40,7 +40,7 @@ val fatJar = task("fatJar", type = Jar::class) {
         attributes["Main-Class"] = "hello.MainKt"
     }
     from(
-        configurations.runtime.map {
+        configurations["runtimeClasspath"].map {
             if (it.isDirectory) it else zipTree(it)
         }
     )
