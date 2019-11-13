@@ -1,4 +1,4 @@
-package text
+package input
 
 data class NumberInput(private val digit: String) : Comparable<NumberInput> {
 

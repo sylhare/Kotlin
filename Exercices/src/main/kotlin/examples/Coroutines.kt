@@ -1,4 +1,4 @@
-package hello
+package examples
 
 import kotlinx.coroutines.*
 import java.time.Instant

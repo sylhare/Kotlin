@@ -1,4 +1,4 @@
-package hello
+package examples
 
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

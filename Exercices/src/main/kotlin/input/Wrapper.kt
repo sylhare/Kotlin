@@ -1,4 +1,4 @@
-package text
+package input
 
 internal fun List<NumberInput>.concatenate() = NumberInput.concatenate(this)
 internal fun List<String>.concatRegex() = this.takeWhile { it.contains("\\d+".toRegex()) }.joinToString("")

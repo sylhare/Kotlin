@@ -1,5 +1,5 @@
-import hello.A
-import hello.flip
+import examples.A
+import examples.flip
 import org.junit.jupiter.api.Test
 import kotlin.test.assertTrue
 

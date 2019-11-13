@@ -1,8 +1,7 @@
-package hello
+package examples
 
 import kotlinx.coroutines.*
 import kotlin.reflect.KMutableProperty0
-import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     runBlocking {

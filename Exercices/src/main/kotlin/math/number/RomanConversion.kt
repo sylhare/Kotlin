@@ -1,4 +1,4 @@
-package number
+package math.number
 
 import kotlin.math.pow
 

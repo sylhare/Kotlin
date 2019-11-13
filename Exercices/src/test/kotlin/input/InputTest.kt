@@ -1,7 +1,6 @@
 package input
 
 import org.junit.jupiter.api.Test
-import text.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
