@@ -3,6 +3,7 @@ plugins {
 }
 
 apply plugin: 'jacoco'
+apply plugin: 'kotlin'
 
 version '1.0-SNAPSHOT'
 
