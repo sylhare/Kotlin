@@ -6,5 +6,5 @@ internal fun List<String>.concatOther() = this.takeWhile { it.toIntOrNull() != n
 fun List<String>.concatNotInternal() = this.joinToString("") { it }.takeWhile { it.isDigit() }
 internal fun List<String>.concat() = this.joinToString("") { it }.takeWhile { it.isDigit() }
 
+internal fun  List<Number>.toExp() = this.forEach { it.exp }
 val Number.exp get() = NumberInput(this.toString())
-fun  List<Number>.toExp() = this.forEach { it.exp }
