@@ -1,3 +1,4 @@
+// Use Gradle 4.8, if you have a newer version, use ./gradlew
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
