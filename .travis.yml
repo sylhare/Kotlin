@@ -19,7 +19,7 @@ before_script:
 
 script:
   - cd Exercices/
-  - gradle clean build test || ./gradlew clean build test
+  - ./gradlew clean build test || gradle clean build test
 
 after_script:
   - cd ..
