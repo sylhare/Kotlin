@@ -14,8 +14,12 @@ internal class InputTest {
     }
 
     @Test
-    fun concatenated() {
+    fun concatenatedNumberInput() {
         assertEquals("1234", listOf(1.exp, 2.exp, 3.exp, 4.exp).concatenate())
+        assertEquals("", listOf(1.exp, 2.exp, NumberInput("+"), 4.exp).concatenate()) // + will be made first
+    }
+    @Test
+    fun concatenatedString() {
         assertEquals("1234", listOf("1", "2", "3", "4").concat())
         assertEquals("1234", listOf("1", "2", "3", "4", "+", "3").concat())
         assertEquals("1234", listOf("1", "2", "3", "4", "+", "3").concatNotInternal())

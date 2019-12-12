@@ -1,6 +1,6 @@
 package input
 
-class Anagram {
+internal class Anagram {
 
     companion object {
         internal fun filter(listOfWords: List<String>) = listOfWords.map { it.alphaSort() }.toSet()

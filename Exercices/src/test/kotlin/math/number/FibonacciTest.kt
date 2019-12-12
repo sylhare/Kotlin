@@ -7,6 +7,14 @@ import kotlin.test.assertTrue
 internal class FibonacciTest {
 
     @Test
+    internal fun noFibonacci() {
+        // The take makes the fibonnaciSeq stops otherwise go for ever
+        val res = Fibonacci.fibonacciSeq.take(0).toList()
+
+        assertTrue(res.containsAll(listOf()))
+    }
+
+    @Test
     internal fun simpleFibonacci() {
         // The take makes the fibonnaciSeq stops otherwise go for ever
         val res = Fibonacci.fibonacciSeq.take(5).toList()

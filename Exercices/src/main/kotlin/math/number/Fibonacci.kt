@@ -1,6 +1,6 @@
 package math.number
 
-class Fibonacci {
+internal class Fibonacci {
 
     companion object {
         val fibonacciSeq = sequence {
