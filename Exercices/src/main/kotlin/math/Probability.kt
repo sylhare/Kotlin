@@ -1,4 +1,4 @@
-package exercises
+package math
 
 import kotlin.math.absoluteValue
 

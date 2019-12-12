@@ -1,4 +1,4 @@
-package exercises
+package math
 
 // Exercise : There is no square
 // Understand that a polygon with 4 sides and have a right angle

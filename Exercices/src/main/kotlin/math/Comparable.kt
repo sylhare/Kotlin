@@ -1,4 +1,4 @@
-package exercises
+package math
 
 interface Comparable<T> {
 

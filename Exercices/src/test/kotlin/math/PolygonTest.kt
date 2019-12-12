@@ -1,9 +1,7 @@
 package math
 
-import exercises.Comparable
-import exercises.Polygon
-import exercises.Polygon.Companion.rectangle
-import exercises.Polygon.Companion.square
+import math.Polygon.Companion.rectangle
+import math.Polygon.Companion.square
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

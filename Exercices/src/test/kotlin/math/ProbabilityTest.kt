@@ -1,8 +1,5 @@
 package math
 
-import exercises.Comparable
-import exercises.Probability
-import exercises.best
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.lang.IllegalArgumentException
