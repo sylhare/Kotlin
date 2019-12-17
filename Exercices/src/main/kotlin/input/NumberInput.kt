@@ -9,7 +9,7 @@ data class NumberInput(private val digit: String) : Comparable<NumberInput> {
                 .joinToString(separator = "") { it.digit }.takeWhile { it.isDigit() }
 
         internal fun has(keys: List<NumberInput>, char: Char) = !keys.none { it.digit.contains(char) }
-        fun numberToList(n: Int) = n.toString().reversed().map { it.toString().toInt() }
+        fun intToList(n: Int) = n.toString().reversed().map { it.toString().toInt() }
     }
 
 }

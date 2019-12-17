@@ -24,4 +24,19 @@ internal class CoroutinesTest {
         // then
         assertEquals(listOf("Hello,", "word!"), result)
     }
+
+    @Test
+    fun `does not add because of delays`() {
+        val result = mutableListOf<String>()
+        val c = Coroutines()
+        runBlocking {
+            val promise = launch {
+                Coroutines.expensiveComputation(result)
+            }
+            c.helloWorld()
+            result.add("Hello,")
+            promise.join()
+        }
+        assertEquals(listOf("word!", "Hello,"), result)
+    }
 }

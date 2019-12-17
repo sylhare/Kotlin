@@ -3,10 +3,9 @@ package examples
 import kotlinx.coroutines.*
 import kotlin.reflect.KMutableProperty0
 
-fun main(args: Array<String>) {
+fun main() {
     runBlocking {
         Coroutines().helloWorld()
-        delay(1000)
     }
 }
 

@@ -36,6 +36,7 @@ internal class InputTest {
 
     @Test
     fun numberToList() {
-        assertEquals(listOf(5, 4, 3, 2, 1), NumberInput.numberToList(12345))
+        assertEquals(listOf(5, 4, 3, 2, 1), NumberInput.intToList(12345))
+        assertEquals(listOf(1), NumberInput.intToList(1))
     }
 }

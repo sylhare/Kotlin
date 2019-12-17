@@ -1,6 +1,5 @@
-import examples.A
-import examples.flip
-import examples.main
+package examples
+
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -18,6 +17,6 @@ internal class HelloTest {
 
     @Test
     internal fun hello() {
-        main(arrayOf(""))
+        main()
     }
 }
