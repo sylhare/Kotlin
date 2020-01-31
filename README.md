@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/sylhare/Kotlin.svg?branch=master)](https://travis-ci.org/sylhare/Kotlin) [![Maintainability](https://api.codeclimate.com/v1/badges/94ef0be8c89785a0db0b/maintainability)](https://codeclimate.com/github/sylhare/Kotlin/maintainability) 
 [![codecov](https://codecov.io/gh/sylhare/Kotlin/branch/master/graph/badge.svg)](https://codecov.io/gh/sylhare/Kotlin)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d3dd2f19be8a41728c3be9ca522c4674)](https://www.codacy.com/app/Sylhare/Kotlin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sylhare/Kotlin&amp;utm_campaign=Badge_Grade)
-
 
 
 ## Introduction
