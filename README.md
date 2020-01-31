@@ -5,13 +5,18 @@
 
 
 ## Introduction
-Kotlin is made by IntelliJ (the same as the IDE).
+Kotlin is made by JetBrains (the same as that did IntelliJ the IDE).
 
 See their website here:
   - [Kotlin](https://kotlinlang.org/)
   - [Getting started](https://kotlinlang.org/docs/tutorials/getting-started.html)
 
 ## Get started
+
+Compiled with Java11.
+
+To use with IntelliJ, you can select your project SDK, if you have multiple ones.
+Use `File | Project Structure... | Project Settings | Projects` to choose `Java 11`.
 
 ### With kotlinc
 
