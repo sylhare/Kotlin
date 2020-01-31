@@ -1,6 +1,6 @@
-package math.number
+package examples
 
-internal class Fibonacci {
+internal class Fibonacci private constructor(){
 
     companion object {
         val fibonacciSeq = sequence {

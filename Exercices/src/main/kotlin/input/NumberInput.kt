@@ -6,10 +6,9 @@ data class NumberInput(private val digit: String) : Comparable<NumberInput> {
 
     companion object {
         internal fun concatenate(keys: List<NumberInput>) = keys.sorted()
-                .joinToString(separator = "") { it.digit }.takeWhile { it.isDigit() }
+            .joinToString(separator = "") { it.digit }.takeWhile { it.isDigit() }
 
         internal fun has(keys: List<NumberInput>, char: Char) = !keys.none { it.digit.contains(char) }
         fun intToList(n: Int) = n.toString().reversed().map { it.toString().toInt() }
     }
-
 }

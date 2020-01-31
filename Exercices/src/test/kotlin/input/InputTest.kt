@@ -18,6 +18,7 @@ internal class InputTest {
         assertEquals("1234", listOf(1.exp, 2.exp, 3.exp, 4.exp).concatenate())
         assertEquals("", listOf(1.exp, 2.exp, NumberInput("+"), 4.exp).concatenate()) // + will be made first
     }
+
     @Test
     fun concatenatedString() {
         assertEquals("1234", listOf("1", "2", "3", "4").concat())
@@ -31,7 +32,7 @@ internal class InputTest {
     fun has() {
         assertTrue(NumberInput.has(listOf(1.exp, 2.exp, 3.exp, 4.exp), '2'))
         assertFalse(NumberInput.has(listOf(1.exp, 2.exp, 3.exp, 4.exp), 'e'))
-        listOf(1,2,3,4).toExp()
+        listOf(1, 2, 3, 4).toExp()
     }
 
     @Test

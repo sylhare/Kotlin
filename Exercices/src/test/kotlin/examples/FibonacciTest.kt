@@ -1,4 +1,4 @@
-package math.number
+package examples
 
 
 import org.junit.jupiter.api.Test

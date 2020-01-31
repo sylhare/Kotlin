@@ -2,7 +2,7 @@ package math.number
 
 import kotlin.math.pow
 
-internal class RomanConversion {
+class RomanConversion private constructor() {
 
     companion object {
         private const val MAX = 3
