@@ -2,11 +2,9 @@ package math
 
 import math.Polygon.Companion.rectangle
 import math.Polygon.Companion.square
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNull
+import org.junit.jupiter.api.assertThrows
 
 internal class PolygonTest {
 
@@ -27,9 +25,9 @@ internal class PolygonTest {
 
     @Test
     internal fun validParameters() {
-        assertFailsWith<IllegalArgumentException> { Polygon(0, 0) }
-        assertFailsWith<IllegalArgumentException> { Polygon(-2, 1) }
-        assertFailsWith<IllegalArgumentException> { Polygon(1, -2) }
+        assertThrows<IllegalArgumentException> { Polygon(0, 0) }
+        assertThrows<IllegalArgumentException> { Polygon(-2, 1) }
+        assertThrows<IllegalArgumentException> { Polygon(1, -2) }
     }
 
     @Test

@@ -2,8 +2,8 @@ package math
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
-import kotlin.test.assertFailsWith
 
 internal class ProbabilityTest {
     // equals should not throw an exception
@@ -23,8 +23,8 @@ internal class ProbabilityTest {
     }
 
     @Test internal fun `can't be more than 1 or less than 0`() {
-        assertFailsWith<IllegalArgumentException> { (Probability(-2.0)) }
-        assertFailsWith<IllegalArgumentException> { (Probability(2.0)) }
+        assertThrows<IllegalArgumentException> { (Probability(-2.0)) }
+        assertThrows<IllegalArgumentException> { (Probability(2.0)) }
     }
 
     @Test internal fun `is Greater or Smaller`() {

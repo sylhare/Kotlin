@@ -3,6 +3,9 @@ package examples
 import kotlinx.coroutines.*
 import kotlin.reflect.KMutableProperty0
 
+
+class Hello
+
 fun main() {
     runBlocking {
         Coroutines().helloWorld()

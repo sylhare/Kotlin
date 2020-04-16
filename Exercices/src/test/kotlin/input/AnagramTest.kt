@@ -1,14 +1,13 @@
 package input
 
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+
 
 class AnagramTest {
 
     @Test
-    fun anagramsAreFilteredOut(){
+    fun anagramsAreFilteredOut() {
         print(Anagram.filter(listOf("salut", "talus")))
         assertEquals(1, Anagram.filter(listOf("salut", "talus")).size)
         assertEquals(5, Anagram.filter(listOf("nanana", "nana", "panama", "bac", "ananas", "cab")).size)
@@ -16,13 +15,13 @@ class AnagramTest {
     }
 
     @Test
-    fun isAnagramTest(){
+    fun isAnagramTest() {
         assertTrue("cat".isAnagram("tac"))
         assertFalse("nanan".isAnagram("nana"))
     }
 
     @Test
-    fun anagramsAreFilteredSameOutput(){
+    fun anagramsAreFilteredSameOutput() {
         var words = listOf("cat", "tac", "hello", "bonjour", "allo", "loal")
         assertEquals(listOf("hello", "bonjour"), words.removeAllAnagrams())
         assertEquals(listOf("tac", "hello", "bonjour", "loal"), words.removeAnagramDuplicates())

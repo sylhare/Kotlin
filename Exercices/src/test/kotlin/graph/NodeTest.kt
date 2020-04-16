@@ -2,8 +2,8 @@ package graph
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
-import kotlin.test.assertFailsWith
 
 internal class NodeTest {
     companion object {
@@ -48,8 +48,8 @@ internal class NodeTest {
         assertEquals(2, B hops D)
         assertEquals(2, B hops E)
         assertEquals(3, H hops E)
-        assertFailsWith<IllegalArgumentException> {  B hops G }
-        assertFailsWith<IllegalArgumentException> {  A hops B }
+        assertThrows<IllegalArgumentException> {  B hops G }
+        assertThrows<IllegalArgumentException> {  A hops B }
     }
 
     @Test internal fun `Cost of a path`() {
