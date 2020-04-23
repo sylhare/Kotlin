@@ -7,6 +7,8 @@ plugins {
     application
 }
 
+group = ""
+version = "1.0"
 java.sourceCompatibility = JavaVersion.VERSION_11
 application.mainClassName = "examples.HelloKt"
 
@@ -18,6 +20,17 @@ java {
 repositories {
     jcenter()
     mavenCentral()
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "examples.MainKt"
+    }
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
 }
 
 dependencies {
@@ -39,7 +52,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform() // To sat to use the junit engine while test
     testLogging {
-        events("passed", "skipped", "failed")
+        events( "skipped", "failed") // "passed" tests can be logged too.
     }
 }
 
