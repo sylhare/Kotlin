@@ -1,4 +1,4 @@
-package examples
+package coroutine
 
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.Assertions.assertEquals

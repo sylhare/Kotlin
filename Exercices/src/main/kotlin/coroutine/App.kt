@@ -3,27 +3,35 @@ package coroutine
 import kotlinx.coroutines.*
 import java.util.*
 
-// https://www.youtube.com/watch?v=ZTDXo0-SKuU&feature=youtu.be
-class App(private val dispatcher: CoroutineDispatcher) {
-    private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+internal class App {
+    private var listen = false
+    private var dispatcher = Dispatchers.IO
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     fun start() {
         scope.launch(dispatcher) {
             bootstrap()
-            print("App is running ...")
+            println("App is running ...")
+            println("App is listening: $listen")
         }
     }
 
-    private fun init(properties: Properties) = print("Initialising App with $properties")
-    private suspend fun bootstrap() = init(properties())
-    private suspend fun properties(): Properties = withContext(Dispatchers.IO) {
-        val properties = Properties()
-        properties.load(ClassLoader.getSystemResourceAsStream("${System.getProperty("properties")}.properties"))
-        properties
+    companion object {
+        fun appWithDispatcher(dispatcher: CoroutineDispatcher): App {
+            val app = App()
+            app.dispatcher = dispatcher
+            return app
+        }
     }
 
-    @ExperimentalCoroutinesApi
-    private fun stop() = scope.cancel()
-
-
+    fun isListening() = listen
+    private fun init(properties: Properties) = println("Initialising App with $properties")
+    private suspend fun bootstrap() = init(loadProperties())
+    private suspend fun loadProperties(): Properties = withContext(Dispatchers.IO) {
+        val properties = Properties()
+        properties.load(ClassLoader.getSystemResourceAsStream("${System.getProperty("properties")}.properties"))
+        listen = true
+        properties
+    }
 }
+
