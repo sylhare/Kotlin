@@ -42,11 +42,13 @@ dependencies {
     }
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.71")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.71")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.4")
     testImplementation(kotlin("test"))
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 tasks.test {
@@ -54,6 +56,10 @@ tasks.test {
     testLogging {
         events( "skipped", "failed") // "passed" tests can be logged too.
     }
+}
+
+jacoco {
+    toolVersion = "0.8.4"
 }
 
 tasks.jacocoTestReport {

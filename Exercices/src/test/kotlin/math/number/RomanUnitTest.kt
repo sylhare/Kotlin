@@ -2,21 +2,27 @@ package math.number
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class RomanUnitTest {
 
     @Test
     fun romanUnitConvert() {
-        assertEquals( "MMM", RomanConversion.of(3000))
-        assertEquals( "MCMXCIX", RomanConversion.of(1999))
-        assertEquals( "CXXVIII", RomanConversion.of(128))
-        assertEquals( "XLIX", RomanConversion.of(49))
-        assertEquals( "I", RomanConversion.of(1))
-        assertEquals( "III", RomanConversion.of(3))
-        assertEquals( "IV", RomanConversion.of(4))
-        assertEquals( "VII", RomanConversion.of(7))
-        assertEquals( "IX", RomanConversion.of(9))
-        assertEquals( "X", RomanConversion.of(10))
+        assertEquals("MMM", romanConvert(3000))
+        assertEquals("MCMXCIX", romanConvert(1999))
+        assertEquals("CXXVIII", romanConvert(128))
+        assertEquals("XLIX", romanConvert(49))
+        assertEquals("I", romanConvert(1))
+        assertEquals("III", romanConvert(3))
+        assertEquals("IV", romanConvert(4))
+        assertEquals("VII", romanConvert(7))
+        assertEquals("IX", romanConvert(9))
+        assertEquals("X", romanConvert(10))
+    }
+
+    @Test
+    fun failedConversionTest() {
+        assertThrows<IllegalArgumentException> {  romanConvert(-1) }
     }
 
 }
