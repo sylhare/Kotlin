@@ -1,19 +1,10 @@
 package examples
 
-import kotlinx.coroutines.*
 import kotlin.reflect.KMutableProperty0
 
-
-class Hello
-
 fun main() {
-    runBlocking {
-        Coroutines().helloWorld()
-    }
+    print("Hello world!")
 }
 
-class A {
-    var x = false
-}
-
+// To flip boolean variable of a class like: Class::Boolean.flip()
 fun KMutableProperty0<Boolean>.flip() = set(!get())
