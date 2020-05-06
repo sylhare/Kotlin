@@ -33,3 +33,7 @@ Exercices/.gradle/
 **/lib/*
 **/jacoco/*
 .gradle/*
+**/.gradle/**
+**/build/**
+**/out/**
+
