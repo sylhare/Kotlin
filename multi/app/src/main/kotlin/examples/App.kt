@@ -1,3 +1,10 @@
 package examples
 
-fun hello() = "examples.hello ${world()}"
+import examples.Core.Companion.world
+
+class App {
+
+    companion object {
+        fun hello() = "hello ${world()}"
+    }
+}

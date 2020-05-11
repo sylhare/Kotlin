@@ -1,3 +1,9 @@
 package examples
 
-fun world() = "world"
+class Core {
+
+    companion object {
+        fun world() = "world"
+    }
+
+}
