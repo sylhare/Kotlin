@@ -12,6 +12,19 @@ val artifactoryUser: String by project
 val artifactoryPassword: String by project
 val artifactoryUrl: String by project
 
+
+/**
+ *
+ * Configuration for all projects, including the main one.
+ * You can check those using:
+ *
+ *    gradle projects
+ *
+ * Root project 'multi'
+ * +--- Project ':app'
+ * \--- Project ':core'
+ *
+ **/
 allprojects {
     // Use gradle projects, to see the structure
     apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -22,6 +35,12 @@ allprojects {
     }
 }
 
+/**
+ *
+ * Configuration that will apply for all the subprojects
+ * Usually the ones with codes
+ *
+ **/
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "jacoco")
