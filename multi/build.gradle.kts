@@ -109,6 +109,38 @@ subprojects {
 }
 
 /**
+ *
+ * Generate coverage for all projects using:
+ *
+ *   gradle clean build test codeCoverageReport
+ *
+ **/
+tasks.register<JacocoReport>("codeCoverageReport") {
+
+    executionData(fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec"))
+    subprojects.forEach{ sourceSets(it.sourceSets.main.get()) }
+
+    reports {
+        xml.isEnabled = true
+        xml.destination = File("${buildDir}/reports/jacoco/report.xml")
+        html.isEnabled = true
+    }
+
+    dependsOn(allprojects.map { it.tasks.named<Test>("test") })
+}
+
+tasks.withType<JacocoReport> {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.map {
+            fileTree(it).apply {
+                exclude("**/config/**") // Remove class / folder from coverage
+            }
+        }))
+    }
+}
+
+
+/**
  * The answer (taken from gradle.properties)
  * Test it using:
  *
