@@ -4,22 +4,22 @@ plugins {
 
 val sourcesJar by tasks.creating(Jar::class) {
     dependsOn(JavaPlugin.CLASSES_TASK_NAME)
-    from(sourceSets.main.get().allSource)
-    from(sourceSets.test.get().allSource) // because we want source test too
+    from(sourceSets.main.get().output)
+    include("*")
 }
 
 configurations {
-    create("mock")
+    create("mock") // Based on artifact
 }
 
 tasks.register<Jar>("testArchive") {
     archiveBaseName.set("core-test")
-    from(project.the<SourceSetContainer>()["test"].output)
+    from(sourceSets.test.get().output)
     include("examples/mocks/**")
 }
 
 artifacts {
-    add("mock", tasks["testArchive"])
+    add("mock", tasks["testArchive"]) // Add a configuration to a task
 }
 
 publishing {
