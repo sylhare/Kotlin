@@ -35,7 +35,9 @@ internal class InputTest {
 
     @Test
     fun numberToList() {
+        val range = 1..5
         assertEquals(listOf(5, 4, 3, 2, 1), NumberInput.intToList(12345))
+        assertEquals(range.toList().reversed(), NumberInput.intToList(12345))
         assertEquals(listOf(1), NumberInput.intToList(1))
     }
 }
