@@ -1,6 +1,6 @@
 # Hello Kotlin
 
-Example of Kotlin project with gradle.
+Example of _old_ Kotlin project with gradle 4.8.
 
 Some key tasks have already been created to kick start your project:
 

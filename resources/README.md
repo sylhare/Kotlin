@@ -9,7 +9,7 @@ A rectangle is a polygon (quadrilateral with a length and a width).
 
 > If you add points, coordinates then it is a cartesianRectangle.
 
-Those simple rectangle can't really be compare, however you can compare there aera or perimeter.
+Those simple rectangle can't really be compare, however you can compare there area or perimeter.
 
 ## Probability
 
