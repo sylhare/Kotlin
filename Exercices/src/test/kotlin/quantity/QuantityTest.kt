@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 internal class QuantityTest {
 
-    @Test internal fun `do toString need to be tested?`() {
+    @Test internal fun `do toString need to be tested`() {
         assertTrue(3.teaspoons.toString().contains("Quantity(unit="))
         assertTrue(3.teaspoons.toString().contains("amount="))
     }

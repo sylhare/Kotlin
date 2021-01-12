@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
-    kotlin("jvm") version "1.3.71"
+    kotlin("jvm") version "1.4.21"
     jacoco
     publishing
     application
@@ -40,12 +41,12 @@ dependencies {
             version{ rejectAll() } // To say you don't want guava in the project
         }
     }
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.71")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.71")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.4")
     testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")

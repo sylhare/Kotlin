@@ -3,7 +3,7 @@ package graph
 
 class Node {
     val paths get() = paths()
-    private val connexions = mutableListOf<Connexion>()
+    private val connections = mutableListOf<Connection>()
 
     infix fun canReach(destination: Node) = paths(destination).isNotEmpty()
     infix fun hops(destination: Node) = path(destination, Path::hopCount).hopCount()
@@ -11,15 +11,15 @@ class Node {
     infix fun path(destination: Node) = path(destination, Path::cost)
     infix fun paths(destination: Node) = paths().filterBy(destination)
 
-    infix fun cost(amount: Number): ConnexionBuilder = ConnexionBuilder(amount.toDouble(), connexions)
+    infix fun cost(amount: Number): ConnectionBuilder = ConnectionBuilder(amount.toDouble(), connections)
 
     private fun path(destination: Node, strategy: CostStrategy) =
-            paths(destination).minBy { strategy(it).toDouble() } ?: throw IllegalArgumentException("Can't reach")
+            paths(destination).minByOrNull { strategy(it).toDouble() } ?: throw IllegalArgumentException("Can't reach")
 
     private fun paths(): List<Path> = paths(mutableListOf())
 
     internal fun paths(visitedNodes: List<Node>): List<Path> {
         if (this in visitedNodes) return emptyList()
-        return (connexions.flatMap { it.paths(visitedNodes + this) } + Path()).onEach { it prepend this }
+        return (connections.map { it.paths(visitedNodes + this) }.flatten() + Path()).onEach { it prepend this }
     }
 }

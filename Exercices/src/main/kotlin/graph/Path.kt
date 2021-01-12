@@ -2,17 +2,17 @@ package graph
 
 class Path internal constructor() {
 
-    private var connexions = mutableListOf<Connexion>()
+    private var connections = mutableListOf<Connection>()
     private var nodes = mutableListOf<Node>()
 
     internal companion object {
         internal fun filterBy(paths: List<Path>, destination: Node) = paths.filter { destination == it.nodes.last() }
     }
 
-    fun cost() = connexions.totalCost()
-    fun hopCount() = connexions.size
+    fun cost() = connections.totalCost()
+    fun hopCount() = connections.size
 
-    infix fun prepend(connexion: Connexion) = connexions.add(0, connexion)
+    infix fun prepend(connection: Connection) = connections.add(0, connection)
     infix fun prepend(node: Node) = nodes.add(0, node)
 }
 
