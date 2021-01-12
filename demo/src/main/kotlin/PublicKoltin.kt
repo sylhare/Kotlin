@@ -1,4 +1,0 @@
-package kotlin
-
-class PublicKoltin {
-}
