@@ -49,7 +49,7 @@ internal class AppTest {
 
 
     @Test
-    fun testDispatcherTest() {
+    fun dispatcherTest() {
         testDispacher.runBlockingTest {
             var late = "late"
             GlobalScope.launch(testDispacher) {
@@ -59,4 +59,23 @@ internal class AppTest {
             assertEquals("on time", late)
         }
     }
+
+    @Test
+    fun listInPartitionTest() {
+        val listOfObj = listOf("B", "B" , "S", "B", "B", "X", "S", "B", "B", "P")
+        val result = mutableListOf<List<String>>()
+        var current = mutableListOf<String>()
+        listOfObj.forEach { letter ->
+            if (letter == "S") {
+                result.add(current)
+                current = mutableListOf()
+            }
+            current.add(letter)
+        }
+        if (current.isNotEmpty()) {
+            result.add(current)
+        }
+        assertEquals(result, listOf(listOf("B", "B"), listOf("S", "B", "B", "X"), listOf("S", "B", "B", "P")))
+    }
+
 }
