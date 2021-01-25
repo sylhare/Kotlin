@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -14,7 +14,12 @@ import kotlin.test.assertEquals
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class AppTest {
 
-    private val testDispacher = TestCoroutineDispatcher()
+    private val testDispatcher = TestCoroutineDispatcher()
+
+    @AfterEach
+    fun pause() {
+        Thread.sleep(100)
+    }
 
     @Test
     fun startAppTest() {
@@ -40,20 +45,26 @@ internal class AppTest {
     @Test
     fun startAppWithTestRunBlockingTest() {
         System.getProperties()["properties"] = "example"
-        val app = App.appWithDispatcher(testDispacher)
-        testDispacher.runBlockingTest {
+        val app = App.appWithDispatcher(testDispatcher)
+        var waitingTime = 0
+        testDispatcher.runBlockingTest {
             launch { app.start() }.join()
             delay(100)
         }
+        while (!app.isListening()) {
+            waitingTime += 100
+            Thread.sleep(100)
+        }
+        println("Real waiting time: $waitingTime (should be 0 since we use runBlockingTest)")
         assertTrue(app.isListening())
     }
 
 
     @Test
     fun dispatcherTest() {
-        testDispacher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             var late = "late"
-            GlobalScope.launch(testDispacher) {
+            GlobalScope.launch(testDispatcher) {
                 delay(100)
                 late = "on time"
             }.join()
@@ -77,60 +88,5 @@ internal class AppTest {
             result.add(current)
         }
         assertEquals(result, listOf(listOf("B", "B"), listOf("S", "B", "B", "X"), listOf("S", "B", "B", "P")))
-    }
-
-    @Test
-    fun breakForTest() {
-        var i = 1
-        var j = 2
-
-        println(j + i++)
-        i = 1
-        println(j + ++i)
-
-        var a = 1
-        var b = 1
-        b += 1
-        a++
-        assertEquals(a, b)
-
-        for (i in 0..10) {
-            print(i)
-            for (letter in 'a'..'z') {
-                if (letter == 'c') break
-             }
-        }
-
-        for (e in 0..3) {
-            loop@ while (i < 100) {
-                when {
-                    i % 9 == 0 -> {
-                        println("break")
-                        break
-                    }
-                    i % 25 == 0 -> {
-                        println("break@loop")
-                        break@loop
-                    }
-                }
-                i++
-            }
-        }
-
-        val numbers = listOf("one", "two", "three", "four", "five", "six")
-
-        var index = numbers.indexOfFirst { it == "five" }
-        var indexT = numbers.takeLast(3).indexOfFirst { it == "five" }
-        assertEquals(1, indexT)
-        val aObj = A()
-        aObj.i++
-        assertEquals(2, aObj.i)
-
-
-
-    }
-
-    class A {
-        var i = 1
     }
 }

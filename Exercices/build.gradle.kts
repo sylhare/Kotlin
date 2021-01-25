@@ -53,8 +53,10 @@ dependencies {
 }
 
 tasks.test {
-    useJUnitPlatform() // To sat to use the junit engine while test
+    useJUnitPlatform() // To use the junit engine while test
     testLogging {
+        showStandardStreams = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
         events( "skipped", "failed") // "passed" tests can be logged too.
     }
 }
