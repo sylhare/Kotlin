@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -78,4 +79,58 @@ internal class AppTest {
         assertEquals(result, listOf(listOf("B", "B"), listOf("S", "B", "B", "X"), listOf("S", "B", "B", "P")))
     }
 
+    @Test
+    fun breakForTest() {
+        var i = 1
+        var j = 2
+
+        println(j + i++)
+        i = 1
+        println(j + ++i)
+
+        var a = 1
+        var b = 1
+        b += 1
+        a++
+        assertEquals(a, b)
+
+        for (i in 0..10) {
+            print(i)
+            for (letter in 'a'..'z') {
+                if (letter == 'c') break
+             }
+        }
+
+        for (e in 0..3) {
+            loop@ while (i < 100) {
+                when {
+                    i % 9 == 0 -> {
+                        println("break")
+                        break
+                    }
+                    i % 25 == 0 -> {
+                        println("break@loop")
+                        break@loop
+                    }
+                }
+                i++
+            }
+        }
+
+        val numbers = listOf("one", "two", "three", "four", "five", "six")
+
+        var index = numbers.indexOfFirst { it == "five" }
+        var indexT = numbers.takeLast(3).indexOfFirst { it == "five" }
+        assertEquals(1, indexT)
+        val aObj = A()
+        aObj.i++
+        assertEquals(2, aObj.i)
+
+
+
+    }
+
+    class A {
+        var i = 1
+    }
 }
