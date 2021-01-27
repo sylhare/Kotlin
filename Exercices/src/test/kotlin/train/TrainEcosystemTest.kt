@@ -7,24 +7,24 @@ import kotlin.test.assertNotEquals
 /**
  * Basic objects data test of our train ecosystem
  */
-class TrainEcosystemTest {
+internal class TrainEcosystemTest {
 
     @Test
-    fun trainNetworkEqualTest() {
+    internal fun trainNetworkEqualTest() {
         assertEquals("MTL".station, "MTL".station)
         assertEquals("toward MTL".switch, "toward MTL".switch)
         assertEquals(1.junction, 1.junction)
     }
 
     @Test
-    fun trainNetworkNotEqualTest() {
+    internal fun trainNetworkNotEqualTest() {
         assertNotEquals("Toronto".station, "MTL".station)
         assertNotEquals("toward Toronto".switch, "toward MTL".switch)
         assertNotEquals(1.junction, 10.junction)
     }
 
     @Test
-    fun railSectionPositionTest() {
+    internal fun railSectionPositionTest() {
         assertEquals("trunk 1".railSection, "trunk 1".railSection)
         assertEquals(1, "trunk 1".railSection.position)
         assertEquals(0, "trunk 0".railSection.position)
@@ -34,7 +34,7 @@ class TrainEcosystemTest {
     }
 
     @Test
-    fun trainStepTest() {
+    internal fun trainStepTest() {
         val journey = trainLineOf(
             TrainStep(0, "trunk 1".railSection),
             TrainStep(0, "trunk 2".railSection),

@@ -19,17 +19,34 @@ import kotlin.test.assertEquals
  *      - Sometime a captor malfunction and you receive errored info, if that happens add the captor's info corresponding switch
  * following by an invalid trunk in the itinerary and proceed from last known location
  */
-class DestinationTest {
+internal class DestinationTest {
 
-    @Test
-    fun expressToMtlTest() {
-        val expressLine = trainLineOf(
+    companion object {
+        internal val mtlExpress = trainLineOf(
             TrainStep(0, "trunk 1".railSection),
             TrainStep(0, "trunk 2".railSection),
             TrainStep(1, "toward MTL".switch),
             TrainStep(2, "MTL".station)
-        )
-        assertEquals(expressLine, processJourney(expressLine, listOf("toward MTL")))
+        ).toList()
+    }
 
+    @Test
+    internal fun expressToMtlTest() {
+        assertEquals(mtlExpress, processJourney(mtlExpress, listOf("toward MTL")))
+    }
+
+
+    @Test
+    internal fun expressToMtlWithNoiseTest() {
+        assertEquals(
+            trainLineOf(
+                TrainStep(0, "trunk 1".railSection),
+                TrainStep(0, "trunk 2".railSection),
+                TrainStep(1, "toward Pancake Creek".switch),
+                TrainStep(2, RailSection.invalid),
+                TrainStep(1, "toward MTL".switch),
+                TrainStep(2, "MTL".station)
+            ), processJourney(mtlExpress, listOf("toward Pancake Creek", "toward MTL"))
+        )
     }
 }
