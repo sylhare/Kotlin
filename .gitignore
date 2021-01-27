@@ -37,3 +37,4 @@ Exercices/.gradle/
 **/build/**
 **/out/**
 
+Exercices/src/main/kotlin/draft/*

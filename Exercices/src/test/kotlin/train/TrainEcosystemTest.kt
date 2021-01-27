@@ -35,13 +35,14 @@ class TrainEcosystemTest {
 
     @Test
     fun trainStepTest() {
-        val journey = mutableListOf<TrainStep<TrainNetwork>>()
-        journey.add(TrainStep(0, "trunk 1".railSection))
-        journey.add(TrainStep(0, "trunk 2".railSection))
-        journey.add(TrainStep(1, "toward MTL".switch))
-        journey.add(TrainStep(2, "MTL".station))
-        journey.add(TrainStep(1, "toward Toronto".station))
-        journey.add(TrainStep(2, "Toronto".station))
+        val journey = trainLineOf(
+            TrainStep(0, "trunk 1".railSection),
+            TrainStep(0, "trunk 2".railSection),
+            TrainStep(1, "toward MTL".switch),
+            TrainStep(2, "MTL".station),
+            TrainStep(1, "toward Toronto".station),
+            TrainStep(2, "Toronto".station)
+        )
         journey.forEach {
             assertEquals(it.item, it.item)
             assertEquals(it.distance, it.distance)
