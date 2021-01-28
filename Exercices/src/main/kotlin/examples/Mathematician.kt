@@ -2,7 +2,7 @@ package examples
 
 import java.math.BigInteger
 
-internal class Fibonacci private constructor(){
+internal class Mathematician private constructor(){
 
     companion object {
         val fibonacciSeq = sequence {
@@ -20,9 +20,9 @@ internal class Fibonacci private constructor(){
          * Meaning it's tail recursive.
          * Useful when n gets very big.
          */
-        tailrec fun fibonacci(n: Int, a: BigInteger, b: BigInteger): BigInteger {
+        tailrec fun fibonacciAt(n: Int, a: BigInteger, b: BigInteger): BigInteger {
             return if (n == 0) b
-            else fibonacci(n - 1, a + b, a)
+            else fibonacciAt(n - 1, a + b, a)
         }
 
         tailrec fun factorial(n: Int, result: Int = 1): Int {
@@ -32,8 +32,5 @@ internal class Fibonacci private constructor(){
             }
         }
     }
-
-
-
 
 }
