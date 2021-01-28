@@ -3,6 +3,8 @@ package examples
 
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.math.BigInteger
+import kotlin.test.assertEquals
 
 internal class FibonacciTest {
 
@@ -27,5 +29,20 @@ internal class FibonacciTest {
         // Quickly int is not enough to keep up with like the 50 first elements
         val res = Fibonacci.fibonacciSeq.take(50).toList()
         print(res)
+    }
+
+    @Test
+    internal fun tailrecFibonacciTest() {
+        // Get the n number in the fibonacci sequence
+        val res = Fibonacci.fibonacci(4, BigInteger.ONE, BigInteger.ONE)
+        assertEquals(BigInteger.valueOf(5), res)
+        assertEquals(BigInteger.ONE, Fibonacci.fibonacci(0, BigInteger.ONE, BigInteger.ONE))
+    }
+
+    @Test
+    internal fun factorialTest() {
+        assertEquals(24, Fibonacci.factorial(4))
+        assertEquals(6, Fibonacci.factorial(3))
+        assertEquals(1, Fibonacci.factorial(0))
     }
 }
