@@ -17,8 +17,10 @@ plugins {
 }
 
 dependencies {
-    compile(kotlin("stdlib"))
-    testCompile("junit:junit:4.12")
+    implementation(kotlin("stdlib"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 // To work with the `application` plugin of gradle -> gradle run
