@@ -29,7 +29,7 @@ internal class ExampleTest {
     internal fun twoListMapTest() {
         val numbers = (1..4).toList()
         val letters = ('a'..'d').toList()
-        val alphabetIndexed = letters.mapIndexed{ i, v -> v to numbers[i] }.toMap()
+        val alphabetIndexed = letters.mapIndexed { i, v -> v to numbers[i] }.toMap()
         val alphabetZip = letters.zip(numbers).toMap()
 
         assertEquals(mapOf('a' to 1, 'b' to 2, 'c' to 3, 'd' to 4), alphabetIndexed)
