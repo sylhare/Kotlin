@@ -27,3 +27,15 @@ fun printPreOrderTree(node: TrainNode?) {
         printPreOrderTree(node.right)
     }
 }
+fun treeIndexesOf(line: List<TrainStep<TrainNetwork>>, index: Int=0): List<Int> {
+    val branchTwoRoot = line.map { it.distance }.run { this.lastIndexOf(this[1]) }
+    return if ( branchTwoRoot != 1) {
+        val branchOne = treeIndexesOf(line.subList(1, branchTwoRoot), index + 1).toTypedArray()
+        val rootStart = index + branchOne.size + 1
+        val branchTwo = treeIndexesOf(line.subList(branchTwoRoot, line.size), rootStart + 1).toTypedArray()
+        val listIndexed = listOf(rootStart, *branchOne, *branchTwo)
+        listIndexed
+    } else {
+        (index until index + line.size).toList()
+    }
+}

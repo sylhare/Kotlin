@@ -18,6 +18,21 @@ class TrainNodeTest {
                 }
             }
         }
+
+        val nodes = listOf<TrainStep<TrainNetwork>>(
+            TrainStep(0, "trunk 0".railSection),
+            TrainStep(1, "toward MTL".switch),
+            TrainStep(2, "trunk 2".railSection),
+            TrainStep(3, "MTL".station),
+            TrainStep(1, "toward Toronto".switch),
+            TrainStep(2, "trunk 3".railSection),
+            TrainStep(3, "Toronto".station)
+        )
+    }
+
+    @Test
+    fun addValuesTest() {
+        assertEquals(listOf(4, 1, 2, 3, 5, 6, 7), treeIndexesOf(nodes))
     }
 
     @Test
