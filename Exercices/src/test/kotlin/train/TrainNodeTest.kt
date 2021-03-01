@@ -1,6 +1,5 @@
 package train
 
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -47,7 +46,8 @@ class TrainNodeTest {
     @Test
     fun treeNotEqualTest() {
         val expressMTL = deserialize(nodes.dropLast(3)) ?: TrainNode(0, TrainStep(0, RailSection.invalid))
-        val expressToronto = deserialize(nodes.slice(setOf(0, 4, 5, 6))) ?: TrainNode(0, TrainStep(0, RailSection.invalid))
+        val expressToronto =
+            deserialize(nodes.slice(setOf(0, 4, 5, 6))) ?: TrainNode(0, TrainStep(0, RailSection.invalid))
         assertNotEquals(node, expressMTL)
         assertNotEquals(node, expressToronto)
         assertNotEquals(expressToronto, expressMTL)
@@ -70,5 +70,12 @@ class TrainNodeTest {
         println()
         printLevelOrderTree(node)
     }
+
+    @Test
+    fun getNodesAtDistanceSimpleTreeTest() {
+        assertEquals(2, countNodesAtDistance(root, 2))
+        assertEquals(2, countNodesAtDistance(root, 1))
+        assertEquals(1, countNodesAtDistance(root, 0))
+        assertEquals(0, countNodesAtDistance(null, 0))
     }
 }

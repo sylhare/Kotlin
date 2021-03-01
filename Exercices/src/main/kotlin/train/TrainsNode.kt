@@ -61,6 +61,8 @@ fun printPreOrderTree(node: TrainNode?) {
     }
 }
 
-fun getNodesAtDistance(root: TrainNode, distance: Int) {
-
+fun countNodesAtDistance(root: TrainNode?, distance: Int): Int {
+    if (root == null) return 0
+    if (root.distance == distance) return 1
+    return countNodesAtDistance(root.left, distance) + countNodesAtDistance(root.right, distance)
 }
