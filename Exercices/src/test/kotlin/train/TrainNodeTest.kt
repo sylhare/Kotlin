@@ -4,6 +4,27 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
+/**
+ *  Rule for ordered binary tree
+ *  Each tree node has an index that is ascending the further you go in the leaves.
+ *  Right branches have higher index than left branches
+ *  If a left branch has leaves the branching node index must be higher than the last rightest leaf index.
+ *
+ *  Here is an example tree:            Depth level
+ *              7                           0
+ *            /  \
+ *           1    8                         1
+ *          /      \
+ *         4        9                       2
+ *       /  \
+ *      2    5                              3
+ *     /      \
+ *    3        6                            4
+ *
+ * The serialized tree reads:   7, 1, 4, 2, 3, 5, 6, 8, 9
+ * The serialized depth reads:  0, 1, 2, 3, 4, 3, 4, 1, 2
+ *
+ */
 class TrainNodeTest {
 
     companion object {
@@ -30,11 +51,19 @@ class TrainNodeTest {
             TrainStep(3, "Toronto".station)
         )
         val node = deserialize(nodes) ?: TrainNode(0, TrainStep(0, RailSection.invalid))
-    }
 
-    @Test
-    fun addValuesTest() {
-        assertEquals(listOf(4, 1, 2, 3, 5, 6, 7), treeIndexesOf(nodes))
+        private val italyNodes = listOf<TrainStep<TrainNetwork>>(
+            TrainStep(0, "trunk 0".railSection),
+            TrainStep(1, "toward Rome".switch),
+            TrainStep(2, "trunk 2".railSection),
+            TrainStep(3, "toward Milan".station),
+            TrainStep(4, "Milan".station),
+            TrainStep(3, "toward Vatican".station),
+            TrainStep(4, "Vatican".station),
+            TrainStep(1, "toward Venice".switch),
+            TrainStep(2, "Venice".station)
+        )
+        val italyLine = deserialize(italyNodes) ?: TrainNode(0, TrainStep(0, RailSection.invalid))
     }
 
     @Test
@@ -60,6 +89,8 @@ class TrainNodeTest {
     fun printRootTest() {
         println(root.toStringTree())
         println()
+        println(italyLine.toStringTree())
+        println()
         println(node.toStringTree())
         println()
         printPreOrderTree(root)
@@ -69,6 +100,12 @@ class TrainNodeTest {
         printLevelOrderTree(root)
         println()
         printLevelOrderTree(node)
+    }
+
+    @Test
+    fun addValuesTest() {
+        assertEquals(listOf(4, 1, 2, 3, 5, 6, 7), treeIndexesOf(nodes))
+        assertEquals(listOf(7, 1, 4, 2, 3, 5, 6, 8, 9), treeIndexesOf(italyNodes))
     }
 
     @Test

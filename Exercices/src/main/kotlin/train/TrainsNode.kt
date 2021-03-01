@@ -18,16 +18,25 @@ class TrainNode(val index: Int, step: TrainStep<TrainNetwork>) {
 }
 
 fun treeIndexesOf(line: List<TrainStep<TrainNetwork>>, index: Int = 0): List<Int> {
-    val branchTwoRoot = line.map { it.distance }.run { this.lastIndexOf(this[1]) }
-    return if (branchTwoRoot != 1) {
-        val branchOne = treeIndexesOf(line.subList(1, branchTwoRoot), index + 1).toTypedArray()
-        val rootStart = index + branchOne.size + 1
-        val branchTwo = treeIndexesOf(line.subList(branchTwoRoot, line.size), rootStart + 1).toTypedArray()
-        val listIndexed = listOf(rootStart, *branchOne, *branchTwo)
-        listIndexed
-    } else {
-        (index until index + line.size).toList()
+    var currentIndex = index
+    val result = mutableListOf<Int>()
+    val distances = line.map { it.distance }
+    for (i in distances.indices) {
+        val next = distances.getOrNull(i + 1)
+        if (next != null) {
+            val branchTwoRoot = distances.lastIndexOf(next)
+            if (branchTwoRoot != i + 1) {
+                val branchOne = treeIndexesOf(line.subList(i + 1, branchTwoRoot), index + 1)
+                val rootStart = index + branchOne.size + 1
+                val branchTwo = treeIndexesOf(line.subList(branchTwoRoot, line.size), rootStart + 1)
+                result.add(rootStart)
+                result.addAll(branchOne)
+                result.addAll(branchTwo)
+                break
+            } else result.add(currentIndex++)
+        } else result.add(currentIndex++)
     }
+    return result
 }
 
 fun deserialize(line: List<TrainStep<TrainNetwork>>): TrainNode? {
