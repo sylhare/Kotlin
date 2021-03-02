@@ -6,6 +6,12 @@ class TrainNode(val index: Int, step: TrainStep<TrainNetwork>) {
     var right: TrainNode? = null
     var left: TrainNode? = null
 
+    fun childCount() = when {
+        right == null && left == null -> 0
+        right != null && left != null -> 2
+        else -> 1
+    }
+
     fun toStringTree(): String =
         "$this\nleft: {${left?.toStringTree()}}\tright: {${right?.toStringTree()}}"
 
@@ -22,14 +28,14 @@ fun treeIndexesOf(line: List<TrainStep<TrainNetwork>>, index: Int = 0): List<Int
     val result = mutableListOf<Int>()
     val distances = line.map { it.distance }
     for (i in distances.indices) {
-            val branchTwoRoot = distances.lastIndexOf(distances.getOrNull(i + 1))
-            if (branchTwoRoot != -1 && branchTwoRoot != i + 1) {
-                val branchOne = treeIndexesOf(line.subList(i + 1, branchTwoRoot), index + 1)
-                val rootStart = index + branchOne.size + 1
-                val branchTwo = treeIndexesOf(line.subList(branchTwoRoot, line.size), rootStart + 1)
-                result += listOf(rootStart) + branchOne + branchTwo
-                break
-            } else result.add(currentIndex++)
+        val branchTwoRoot = distances.lastIndexOf(distances.getOrNull(i + 1))
+        if (branchTwoRoot != -1 && branchTwoRoot != i + 1) {
+            val branchOne = treeIndexesOf(line.subList(i + 1, branchTwoRoot), index + 1)
+            val rootStart = index + branchOne.size + 1
+            val branchTwo = treeIndexesOf(line.subList(branchTwoRoot, line.size), rootStart + 1)
+            result += listOf(rootStart) + branchOne + branchTwo
+            break
+        } else result.add(currentIndex++)
     }
     return result
 }
@@ -46,6 +52,37 @@ fun insert(root: TrainNode?, data: TrainStep<TrainNetwork>, index: Int): TrainNo
         index <= root.index -> root.also { it.left = insert(it.left, data, index) }
         else -> root.also { it.right = insert(it.right, data, index) }
     }
+
+fun trainPath(root: TrainNode, switch: List<String>): List<TrainNetwork> {
+    var currentSwitch = switch
+    if (root.value is Switch) {
+        currentSwitch = if (currentSwitch.size > 1) switch.drop(1) else listOf()
+        return when (root.value.info) {
+            switch[0] -> listOf(root.value) + trainPath(root.right!!, currentSwitch)
+            else -> listOf()
+        }
+    }
+    return when (root.childCount()) {
+        1 -> listOf(root.value) + trainPath(root.right!!, switch)
+        2 -> {
+            val result = mutableListOf(root.value)
+            var leftPath = listOf<TrainNetwork>()
+            var rightPath = listOf<TrainNetwork>()
+            while (leftPath.isEmpty() && rightPath.isEmpty()) {
+                leftPath = trainPath(root.left!!, currentSwitch)
+                rightPath = trainPath(root.right!!, currentSwitch)
+                if (leftPath.isEmpty() && rightPath.isEmpty()) {
+                    result += listOf(Switch(switch[0]), RailSection.invalid)
+                    currentSwitch = switch.drop(1)
+                } else break
+            }
+            result + leftPath + rightPath
+        }
+        else -> listOf(root.value)
+    }
+
+
+}
 
 fun printLevelOrderTree(node: TrainNode) {
     val tree = mutableListOf(node)

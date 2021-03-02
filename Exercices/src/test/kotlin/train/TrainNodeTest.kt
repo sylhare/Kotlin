@@ -56,9 +56,9 @@ class TrainNodeTest {
             TrainStep(0, "trunk 0".railSection),
             TrainStep(1, "toward Rome".switch),
             TrainStep(2, "trunk 2".railSection),
-            TrainStep(3, "toward Milan".station),
+            TrainStep(3, "toward Milan".switch),
             TrainStep(4, "Milan".station),
-            TrainStep(3, "toward Vatican".station),
+            TrainStep(3, "toward Vatican".switch),
             TrainStep(4, "Vatican".station),
             TrainStep(1, "toward Venice".switch),
             TrainStep(2, "Venice".station)
@@ -118,5 +118,29 @@ class TrainNodeTest {
         assertEquals(2, countNodesAtDistance(root, 1))
         assertEquals(1, countNodesAtDistance(root, 0))
         assertEquals(0, countNodesAtDistance(null, 0))
+    }
+
+    @Test
+    fun trainPathTest() {
+        assertEquals(
+            listOf(
+                "trunk 0".railSection,
+                "toward Rome".switch,
+                "trunk 2".railSection,
+                "toward Vatican".switch,
+                "Vatican".station,
+            ), trainPath(italyLine, listOf("toward Rome", "toward Vatican"))
+        )
+        assertEquals(
+            listOf(
+                "trunk 0".railSection,
+                "toward Rome".switch,
+                "trunk 2".railSection,
+                "toward Garbage".switch,
+                RailSection.invalid,
+                "toward Vatican".switch,
+                "Vatican".station,
+            ), trainPath(italyLine, listOf("toward Rome", "toward Garbage", "toward Vatican"))
+        )
     }
 }
