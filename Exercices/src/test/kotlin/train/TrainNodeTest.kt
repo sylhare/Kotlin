@@ -89,17 +89,21 @@ class TrainNodeTest {
     fun printRootTest() {
         println(root.toStringTree())
         println()
-        println(italyLine.toStringTree())
-        println()
         println(node.toStringTree())
+        println()
+        println(italyLine.toStringTree())
         println()
         printPreOrderTree(root)
         println()
         printPreOrderTree(node)
         println()
+        printPreOrderTree(italyLine)
+        println()
         printLevelOrderTree(root)
         println()
         printLevelOrderTree(node)
+        println()
+        printLevelOrderTree(italyLine)
     }
 
     @Test

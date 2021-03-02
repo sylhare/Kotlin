@@ -22,19 +22,14 @@ fun treeIndexesOf(line: List<TrainStep<TrainNetwork>>, index: Int = 0): List<Int
     val result = mutableListOf<Int>()
     val distances = line.map { it.distance }
     for (i in distances.indices) {
-        val next = distances.getOrNull(i + 1)
-        if (next != null) {
-            val branchTwoRoot = distances.lastIndexOf(next)
-            if (branchTwoRoot != i + 1) {
+            val branchTwoRoot = distances.lastIndexOf(distances.getOrNull(i + 1))
+            if (branchTwoRoot != -1 && branchTwoRoot != i + 1) {
                 val branchOne = treeIndexesOf(line.subList(i + 1, branchTwoRoot), index + 1)
                 val rootStart = index + branchOne.size + 1
                 val branchTwo = treeIndexesOf(line.subList(branchTwoRoot, line.size), rootStart + 1)
-                result.add(rootStart)
-                result.addAll(branchOne)
-                result.addAll(branchTwo)
+                result += listOf(rootStart) + branchOne + branchTwo
                 break
             } else result.add(currentIndex++)
-        } else result.add(currentIndex++)
     }
     return result
 }
@@ -57,8 +52,8 @@ fun printLevelOrderTree(node: TrainNode) {
     while (tree.isNotEmpty()) {
         val current = tree.removeFirst()
         println(current)
-        if (current.left != null) tree.add(current.left!!)
-        if (current.right != null) tree.add(current.right!!)
+        current.left?.run { tree.add(this) }
+        current.right?.run { tree.add(this) }
     }
 }
 
