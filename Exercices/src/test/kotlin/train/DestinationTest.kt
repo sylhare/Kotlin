@@ -2,6 +2,7 @@ package train
 
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import train.Journey.Companion.printJourney
 import kotlin.test.assertEquals
 
 /**
@@ -59,6 +60,24 @@ internal class DestinationTest {
             TrainStep(3, "MTL".station)
         ).toList()
         assertEquals(mtlExpress2, processJourney(mtlExpress2, listOf("toward MTL")))
+    }
+
+    @Test
+    internal fun secondExpressToMtl2Test() {
+        val mtlExpress2 = trainLineOf(
+            TrainStep(0, "trunk 1".railSection),
+            TrainStep(0, "trunk 2".railSection),
+            TrainStep(1, "toward MTL".switch),
+            TrainStep(2, "trunk 2".railSection),
+            TrainStep(3, "MTL".station)
+        ).toList()
+        assertEquals(listOf(
+            "trunk 1".railSection,
+            "trunk 2".railSection,
+            "toward MTL".switch,
+            "trunk 2".railSection,
+            "MTL".station
+        ), printJourney(mtlExpress2, listOf("toward MTL")))
     }
 
     @Test

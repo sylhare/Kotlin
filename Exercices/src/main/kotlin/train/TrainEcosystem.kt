@@ -16,11 +16,11 @@ data class Switch(val info: String) : TrainNetwork() {
     override fun toString() = "switch [$info]"
 }
 
-sealed class ClientConnection : TrainNetwork()
-data class Junction(val position: Int) : ClientConnection() {
+sealed class TrainConnection : TrainNetwork()
+data class Junction(val position: Int) : TrainConnection() {
     override fun toString() = "junction [$position]"
 }
-data class Station(val info: String) : ClientConnection() {
+data class Station(val info: String) : TrainConnection() {
     override fun toString() = "station [$info]"
 }
 
