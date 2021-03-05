@@ -4,11 +4,11 @@ internal fun processJourney(line: List<TrainStep<TrainNetwork>>, switchTriggered
     val result = trainLineOf()
     val visitedSteps = line.toMutableList()
 
-    for (switch in switchTriggered) {
+    for (name in switchTriggered) {
         stepLoop@ while (visitedSteps.size > 0) {
             val current = visitedSteps.first()
-            if (current.item is Switch && current.item.info != switch) {
-                result.add(TrainStep(current.distance, Switch(switch)))
+            if (current.item is Switch && current.item.info != name) {
+                result.add(TrainStep(current.distance, Switch(name)))
                 result.add(TrainStep(current.distance + 1, RailSection.invalid))
                 break@stepLoop
             } else {
