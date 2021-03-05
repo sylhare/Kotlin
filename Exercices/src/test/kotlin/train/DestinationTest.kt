@@ -45,6 +45,12 @@ internal class DestinationTest {
     }
 
     @Test
+    fun printTest() {
+        val line = lineWithBranches + TrainStep(5, Junction(5))
+        line.forEach { println(it.item) }
+    }
+
+    @Test
     internal fun expressToMtlTest() {
         assertEquals(mtlExpress, processJourney(mtlExpress, listOf("toward MTL")))
     }

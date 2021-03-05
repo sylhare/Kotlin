@@ -73,6 +73,22 @@ class TrainNodeTest {
     fun treeEqualityTest() {
         assertEquals(root, node)
         assertEquals(root.hashCode(), node.hashCode())
+        assertEquals(TrainNode(0, TrainStep(0, RailSection.invalid)), deserialize(listOf()))
+        assertEquals(TrainNode(1, TrainStep(0, "trunk 0".railSection)), TrainNode(0, TrainStep(0, "trunk 0".railSection)))
+    }
+
+    @Test
+    fun moreEqualityTest() {
+        val startNode = TrainNode(4, TrainStep(0, "trunk 0".railSection))
+        val startOneNode = TrainNode(4, TrainStep(1, "trunk 0".railSection))
+        val startTrunkyNode = TrainNode(4, TrainStep(0, "trunky".railSection))
+        assertEquals(startNode, startNode)
+        assertEquals(startNode.hashCode(), startNode.hashCode())
+        assertEquals(null, startNode.left)
+        assertEquals(null, startNode.right)
+        assertEquals(0, startNode.childCount())
+        assertNotEquals(startNode, startOneNode)
+        assertNotEquals(startNode, startTrunkyNode)
     }
 
     @Test
@@ -112,6 +128,49 @@ class TrainNodeTest {
     fun addValuesTest() {
         assertEquals(listOf(4, 1, 2, 3, 5, 6, 7), TrainTree.indexesOf(nodes))
         assertEquals(listOf(7, 1, 4, 2, 3, 5, 6, 8, 9), TrainTree.indexesOf(italyNodes))
+    }
+
+    @Test
+    fun leftChildTest() {
+        val leftChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.left = TrainNode(1, TrainStep(1, "toward MTL".switch))
+        }
+
+        assertEquals(1, leftChildNode.childCount())
+        assertEquals(leftChildNode.hashCode(), leftChildNode.hashCode())
+        assertEquals(TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.left = TrainNode(1, TrainStep(1, "toward MTL".switch))
+        }, leftChildNode)
+    }
+
+
+    @Test
+    fun rightChildTest() {
+        val rightChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.right = TrainNode(5, TrainStep(1, "toward Toronto".switch))
+        }
+
+        assertEquals(1, rightChildNode.childCount())
+        assertEquals(rightChildNode.hashCode(), rightChildNode.hashCode())
+        assertEquals(TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.right = TrainNode(5, TrainStep(1, "toward Toronto".switch))
+        }, rightChildNode)
+
+    }
+
+    @Test
+    fun bothChildTest() {
+        val allChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.left = TrainNode(1, TrainStep(1, "toward MTL".switch))
+            it.right = TrainNode(5, TrainStep(1, "toward Toronto".switch))
+        }
+
+        assertEquals(2, allChildNode.childCount())
+        assertEquals(allChildNode.hashCode(), allChildNode.hashCode())
+        assertEquals(TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.left = TrainNode(1, TrainStep(1, "toward MTL".switch))
+            it.right = TrainNode(5, TrainStep(1, "toward Toronto".switch))
+        }, allChildNode)
     }
 
     @Test

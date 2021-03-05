@@ -1,7 +1,7 @@
 package train
 
 class TrainNode(val index: Int, step: TrainStep<TrainNetwork>) {
-    val distance = step.distance
+    private val distance = step.distance
     val value = step.item
     var right: TrainNode? = null
     var left: TrainNode? = null
