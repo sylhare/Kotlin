@@ -1,8 +1,8 @@
-![Kotlin](https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/240px-Kotlin-logo.svg.png)
-
+# Kotlin
 [![Build Status](https://travis-ci.org/sylhare/Kotlin.svg?branch=master)](https://travis-ci.org/sylhare/Kotlin) [![Maintainability](https://api.codeclimate.com/v1/badges/94ef0be8c89785a0db0b/maintainability)](https://codeclimate.com/github/sylhare/Kotlin/maintainability) 
 [![codecov](https://codecov.io/gh/sylhare/Kotlin/branch/master/graph/badge.svg)](https://codecov.io/gh/sylhare/Kotlin)
 
+![Kotlin](https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/240px-Kotlin-logo.svg.png)
 
 ## Introduction
 Kotlin is made by JetBrains (the same as that did IntelliJ the IDE).
