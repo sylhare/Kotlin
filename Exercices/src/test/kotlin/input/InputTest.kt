@@ -1,20 +1,27 @@
 package input
 
+import input.NumberInput.Companion.has
+import input.NumberInput.Companion.input
+import input.NumberInput.Companion.sortConcatenate
+import input.NumberInput.Companion.toNumberInput
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 
 internal class InputTest {
     @Test
-    fun compareTo() {
+    fun equalityTest() {
         assertEquals(NumberInput("s"), NumberInput("s"))
+        assertEquals(NumberInput("123"), NumberInput("123"))
         assertNotEquals(NumberInput("a"), NumberInput("s"))
     }
 
     @Test
     fun concatenatedNumberInput() {
-        assertEquals("1234", listOf(1.exp, 2.exp, 3.exp, 4.exp).concatenate())
-        assertEquals("", listOf(1.exp, 2.exp, NumberInput("+"), 4.exp).concatenate()) // + will be made first
+        assertEquals("1234", listOf(4, 3, 2, 1).toNumberInput().sortConcatenate())
+        assertEquals("1234", listOf(4, 3, 2, 1).toNumberInput().sortConcatenate())
+        assertEquals("1", listOf(1.input).sortConcatenate())
+        assertEquals("", listOf(1.input, 2.input, NumberInput("+"), 4.input).sortConcatenate()) // + will be made first
     }
 
     @Test
@@ -28,16 +35,17 @@ internal class InputTest {
 
     @Test
     fun has() {
-        assertTrue(NumberInput.has(listOf(1.exp, 2.exp, 3.exp, 4.exp), '2'))
-        assertFalse(NumberInput.has(listOf(1.exp, 2.exp, 3.exp, 4.exp), 'e'))
-        listOf(1, 2, 3, 4).toExp()
+        assertTrue(listOf(1, 2, 3, 4).toNumberInput().has('2'))
+        assertFalse(listOf(1, 2, 3, 4).toNumberInput().has('5'))
+        assertFalse(listOf(1, 2, 3, 4).toNumberInput().has('e'))
+
     }
 
     @Test
     fun numberToList() {
         val range = 1..5
-        assertEquals(listOf(5, 4, 3, 2, 1), NumberInput.intToList(12345))
-        assertEquals(range.toList().reversed(), NumberInput.intToList(12345))
+        assertEquals(listOf(1, 2, 3, 4, 5), NumberInput.intToList(12345))
+        assertEquals(range.toList(), NumberInput.intToList(12345))
         assertEquals(listOf(1), NumberInput.intToList(1))
     }
 }

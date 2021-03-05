@@ -22,9 +22,12 @@ class AnagramTest {
 
     @Test
     fun anagramsAreFilteredSameOutput() {
-        var words = listOf("cat", "tac", "hello", "bonjour", "allo", "loal")
+        val words = listOf("cat", "tac", "hello", "bonjour", "allo", "loal")
         assertEquals(listOf("hello", "bonjour"), words.removeAllAnagrams())
+        assertEquals(listOf("hello", "bonjour"), listOf("hello", "bonjour").removeAllAnagrams())
         assertEquals(listOf("tac", "hello", "bonjour", "loal"), words.removeAnagramDuplicates())
+        assertEquals(listOf("tac", "hello", "bonjour", "loal"), listOf("tac", "hello", "bonjour", "loal").removeAnagramDuplicates())
         assertEquals(listOf("cat", "hello", "bonjour", "allo"), words.filterAnagrams())
+        assertEquals(listOf("cat", "hello", "bonjour", "allo"), listOf("cat", "hello", "bonjour", "allo").filterAnagrams())
     }
 }
