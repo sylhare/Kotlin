@@ -52,11 +52,11 @@ gradle test
 
 Some principles
 
-- Inheritance : kill off duplicate codes 
+- _Inheritance_ : kill off duplicate codes 
 	- Implement with a Mother class implemented by a daughter class
-- Polymorphism : abstraction of implementation
+- _Polymorphism_ : abstraction of implementation
 	- Implement using interface and generic functions 
-- Encapsulation : hiding the changes, protects data
+- _Encapsulation_ : hiding the changes, protects data
 	- Implement by using restrictive access to data or contructers
 
 Objects comparison:
@@ -66,11 +66,13 @@ Objects comparison:
 
 Encapsulation problems:
 
-- getters / setters
-	- Either with a verb to change something
-	- With a noun to have the value of something	 
-- publicly available data
-	- You don't want anyone using the data without knowing how to. 
+- Don't use `setSomething` and `getSomething` if you need _getters / setters_ but rather:
+	- A Method with a verb to change something
+	- A property with a noun to have the value of something	 
+- Control the data flow
+ 	- You want to control how the value of your object is handled
+	- You don't want anyone using the data without knowing how to
+	- Make everything a sprivate as possible
 - Data object, feature envy
 - Classes finishing by `-er` or `-or`
 	- Should be a job of the class, or implemented as a pattern
