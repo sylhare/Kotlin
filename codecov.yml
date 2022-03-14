@@ -1,2 +1,8 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 90%     # Minimum coverage ratio that the commit must meet to be considered a success status.
+        threshold: 3%   # Allow the coverage to drop by X%, and posting a success status.
 ignore:
   - "/Exercices/src/main/kotlin/examples"  # ignore folders and all its contents
