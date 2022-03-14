@@ -8,6 +8,7 @@ Kotlin is made by JetBrains (the same as that did IntelliJ the IDE).
 See their website here:
   - [Kotlin](https://kotlinlang.org/)
   - [Getting started](https://kotlinlang.org/docs/tutorials/getting-started.html)
+  - [Kotlin 101](https://sylhare.github.io/2019/12/02/Kotlin-101.html)
 
 ## Get started
 
@@ -41,12 +42,20 @@ For gradle to pick up the source and test files, you will need to organise your 
 
 ```
 
-You can now try to run the tests:
+You can now try to run the tests (using the gradle wrapper `./gradlew` instead of `gradle` to
+use the gradle version with which the project has been built with):
+
 ```bash
-gradle test
+./gradlew test
 ```
 
-## Object oriented
+And the complete one with coverage:
+
+```bash
+./gradlew clean build test jacocoTestReport
+```
+
+## Object-oriented
 
 Some principles
 
@@ -70,7 +79,7 @@ Encapsulation problems:
 - Control the data flow
  	- You want to control how the value of your object is handled
 	- You don't want anyone using the data without knowing how to
-	- Make everything a sprivate as possible
+	- Make everything as private as possible
 - Data object, feature envy
 - Classes finishing by `-er` or `-or`
 	- Should be a job of the class, or implemented as a pattern
@@ -84,7 +93,7 @@ Encapsulation problems:
 fun `valid parameters` { ... }
 ```
 
-- Overload Objects to generates new ones easily:
+- Overload Objects to generate new ones easily:
 
 ```kotlin
 val Number.teaspoons get() = Quantity(this, Unit.teaspoon)
@@ -128,7 +137,7 @@ return if (list.isEmpty) -1 else list.min()!! //list can be null, without !! it 
 When you have to create a recursive function, you first answer this three questions:
   - What is the original question: What you are actually trying to do?
   - What is the recursive question: What will you base your recursion on?
-  - What are the terminal coniditions: When should the recursive question stopped and return an answer?
+  - What are the terminal conditions: When should the recursive question stopped and return an answer?
 
 ## Keywords
 
@@ -163,7 +172,7 @@ internal typealias CostStrategy = (Double) -> Double
 
 ### Operation on lists
 
-- `flatMap` tranforms a list of list of stuff into a simple list of stuff
+- `flatMap` transforms a list of list of stuff into a simple list of stuff
 ```kotlin
 list.flatMap { List<List<Path>> } // returns List<Path>
 ```
