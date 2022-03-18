@@ -1,6 +1,6 @@
 package shopping
 
-class CashRegister {
+class SimpleShop {
 
     companion object {
         val priceTags = mapOf("meatloaf" to 5, "pie" to 3, "soda" to 2)
@@ -30,6 +30,4 @@ class CashRegister {
             )
         } + deliveryFee
     }
-
-    fun bill(items: String) = Market().evaluate(items)
 }
