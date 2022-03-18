@@ -1,7 +1,5 @@
 package shopping
 
-import shopping.PricedItems.Companion.unknown
-
 class CashRegister {
 
     companion object {
@@ -10,9 +8,9 @@ class CashRegister {
 
     // Natural language processing ~> latent dirichlet allocation?
     private val String.toSingular get() = when {
-        this.endsWith("ves") -> this.trimEnd(*"ves".toCharArray()) + "f"
-        else -> this.trimEnd('s')
-    }
+            this.endsWith("ves") -> this.trimEnd(*"ves".toCharArray()) + "f"
+            else -> this.trimEnd('s')
+        }
 
     private fun toPricedItem(item: String, quantity: Int) = when (quantity) {
         1 -> item
@@ -25,7 +23,12 @@ class CashRegister {
         val deliveryFee = if (previousLength > processedItems.length) 10 else 0
 
         val request = processedItems.split(", ", " and ").map { it.split(" ") }
-        return request.sumOf { it[0].toInt() * priceTags.getOrDefault(toPricedItem(it[1], it[0].toInt()), 0) } + deliveryFee
+        return request.sumOf {
+            it[0].toInt() * priceTags.getOrDefault(
+                toPricedItem(it[1], it[0].toInt()),
+                0
+            )
+        } + deliveryFee
     }
 
     fun bill(items: String) = Market().evaluate(items)
