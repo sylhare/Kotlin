@@ -1,4 +1,6 @@
-package examples
+package shopping
+
+import shopping.PricedItems.Companion.unknown
 
 class CashRegister {
 
@@ -25,4 +27,6 @@ class CashRegister {
         val request = processedItems.split(", ", " and ").map { it.split(" ") }
         return request.sumOf { it[0].toInt() * priceTags.getOrDefault(toPricedItem(it[1], it[0].toInt()), 0) } + deliveryFee
     }
+
+    fun bill(items: String) = Market().evaluate(items)
 }
