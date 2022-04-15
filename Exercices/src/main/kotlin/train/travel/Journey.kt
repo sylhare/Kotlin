@@ -1,4 +1,9 @@
-package train
+package train.travel
+
+import train.RailSection
+import train.Switch
+import train.TrainNetwork
+import train.TrainStep
 
 internal fun processJourney(line: List<TrainStep<TrainNetwork>>, switchTriggered: List<String>): TrainLine {
     val result = trainLineOf()

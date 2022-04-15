@@ -20,7 +20,7 @@ import kotlin.test.assertNotEquals
  *      - Sometime a captor malfunction and you receive errored info, if that happens add the captor's info corresponding switch
  * following by an invalid trunk in the itinerary and proceed from last known location
  */
-internal class DestinationTest {
+internal class JourneyTest {
 
     companion object {
         internal val mtlExpress = trainLineOf(
