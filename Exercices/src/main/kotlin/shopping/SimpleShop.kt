@@ -22,12 +22,9 @@ class SimpleShop {
         val processedItems = item.replace(" with delivery", "")
         val deliveryFee = if (previousLength > processedItems.length) 10 else 0
 
-        val request = processedItems.split(", ", " and ").map { it.split(" ") }
-        return request.sumOf {
-            it[0].toInt() * priceTags.getOrDefault(
-                toPricedItem(it[1], it[0].toInt()),
-                0
-            )
-        } + deliveryFee
+        return processedItems.split(", ", " and ")
+            .map { it.split(" ") }
+            .map { Pair(it[0].toInt(), it[1]) }
+            .sumOf { it.first * priceTags.getOrDefault(toPricedItem(it.second, it.first), 0) } + deliveryFee
     }
 }
