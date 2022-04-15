@@ -1,8 +1,8 @@
 package train
 
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 /**
  * You manage a Train system
@@ -29,6 +29,13 @@ internal class DestinationTest {
             TrainStep(1, "toward MTL".switch),
             TrainStep(2, "MTL".station)
         ).toList()
+        internal val mtlExpressWithJunction = trainLineOf(
+            TrainStep(0, "trunk 1".railSection),
+            TrainStep(0, "trunk 2".railSection),
+            TrainStep(1, "toward MTL".switch),
+            TrainStep(1, 1.junction),
+            TrainStep(2, "MTL".station)
+        ).toList()
         internal val lineWithBranches = trainLineOf(
             TrainStep(0, "trunk 1".railSection),
             TrainStep(0, "trunk 2".railSection),
@@ -38,7 +45,6 @@ internal class DestinationTest {
             TrainStep(4, "Toronto".station),
             TrainStep(1, "toward Quebec".switch),
             TrainStep(2, "trunk 4".railSection),
-            TrainStep(2, "trunk 5".railSection),
             TrainStep(3, "toward MTL".switch),
             TrainStep(4, "MTL".station),
         ).toList()
@@ -81,18 +87,24 @@ internal class DestinationTest {
         )
     }
 
-    @Disabled
     @Test
     internal fun journeyToMtlWithStopsTest() {
-        assertEquals(
+        assertNotEquals(
             trainLineOf(
                 TrainStep(0, "trunk 1".railSection),
                 TrainStep(0, "trunk 2".railSection),
-                TrainStep(1, "toward Ottawa".switch),
-                TrainStep(2, "trunk 5".railSection),
+                TrainStep(1, "toward Quebec".switch),
+                TrainStep(2, "trunk 4".railSection),
                 TrainStep(3, "toward MTL".switch),
                 TrainStep(4, "MTL".station)
-            ), processJourney(lineWithBranches, listOf("toward Ottawa", "toward MTL"))
+            ), processJourney(lineWithBranches, listOf("toward Quebec", "toward MTL"))
+        )
+    }
+
+    @Test
+    internal fun journeyToMtlWithJunctionTest() {
+        assertNotEquals(
+            trainLineOf(), processJourney(mtlExpressWithJunction, listOf("toward Quebec", "toward MTL"))
         )
     }
 }
