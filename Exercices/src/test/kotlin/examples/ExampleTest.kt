@@ -26,6 +26,17 @@ internal class ExampleTest {
     }
 
     @Test
+    internal fun iterator() {
+        val iterator = listOf(1, 2, 3, 4, 5).listIterator()
+        assertTrue(iterator.hasNext())
+        assertFalse(iterator.hasPrevious())
+        assertEquals(1, iterator.next())
+        assertEquals(2, iterator.next())
+        assertEquals(2, iterator.previous())
+        assertEquals(2, iterator.next())
+    }
+
+    @Test
     internal fun twoListMapTest() {
         val numbers = (1..4).toList()
         val letters = ('a'..'d').toList()
