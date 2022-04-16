@@ -67,6 +67,39 @@ class TrainNodeTest {
             TrainStep(2, "Venice".station)
         )
         val italyLine = deserialize(italyNodes)
+
+        internal val mtlExpress = trainLineOf(
+            TrainStep(0, "trunk 1".railSection),
+            TrainStep(0, "trunk 2".railSection),
+            TrainStep(1, "toward MTL".switch),
+            TrainStep(2, "MTL".station)
+        ).toList()
+        internal val mtlExpressWithJunction = trainLineOf(
+            TrainStep(0, "trunk 1".railSection),
+            TrainStep(0, "trunk 2".railSection),
+            TrainStep(1, "toward MTL".switch),
+            TrainStep(1, 1.junction),
+            TrainStep(2, "MTL".station)
+        ).toList()
+        internal val lineWithBranches = trainLineOf(
+            TrainStep(0, "trunk 1".railSection),
+            TrainStep(0, "trunk 2".railSection),
+            TrainStep(1, "toward Ottawa".switch),
+            TrainStep(2, "trunk 3".railSection),
+            TrainStep(3, "toward Toronto".switch),
+            TrainStep(4, "Toronto".station),
+            TrainStep(1, "toward Quebec".switch),
+            TrainStep(2, "trunk 4".railSection),
+            TrainStep(3, "toward MTL".switch),
+            TrainStep(4, "MTL".station),
+        ).toList()
+    }
+
+    @Test
+    fun deserializeLines() {
+        println(deserialize(mtlExpress).toStringTree())
+        println(deserialize(mtlExpressWithJunction).toStringTree())
+        println(deserialize(lineWithBranches).toStringTree())
     }
 
     @Test

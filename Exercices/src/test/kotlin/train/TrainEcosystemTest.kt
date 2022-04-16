@@ -1,7 +1,6 @@
 package train
 
 import org.junit.jupiter.api.Test
-import train.travel.trainLineOf
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 

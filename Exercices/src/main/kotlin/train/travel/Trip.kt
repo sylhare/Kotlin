@@ -1,13 +1,14 @@
 package train.travel
 
 import train.*
+import train.Switch.Companion.ERROR
 
 fun List<TrainNetwork>.itineraryFrom(switches: List<String>): List<TrainNetwork> {
     val tripSwitches = this.filterIsInstance<Switch>().map { it.info }
     val switchIterator = switches.map { switch ->
         when {
             tripSwitches.contains(switch) -> switch
-            else -> ""
+            else -> ERROR
         }
     }.listIterator()
     return findNext(this, switchIterator)
@@ -17,24 +18,14 @@ private fun List<TrainNetwork>.at(position: Int): List<TrainNetwork> {
     return this.dropWhile { !(it is RailSection && it.position == position) }
 }
 
-private fun ListIterator<String>.at(currentSwitch: String): ListIterator<String> {
-    while (this.hasNext() && this.next() != currentSwitch) {
-        this.next()
-    }
-    this.previous()
-    return this
-}
-
 fun findNext(
     remainingTripStep: List<TrainNetwork>,
     switch: ListIterator<String>,
-    isLast: Boolean = false
 ): List<TrainNetwork> {
     val itinerary = mutableListOf<TrainNetwork>()
     var currentSwitch = switch.next()
-    println(currentSwitch)
     var ignores = false
-    var last = isLast
+    var last = false
 
     for (step in remainingTripStep) {
         println("$step for $currentSwitch is last $last")
@@ -53,9 +44,9 @@ fun findNext(
                     else -> last = true
                 }
             }
-            step is Switch && currentSwitch == "" && step.info == switch.next() -> {
+            step is Switch && currentSwitch == ERROR && step.info == switch.next() -> {
                 println("add $step")
-                itinerary.add(RailSection.invalid)
+                itinerary.add(Switch.invalid)
                 itinerary.add(step)
                 when {
                     switch.hasNext() -> currentSwitch = switch.next()
@@ -65,7 +56,8 @@ fun findNext(
             step is Switch -> ignores = true
             step is Junction -> {
                 println("go to $step")
-                itinerary.addAll(findNext(remainingTripStep.at(step.position), switch.at(currentSwitch), false))
+                switch.previous()
+                itinerary.addAll(findNext(remainingTripStep.at(step.position), switch))
                 break
             }
             !ignores -> {
