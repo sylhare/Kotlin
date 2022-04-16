@@ -31,9 +31,15 @@ internal class ExampleTest {
         assertTrue(iterator.hasNext())
         assertFalse(iterator.hasPrevious())
         assertEquals(1, iterator.next())
+        assertTrue(iterator.hasPrevious())
         assertEquals(2, iterator.next())
         assertEquals(2, iterator.previous())
         assertEquals(2, iterator.next())
+        assertEquals(3, iterator.next())
+        assertEquals(4, iterator.next())
+        assertEquals(5, iterator.next())
+        assertFalse(iterator.hasNext())
+        assertEquals(5, iterator.previous())
     }
 
     @Test
