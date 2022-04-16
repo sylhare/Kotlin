@@ -1,5 +1,6 @@
+package train
+
 import org.junit.jupiter.api.Test
-import train.*
 import train.travel.itineraryFrom
 import kotlin.test.assertEquals
 
@@ -33,6 +34,21 @@ internal class TripTest {
             "North Gate".switch,
             "Paris".station,
         ), euroTrip.itineraryFrom(listOf("Waterloo", "North Gate")))
+    }
+
+    @Test
+    fun `Via Waterloo to Paris with errors`() {
+        assertEquals(listOf(
+            "trunk Warehouse".railSection,
+            "trunk Transit".railSection,
+            "Waterloo".switch,
+            "trunk Tunnel".railSection,
+            "trunk Lille 1".railSection,
+            "trunk Baguette".railSection,
+            RailSection.invalid,
+            "North Gate".switch,
+            "Paris".station,
+        ), euroTrip.itineraryFrom(listOf("Waterloo", "error", "North Gate")))
     }
 
     @Test
