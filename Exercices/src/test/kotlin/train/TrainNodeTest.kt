@@ -43,6 +43,13 @@ class TrainNodeTest {
                 }
             }
         }
+        val soloChild = TrainNode(0, TrainStep(0, "trunk 0".railSection))
+        val leftChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.left = TrainNode(1, TrainStep(1, "toward MTL".switch))
+        }
+        val rightChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
+            it.right = TrainNode(5, TrainStep(1, "toward Toronto".switch))
+        }
 
         val nodes = listOf<TrainStep<TrainNetwork>>(
             TrainStep(0, "trunk 0".railSection),
@@ -67,39 +74,6 @@ class TrainNodeTest {
             TrainStep(2, "Venice".station)
         )
         val italyLine = deserialize(italyNodes)
-
-        internal val mtlExpress = trainLineOf(
-            TrainStep(0, "trunk 1".railSection),
-            TrainStep(0, "trunk 2".railSection),
-            TrainStep(1, "toward MTL".switch),
-            TrainStep(2, "MTL".station)
-        ).toList()
-        internal val mtlExpressWithJunction = trainLineOf(
-            TrainStep(0, "trunk 1".railSection),
-            TrainStep(0, "trunk 2".railSection),
-            TrainStep(1, "toward MTL".switch),
-            TrainStep(1, 1.junction),
-            TrainStep(2, "MTL".station)
-        ).toList()
-        internal val lineWithBranches = trainLineOf(
-            TrainStep(0, "trunk 1".railSection),
-            TrainStep(0, "trunk 2".railSection),
-            TrainStep(1, "toward Ottawa".switch),
-            TrainStep(2, "trunk 3".railSection),
-            TrainStep(3, "toward Toronto".switch),
-            TrainStep(4, "Toronto".station),
-            TrainStep(1, "toward Quebec".switch),
-            TrainStep(2, "trunk 4".railSection),
-            TrainStep(3, "toward MTL".switch),
-            TrainStep(4, "MTL".station),
-        ).toList()
-    }
-
-    @Test
-    fun deserializeLines() {
-        println(deserialize(mtlExpress).toStringTree())
-        println(deserialize(mtlExpressWithJunction).toStringTree())
-        println(deserialize(lineWithBranches).toStringTree())
     }
 
     @Test
@@ -158,17 +132,19 @@ class TrainNodeTest {
     }
 
     @Test
-    fun addValuesTest() {
+    fun treeIndexesOfTest() {
         assertEquals(listOf(4, 1, 2, 3, 5, 6, 7), TrainTree.indexesOf(nodes))
         assertEquals(listOf(7, 1, 4, 2, 3, 5, 6, 8, 9), TrainTree.indexesOf(italyNodes))
+        assertEquals(listOf(0), TrainTree.indexesOf(listOf(TrainStep(0, "trunk 0".railSection))))
+    }
+
+    @Test
+    fun soloChildTest() {
+        assertEquals(0, soloChild.childCount())
     }
 
     @Test
     fun leftChildTest() {
-        val leftChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
-            it.left = TrainNode(1, TrainStep(1, "toward MTL".switch))
-        }
-
         assertEquals(1, leftChildNode.childCount())
         assertEquals(leftChildNode.hashCode(), leftChildNode.hashCode())
         assertEquals(TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
@@ -179,10 +155,6 @@ class TrainNodeTest {
 
     @Test
     fun rightChildTest() {
-        val rightChildNode = TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
-            it.right = TrainNode(5, TrainStep(1, "toward Toronto".switch))
-        }
-
         assertEquals(1, rightChildNode.childCount())
         assertEquals(rightChildNode.hashCode(), rightChildNode.hashCode())
         assertEquals(TrainNode(4, TrainStep(0, "trunk 0".railSection)).also {
@@ -218,29 +190,5 @@ class TrainNodeTest {
     fun nonexistantNodesAtDistanceSimpleTreeTest() {
         assertEquals(0, root.nodeCountAt(-2))
         assertEquals(0, root.nodeCountAt(5))
-    }
-
-    @Test
-    fun trainPathTest() {
-        assertEquals(
-            listOf(
-                "trunk 0".railSection,
-                "toward Rome".switch,
-                "trunk 2".railSection,
-                "toward Vatican".switch,
-                "Vatican".station,
-            ), TrainPath.from(italyLine, listOf("toward Rome", "toward Vatican"))
-        )
-        assertEquals(
-            listOf(
-                "trunk 0".railSection,
-                "toward Rome".switch,
-                "trunk 2".railSection,
-                "toward Garbage".switch,
-                RailSection.invalid,
-                "toward Vatican".switch,
-                "Vatican".station,
-            ), TrainPath.from(italyLine, listOf("toward Rome", "toward Garbage", "toward Vatican"))
-        )
     }
 }
