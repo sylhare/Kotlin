@@ -132,9 +132,10 @@ class TrainNodeTest {
     }
 
     @Test
-    fun addValuesTest() {
+    fun treeIndexesOfTest() {
         assertEquals(listOf(4, 1, 2, 3, 5, 6, 7), TrainTree.indexesOf(nodes))
         assertEquals(listOf(7, 1, 4, 2, 3, 5, 6, 8, 9), TrainTree.indexesOf(italyNodes))
+        assertEquals(listOf(0), TrainTree.indexesOf(listOf(TrainStep(0, "trunk 0".railSection))))
     }
 
     @Test
@@ -189,29 +190,5 @@ class TrainNodeTest {
     fun nonexistantNodesAtDistanceSimpleTreeTest() {
         assertEquals(0, root.nodeCountAt(-2))
         assertEquals(0, root.nodeCountAt(5))
-    }
-
-    @Test
-    fun trainPathTest() {
-        assertEquals(
-            listOf(
-                "trunk 0".railSection,
-                "toward Rome".switch,
-                "trunk 2".railSection,
-                "toward Vatican".switch,
-                "Vatican".station,
-            ), TrainPath.from(italyLine, listOf("toward Rome", "toward Vatican"))
-        )
-        assertEquals(
-            listOf(
-                "trunk 0".railSection,
-                "toward Rome".switch,
-                "trunk 2".railSection,
-                "toward Garbage".switch,
-                RailSection.invalid,
-                "toward Vatican".switch,
-                "Vatican".station,
-            ), TrainPath.from(italyLine, listOf("toward Rome", "toward Garbage", "toward Vatican"))
-        )
     }
 }
