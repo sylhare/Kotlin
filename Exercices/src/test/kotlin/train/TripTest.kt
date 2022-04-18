@@ -1,5 +1,6 @@
 package train
 
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import train.travel.itineraryFrom
 import kotlin.test.assertEquals
@@ -23,6 +24,15 @@ import kotlin.test.assertEquals
  */
 internal class TripTest {
     companion object {
+        val testTrip = listOf(
+            "trunk 0".railSection,
+            "trunk 1".railSection,
+            "TrunkToTrack".switch,
+            "EndOfTrack".station,
+            "TrunkToTrail".switch,
+            "EndOfTrail".station,
+            "Junction to 1".junction
+        )
         val euroTrip = listOf(
             "trunk Warehouse".railSection,
             "trunk Transit".railSection,
@@ -135,5 +145,53 @@ internal class TripTest {
             "North Gate".switch,
             "Paris".station,
         ), euroTrip.itineraryFrom(listOf("King's Cross", "error", "North Gate")))
+    }
+
+    @Nested
+    inner class EdgeCases {
+        @Test
+        fun `Via Waterloo to the Unknooooown!`() {
+            assertEquals(listOf(
+                "trunk Warehouse".railSection,
+                "trunk Transit".railSection,
+                "Waterloo".switch,
+                "trunk Tunnel".railSection,
+                "trunk Lille 1".railSection,
+                "trunk Baguette".railSection,
+                "Paris".station,
+            ), euroTrip.itineraryFrom(listOf("Waterloo")))
+        }
+
+        @Test
+        fun `Direct trip`() {
+            assertEquals(listOf(
+                "trunk 0".railSection,
+                "trunk 1".railSection,
+                "TrunkToTrack".switch,
+                "EndOfTrack".station,
+            ), testTrip.itineraryFrom(listOf("TrunkToTrack")))
+        }
+
+        @Test
+        fun `Indirect trip`() {
+            assertEquals(listOf(
+                "trunk 0".railSection,
+                "trunk 1".railSection,
+                "TrunkToTrail".switch,
+                "EndOfTrail".station,
+            ), testTrip.itineraryFrom(listOf("TrunkToTrail")))
+        }
+
+        @Test
+        fun `Loop with junction`() {
+            assertEquals(listOf(
+                "trunk 0".railSection,
+                "trunk 1".railSection,
+                "TrunkToTrail".switch,
+                "trunk 1".railSection,
+                "TrunkToTrack".switch,
+                "EndOfTrack".station,
+            ), testTrip.itineraryFrom(listOf("TrunkToTrail", "TrunkToTrack")))
+        }
     }
 }
