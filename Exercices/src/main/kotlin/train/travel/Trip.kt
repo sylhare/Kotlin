@@ -28,35 +28,32 @@ fun findNext(
     var last = false
 
     for (step in remainingTripStep) {
-        println("$step for $currentSwitch is last $last")
         when {
             last && step is Station -> {
-                println("add $step")
-                itinerary.add(step)
+                itinerary.add(step).also { println("add $step") }
                 break
             }
             step is Station -> ignores = true
-            step is Switch && step.info == currentSwitch -> {
-                println("add $step")
-                itinerary.add(step)
-                when {
-                    switch.hasNext() -> currentSwitch = switch.next()
-                    else -> last = true
+            step is Switch -> when {
+                step.info == currentSwitch -> {
+                    itinerary.add(step).also { println("add $step") }
+                    when {
+                        switch.hasNext() -> currentSwitch = switch.next()
+                        else -> last = true
+                    }
                 }
-            }
-            step is Switch && currentSwitch == ERROR && step.info == switch.next() -> {
-                println("add $step")
-                itinerary.add(Switch.invalid)
-                itinerary.add(step)
-                when {
-                    switch.hasNext() -> currentSwitch = switch.next()
-                    else -> last = true
+                currentSwitch == ERROR && step.info == switch.next() ->{
+                    itinerary.add(Switch.invalid)
+                    itinerary.add(step).also { println("add $step") }
+                    when {
+                        switch.hasNext() -> currentSwitch = switch.next()
+                        else -> last = true
+                    }
                 }
+                else -> ignores = true
             }
-            step is Switch -> ignores = true
             step is Junction -> {
-                println("go to $step")
-                switch.previous()
+                switch.previous().also { println("go to $step") }
                 itinerary.addAll(findNext(remainingTripStep.at(step.position), switch))
                 break
             }
