@@ -49,104 +49,6 @@ internal class TripTest {
         )
     }
 
-    @Test
-    fun `Via Waterloo to Paris`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            "Waterloo".switch,
-            "trunk Tunnel".railSection,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            "North Gate".switch,
-            "Paris".station,
-        ), euroTrip.itineraryFrom(listOf("Waterloo", "North Gate")))
-    }
-
-    @Test
-    fun `Via Waterloo to Paris with errors`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            "Waterloo".switch,
-            "trunk Tunnel".railSection,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            Switch.invalid,
-            "North Gate".switch,
-            "Paris".station,
-        ), euroTrip.itineraryFrom(listOf("Waterloo", "error", "North Gate")))
-    }
-
-    @Test
-    fun `Via Waterloo to Marseille`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            "Waterloo".switch,
-            "trunk Tunnel".railSection,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            "South Gate".switch,
-            "Marseille".station,
-        ), euroTrip.itineraryFrom(listOf("Waterloo", "South Gate")))
-    }
-
-    @Test
-    fun `Off on a wrong trail via Waterloo to Marseille`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            Switch.invalid,
-            "Waterloo".switch,
-            "trunk Tunnel".railSection,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            "South Gate".switch,
-            "Marseille".station,
-        ), euroTrip.itineraryFrom(listOf("error", "Waterloo", "South Gate")))
-    }
-
-    @Test
-    fun `Via King's Cross to Marseille`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            "King's Cross".switch,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            "South Gate".switch,
-            "Marseille".station,
-        ), euroTrip.itineraryFrom(listOf("King's Cross", "South Gate")))
-    }
-
-    @Test
-    fun `Via King's Cross to Paris`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            "King's Cross".switch,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            "North Gate".switch,
-            "Paris".station,
-        ), euroTrip.itineraryFrom(listOf("King's Cross", "North Gate")))
-    }
-
-    @Test
-    fun `Via King's Cross bumpy road to Paris`() {
-        assertEquals(listOf(
-            "trunk Warehouse".railSection,
-            "trunk Transit".railSection,
-            "King's Cross".switch,
-            "trunk Lille 1".railSection,
-            "trunk Baguette".railSection,
-            Switch.invalid,
-            "North Gate".switch,
-            "Paris".station,
-        ), euroTrip.itineraryFrom(listOf("King's Cross", "error", "North Gate")))
-    }
-
     @Nested
     inner class EdgeCases {
         @Test
@@ -192,6 +94,121 @@ internal class TripTest {
                 "TrunkToTrack".switch,
                 "EndOfTrack".station,
             ), testTrip.itineraryFrom(listOf("TrunkToTrail", "TrunkToTrack")))
+        }
+    }
+
+    @Nested
+    inner class RealTrip {
+        @Test
+        fun `Via Waterloo to Paris`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    "Waterloo".switch,
+                    "trunk Tunnel".railSection,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    "North Gate".switch,
+                    "Paris".station,
+                ), euroTrip.itineraryFrom(listOf("Waterloo", "North Gate"))
+            )
+        }
+
+        @Test
+        fun `Via Waterloo to Paris with errors`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    "Waterloo".switch,
+                    "trunk Tunnel".railSection,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    Switch.invalid,
+                    "North Gate".switch,
+                    "Paris".station,
+                ), euroTrip.itineraryFrom(listOf("Waterloo", "error", "North Gate"))
+            )
+        }
+
+        @Test
+        fun `Via Waterloo to Marseille`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    "Waterloo".switch,
+                    "trunk Tunnel".railSection,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    "South Gate".switch,
+                    "Marseille".station,
+                ), euroTrip.itineraryFrom(listOf("Waterloo", "South Gate"))
+            )
+        }
+
+        @Test
+        fun `Off on a wrong trail via Waterloo to Marseille`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    Switch.invalid,
+                    "Waterloo".switch,
+                    "trunk Tunnel".railSection,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    "South Gate".switch,
+                    "Marseille".station,
+                ), euroTrip.itineraryFrom(listOf("error", "Waterloo", "South Gate"))
+            )
+        }
+
+        @Test
+        fun `Via King's Cross to Marseille`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    "King's Cross".switch,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    "South Gate".switch,
+                    "Marseille".station,
+                ), euroTrip.itineraryFrom(listOf("King's Cross", "South Gate"))
+            )
+        }
+
+        @Test
+        fun `Via King's Cross to Paris`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    "King's Cross".switch,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    "North Gate".switch,
+                    "Paris".station,
+                ), euroTrip.itineraryFrom(listOf("King's Cross", "North Gate"))
+            )
+        }
+
+        @Test
+        fun `Via King's Cross bumpy road to Paris`() {
+            assertEquals(
+                listOf(
+                    "trunk Warehouse".railSection,
+                    "trunk Transit".railSection,
+                    "King's Cross".switch,
+                    "trunk Lille 1".railSection,
+                    "trunk Baguette".railSection,
+                    Switch.invalid,
+                    "North Gate".switch,
+                    "Paris".station,
+                ), euroTrip.itineraryFrom(listOf("King's Cross", "error", "North Gate"))
+            )
         }
     }
 }
