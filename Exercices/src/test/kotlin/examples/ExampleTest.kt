@@ -62,7 +62,8 @@ internal class ExampleTest {
 
     @Test
     internal fun wordFrequencyTest() {
-        val result: Map<String, Int> = "Hey hey! That's my hat hat hat!".replace("[:;!?,.]".toRegex(), "")
+        val result: Map<String, Int> = "Hey hey! That's my hat hat hat!"
+            .replace("[:;!?,.]".toRegex(), "")
             .toLowerCase().split(' ').groupingBy { it }.eachCount()
         assertEquals(mapOf("hey" to 2, "that's" to 1, "my" to 1, "hat" to 3), result)
     }
