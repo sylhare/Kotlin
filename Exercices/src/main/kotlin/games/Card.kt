@@ -1,6 +1,9 @@
 package games
 
 interface PlayingCard
+data class Card(val value: Value, val suit: Suit): PlayingCard
+class Joker: PlayingCard
+
 class EmptyDeck: Exception("There are no more cards to draw")
 
 enum class Suit {

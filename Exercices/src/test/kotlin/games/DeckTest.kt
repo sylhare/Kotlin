@@ -18,4 +18,35 @@ class DeckTest {
         val deck = Deck();
         assertNotEquals(deck.draw(), deck.draw())
     }
+
+    @Test
+    internal fun `can only draw 52 cards`() {
+        val deck = Deck()
+        assertThrows<EmptyDeck> { repeat(53) { deck.draw() } }
+    }
+
+    @Test
+    internal fun `shuffle cards`() {
+        assertNotEquals(Deck().shuffle().draw(), Deck().shuffle().draw())
+    }
+
+    @Test
+    internal fun `pickup the cards drawn`() {
+        val deck = Deck()
+        repeat(13) { deck.draw() }
+        val pickedUpDeck = deck.pickup()
+        assertNotEquals(deck, pickedUpDeck)
+        repeat(40) { pickedUpDeck.draw() }
+    }
+
+    @Test
+    internal fun `find a card`() {
+        val deck = Deck()
+        val aceOfSpead = Card(Value.Ace, Suit.Spade)
+        var card: PlayingCard
+        do {
+            card = deck.draw()
+        } while (card != aceOfSpead)
+        assertEquals(card, aceOfSpead)
+    }
 }
