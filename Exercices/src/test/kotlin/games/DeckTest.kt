@@ -49,4 +49,22 @@ class DeckTest {
         } while (card != aceOfSpead)
         assertEquals(card, aceOfSpead)
     }
+
+    @Test
+    internal fun `handle Joker`() {
+        val deck = Deck()
+        deck.addJoker(2)
+        repeat(52) { deck.draw() }
+        assertEquals(deck.draw()::class, Joker::class)
+        assertEquals(deck.draw()::class, Joker::class)
+        assertThrows<EmptyDeck> { deck.draw() }
+    }
+
+    @Test
+    internal fun `handle Jokers and shuffle`() {
+        val deck = Deck().addJoker(52).shuffle()
+        repeat(52) { deck.draw() }
+        repeat(52) { deck.draw() }
+        assertThrows<EmptyDeck> { deck.draw() }
+    }
 }

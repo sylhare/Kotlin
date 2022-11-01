@@ -12,4 +12,6 @@ class Deck {
 
     fun shuffle(): Deck = this.also { this.cards.shuffle() }
     fun pickup(): Deck = Deck().shuffle()
+    fun addJoker(amount: Int) = this.also { repeat(amount) { cards.add(Joker()) } }
 }
+
