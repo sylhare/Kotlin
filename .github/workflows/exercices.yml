@@ -1,0 +1,80 @@
+name: Exercices CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'Exercices/**'
+      - '.github/workflows/exercices.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'Exercices/**'
+      - '.github/workflows/exercices.yml'
+
+jobs:
+  test:
+    name: Build and Test Exercices
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: Exercices
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-exercices-${{ hashFiles('Exercices/**/*.gradle*', 'Exercices/**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-exercices-
+          
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+      
+    - name: Build project
+      run: ./gradlew build --no-daemon
+      
+    - name: Run tests
+      run: ./gradlew test --no-daemon
+      
+    - name: Generate coverage report
+      run: ./gradlew jacocoTestReport --no-daemon
+      if: always()
+      
+    - name: Verify coverage
+      run: ./gradlew jacocoTestCoverageVerification --no-daemon
+      continue-on-error: true
+      
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: exercices-test-results
+        path: Exercices/build/test-results/test/
+        
+    - name: Upload coverage reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: exercices-coverage-reports
+        path: Exercices/build/reports/jacoco/
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: exercices-jar
+        path: Exercices/build/libs/*.jar 
