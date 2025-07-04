@@ -4,8 +4,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class AppTest {
 
-    private val testDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = StandardTestDispatcher()
 
     @AfterEach
     fun pause() {
@@ -47,7 +47,7 @@ internal class AppTest {
         System.getProperties()["properties"] = "example"
         val app = App.appWithDispatcher(testDispatcher)
         var waitingTime = 0
-        testDispatcher.runBlockingTest {
+        runTest(testDispatcher) {
             launch { app.start() }.join()
             delay(100)
         }
@@ -62,9 +62,9 @@ internal class AppTest {
 
     @Test
     fun dispatcherTest() {
-        testDispatcher.runBlockingTest {
+        runTest(testDispatcher) {
             var late = "late"
-            GlobalScope.launch(testDispatcher) {
+            launch {
                 delay(100)
                 late = "on time"
             }.join()
