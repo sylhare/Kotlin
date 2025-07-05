@@ -1,6 +1,8 @@
 # Hello Kotlin
 
-Example of _old_ Kotlin project with gradle 4.8.
+Example of _old_ Kotlin project with gradle 5.4 (compatible with v4.8).
+- Kotlin v1.3.21
+- JVM compatibility to v1.8
 
 Some key tasks have already been created to kick start your project:
 

@@ -3,7 +3,7 @@ package graph
 class Connection(private val node: Node, private val cost: Double) {
 
     internal companion object {
-        fun totalCost(connections: List<Connection>) = if (connections.isEmpty()) 0.0 else connections.sumByDouble { it.cost } //Could be in Unit()
+        fun totalCost(connections: List<Connection>) = if (connections.isEmpty()) 0.0 else connections.sumOf { it.cost } //Could be in Unit()
     }
 
     fun paths(visitedNodes: List<Node>) = node.paths(visitedNodes).onEach { it prepend this }
