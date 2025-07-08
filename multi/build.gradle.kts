@@ -2,10 +2,10 @@ import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "2.2.0"
     id("jacoco")
-    id("com.jfrog.artifactory") version "4.13.0"
-    id("org.sonarqube") version "2.6.2"
+    id("com.jfrog.artifactory") version "5.2.5"
+    id("org.sonarqube") version "5.1.0.4882"
 }
 
 val artifactoryUser: String by project
@@ -30,8 +30,12 @@ allprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
     repositories {
-        jcenter()
         mavenCentral()
+    }
+    
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
@@ -63,16 +67,16 @@ subprojects {
     }
 
     tasks.withType<KotlinCompile> {
-        kotlinOptions {
+        compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "11"
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
         }
     }
 
     tasks.jacocoTestReport {
         reports {
-            xml.isEnabled = true
-            html.isEnabled = true
+            xml.required.set(true)
+            html.required.set(true)
         }
     }
 
@@ -85,26 +89,18 @@ subprojects {
         maxParallelForks = 1
     }
 
-    artifactory {
-        setContextUrl(artifactoryUrl)
-        publish(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig> {
-            repository(delegateClosureOf<groovy.lang.GroovyObject> {
-                setProperty("repoKey", "gradle")
-                setProperty("username", artifactoryUser)
-                setProperty("password", artifactoryPassword)
-                setProperty("maven", true)
-            })
-            defaults(delegateClosureOf<groovy.lang.GroovyObject> {
-                invokeMethod("publications", "mavenJava")
-                setProperty("publishArtifacts", true)
-            })
-        })
-        resolve(delegateClosureOf<org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig> {
-            setProperty("repoKey", "gradle")
-            setProperty("username", artifactoryUser)
-            setProperty("password", artifactoryPassword)
-            setProperty("maven", true)
-        })
+    configure<org.jfrog.gradle.plugin.artifactory.dsl.ArtifactoryPluginConvention> {
+        publish {
+            contextUrl = artifactoryUrl
+            repository {
+                repoKey = "gradle"
+                username = artifactoryUser
+                password = artifactoryPassword
+            }
+            defaults {
+                publications("mavenJava")
+            }
+        }
     }
 }
 
@@ -121,9 +117,9 @@ tasks.register<JacocoReport>("codeCoverageReport") {
     subprojects.forEach{ sourceSets(it.sourceSets.main.get()) }
 
     reports {
-        xml.isEnabled = true
-        xml.destination = File("${buildDir}/reports/jacoco/report.xml")
-        html.isEnabled = true
+        xml.required.set(true)
+        xml.outputLocation.set(File("${layout.buildDirectory.get().asFile}/reports/jacoco/report.xml"))
+        html.required.set(true)
     }
 
     dependsOn(allprojects.map { it.tasks.named<Test>("test") })

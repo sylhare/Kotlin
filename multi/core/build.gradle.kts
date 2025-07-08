@@ -29,7 +29,7 @@ publishing {
             artifactId = "core"
             version = "1.0"
             artifact(sourcesJar)
-            artifact("$buildDir/libs/core.jar")
+            artifact("${layout.buildDirectory.get().asFile}/libs/core.jar")
         }
     }
 }

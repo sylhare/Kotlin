@@ -1,0 +1,110 @@
+name: Multi-Module CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'multi/**'
+      - '.github/workflows/multi.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'multi/**'
+      - '.github/workflows/multi.yml'
+
+jobs:
+  test:
+    name: Build and Test Multi-Module Project
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: multi
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-multi-${{ hashFiles('multi/**/*.gradle*', 'multi/**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-multi-
+          
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+      
+    - name: Build all modules
+      run: ./gradlew build --no-daemon
+      
+    - name: Test all modules
+      run: ./gradlew test --no-daemon
+      
+    - name: Test core module
+      run: ./gradlew :core:test --no-daemon
+      
+    - name: Test app module
+      run: ./gradlew :app:test --no-daemon
+      
+    - name: Generate aggregated coverage report
+      run: ./gradlew codeCoverageReport --no-daemon
+      if: always()
+      
+    - name: Run compute task (demo)
+      run: ./gradlew compute --no-daemon
+      continue-on-error: true
+      
+    - name: Upload test results - Core
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: multi-core-test-results
+        path: multi/core/build/test-results/test/
+        
+    - name: Upload test results - App
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: multi-app-test-results
+        path: multi/app/build/test-results/test/
+        
+    - name: Upload aggregated coverage report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: multi-coverage-report
+        path: multi/build/reports/jacoco/
+        
+    - name: Upload individual coverage reports - Core
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: multi-core-coverage
+        path: multi/core/build/reports/jacoco/
+        
+    - name: Upload individual coverage reports - App
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: multi-app-coverage
+        path: multi/app/build/reports/jacoco/
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: multi-jars
+        path: |
+          multi/build/libs/*.jar
+          multi/core/build/libs/*.jar
+          multi/app/build/libs/*.jar 
