@@ -44,13 +44,13 @@ jobs:
     - name: Make gradlew executable
       run: chmod +x gradlew
       
-    - name: Build project
-      run: ./gradlew build --no-daemon
+    - name: Clean and build project
+      run: ./gradlew clean build --no-daemon
       
     - name: Run tests
       run: ./gradlew test --no-daemon
       
-    - name: Generate coverage report
+    - name: Generate JaCoCo coverage report
       run: ./gradlew jacocoTestReport --no-daemon
       if: always()
       
@@ -58,6 +58,16 @@ jobs:
       run: ./gradlew jacocoTestCoverageVerification --no-daemon
       continue-on-error: true
       
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: Exercices/build/reports/jacoco/test/jacocoTestReport.xml
+        flags: exercices
+        name: exercices-coverage
+        fail_ci_if_error: false
+        verbose: true
+        
     - name: Upload test results
       uses: actions/upload-artifact@v4
       if: always()
@@ -65,7 +75,7 @@ jobs:
         name: exercices-test-results
         path: Exercices/build/test-results/test/
         
-    - name: Upload coverage reports
+    - name: Upload coverage reports (artifacts)
       uses: actions/upload-artifact@v4
       if: always()
       with:
@@ -77,4 +87,14 @@ jobs:
       if: success()
       with:
         name: exercices-jar
-        path: Exercices/build/libs/*.jar 
+        path: Exercices/build/libs/*.jar
+
+    - name: Comment coverage on PR
+      if: github.event_name == 'pull_request'
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: Exercices/build/reports/jacoco/test/jacocoTestReport.xml
+        flags: exercices
+        name: exercices-coverage
+        fail_ci_if_error: false 
