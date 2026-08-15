@@ -2,10 +2,10 @@ import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.3.20"
     id("jacoco")
-    id("com.jfrog.artifactory") version "5.2.5"
-    id("org.sonarqube") version "5.1.0.4882"
+    id("com.jfrog.artifactory") version "6.0.4"
+    id("org.sonarqube") version "7.2.3.7755"
 }
 
 val artifactoryUser: String by project
@@ -53,9 +53,10 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib-jdk8"))
-        testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+        testImplementation("org.junit.jupiter:junit-jupiter:5.14.3")
         testImplementation("org.junit.jupiter:junit-jupiter-api")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
 
     sonarqube {

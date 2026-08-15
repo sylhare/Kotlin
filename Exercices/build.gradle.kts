@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.3.20"
     jacoco
     publishing
     application
@@ -43,11 +43,11 @@ dependencies {
     }
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 
     testImplementation(kotlin("test"))
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.14.3")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
